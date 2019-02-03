@@ -10,6 +10,6 @@
       <Button layoutX="182.0" layoutY="222.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="27.0" prefWidth="237.0" text="Check Registration Status" textAlignment="CENTER" />
       <Button layoutX="182.0" layoutY="289.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="237.0" text="Vote!" />
       <Text layoutX="194.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to our Voting Application" />
-      <Text layoutX="178.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Plesae choose one of the options below" />
+      <Text layoutX="178.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please choose one of the options below" />
    </children>
 </AnchorPane>
