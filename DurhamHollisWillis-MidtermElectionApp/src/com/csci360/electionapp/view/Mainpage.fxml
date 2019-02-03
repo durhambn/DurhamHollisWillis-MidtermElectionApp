@@ -1,31 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
 
-
-<AnchorPane minHeight="400.0" minWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox layoutX="168.0" layoutY="125.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <SplitPane prefHeight="200.0" prefWidth="200.0">
-               <items>
-                  <Button mnemonicParsing="false" prefHeight="75.0" prefWidth="226.0" text="Register To Vote" />
-               </items>
-            </SplitPane>
-            <SplitPane prefHeight="200.0" prefWidth="200.0">
-               <items>
-                  <Button mnemonicParsing="false" prefHeight="76.0" prefWidth="224.0" text="Vote" />
-               </items>
-            </SplitPane>
-            <SplitPane prefHeight="200.0" prefWidth="200.0">
-               <items>
-                  <Button mnemonicParsing="false" prefHeight="77.0" prefWidth="269.0" text="Check Registration Status" />
-               </items>
-            </SplitPane>
-         </children>
-      </HBox>
+      <Button layoutX="181.0" layoutY="148.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="27.0" prefWidth="237.0" text="Register to Vote" />
+      <Button layoutX="182.0" layoutY="222.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="27.0" prefWidth="237.0" text="Check Registration Status" textAlignment="CENTER" />
+      <Button layoutX="182.0" layoutY="289.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="237.0" text="Vote!" />
+      <Text layoutX="194.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to our Voting Application" />
+      <Text layoutX="178.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Plesae choose one of the options below" />
    </children>
 </AnchorPane>
