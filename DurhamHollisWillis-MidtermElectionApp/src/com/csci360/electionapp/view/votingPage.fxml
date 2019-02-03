@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button layoutX="547.0" layoutY="361.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Submit" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="15.0" />
+      <Label alignment="CENTER" layoutX="7.0" layoutY="6.0" prefHeight="25.0" prefWidth="587.0" text="CSCI 360 Elections" AnchorPane.bottomAnchor="369.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="10.0">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Accordion layoutY="58.0" prefHeight="295.0" prefWidth="202.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="100.0">
+        <panes>
+          <TitledPane animated="false" prefHeight="263.0" prefWidth="590.0" text="President">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <GridPane prefHeight="169.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="268.0" minWidth="10.0" prefWidth="129.33331298828125" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="472.0000228881836" minWidth="10.0" prefWidth="418.66668701171875" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <CheckBox mnemonicParsing="false" text="Candidate 1" />
+                              <CheckBox mnemonicParsing="false" text="Candidate 2" GridPane.rowIndex="1" />
+                              <CheckBox mnemonicParsing="false" text="Candidate 3" GridPane.rowIndex="2" />
+                              <Label prefHeight="36.0" prefWidth="419.0" text="Description for Candidate 1" GridPane.columnIndex="1" />
+                              <Label prefHeight="36.0" prefWidth="419.0" text="Description for Candidate 1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label prefHeight="36.0" prefWidth="419.0" text="Description for Candidate 1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </TitledPane>
+          <TitledPane animated="false" text="Vice President ">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <GridPane prefHeight="169.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="268.0" minWidth="10.0" prefWidth="129.33331298828125" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="472.0000228881836" minWidth="10.0" prefWidth="418.66668701171875" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <CheckBox mnemonicParsing="false" text="Candidate 1" />
+                              <CheckBox mnemonicParsing="false" text="Candidate 2" GridPane.rowIndex="1" />
+                              <CheckBox mnemonicParsing="false" text="Candidate 3" GridPane.rowIndex="2" />
+                              <Label prefHeight="36.0" prefWidth="419.0" text="Description for Candidate 1" GridPane.columnIndex="1" />
+                              <Label prefHeight="36.0" prefWidth="419.0" text="Description for Candidate 1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label prefHeight="36.0" prefWidth="419.0" text="Description for Candidate 1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </TitledPane>
+          <TitledPane animated="false" text="Secretary">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <GridPane layoutX="71.0" layoutY="32.0" prefHeight="169.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="268.0" minWidth="10.0" prefWidth="129.33331298828125" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="472.0000228881836" minWidth="10.0" prefWidth="418.66668701171875" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <CheckBox mnemonicParsing="false" text="Candidate 1" />
+                              <CheckBox mnemonicParsing="false" text="Candidate 2" GridPane.rowIndex="1" />
+                              <CheckBox mnemonicParsing="false" text="Candidate 3" GridPane.rowIndex="2" />
+                              <Label prefHeight="36.0" prefWidth="419.0" text="Description for Candidate 1" GridPane.columnIndex="1" />
+                              <Label prefHeight="36.0" prefWidth="419.0" text="Description for Candidate 1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label prefHeight="36.0" prefWidth="419.0" text="Description for Candidate 1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </TitledPane>
+            <TitledPane animated="false" text="Treasurer">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <GridPane prefHeight="169.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="268.0" minWidth="10.0" prefWidth="129.33331298828125" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="472.0000228881836" minWidth="10.0" prefWidth="418.66668701171875" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <CheckBox mnemonicParsing="false" text="Candidate 1" />
+                              <CheckBox mnemonicParsing="false" text="Candidate 2" GridPane.rowIndex="1" />
+                              <CheckBox mnemonicParsing="false" text="Candidate 3" GridPane.rowIndex="2" />
+                              <Label prefHeight="36.0" prefWidth="419.0" text="Description for Candidate 1" GridPane.columnIndex="1" />
+                              <Label prefHeight="36.0" prefWidth="419.0" text="Description for Candidate 1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label prefHeight="36.0" prefWidth="419.0" text="Description for Candidate 1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </TitledPane>
+        </panes>
+      </Accordion>
+      <Label layoutX="14.0" layoutY="75.0" text="You may only have one candidate selected for each catagory before submitting ballot." AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
+      <Button layoutX="464.0" layoutY="383.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Back" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="85.0" />
+   </children>
+</AnchorPane>
