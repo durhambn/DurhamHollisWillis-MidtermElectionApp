@@ -1,10 +1,21 @@
+.root{
+	-fx-background-color: #C1BEBD;
+	-fx-font-family: sans-serif;
+	
+}
 .button{
-	-fx-background-color: #a8c2ed;
-	-fx-text-fill: white; 
+	-fx-background-color: #A9272A;
+	-fx-text-fill: white;
 }
 .text{
 	-fx-font-size: 14px;
 }
 .headerText{
 	-fx-font-size: 30px;
+	-fx-text-alignment: center;
+}
+.subheader{
+	-fx-font-size: 20px;
+	-fx-text-alignment: center;
+	
 }
