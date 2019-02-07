@@ -12,7 +12,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@app.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Text layoutX="246.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registration Page" />
+      <Text layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subheader" text="Registration Page" wrappingWidth="599.9999913573265" />
       <ButtonBar layoutX="300.0" layoutY="333.0" prefHeight="40.0" prefWidth="200.0">
         <buttons>
           <Button mnemonicParsing="false" text="Submit" />

@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@app.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <GridPane layoutX="103.0" layoutY="94.0" prefHeight="133.0" prefWidth="395.0">
@@ -35,7 +34,7 @@
             <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
          </children>
       </GridPane>
-      <Text layoutX="192.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Check Registration Status" />
+      <Text layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subheader" text="Check Registration Status" wrappingWidth="600.0" />
       <ButtonBar layoutX="267.0" layoutY="303.0" prefHeight="40.0" prefWidth="231.0">
         <buttons>
           <Button mnemonicParsing="false" text="Cancel" />
