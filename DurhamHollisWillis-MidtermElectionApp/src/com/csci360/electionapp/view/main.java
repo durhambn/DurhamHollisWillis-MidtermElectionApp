@@ -19,13 +19,10 @@ public class main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-    	Parent root = FXMLLoader.load(getClass().getResource("Mainpage.fxml"));
-    	//GridPane gridPane = new GridPane();
-    	//gridPane.setMinSize(600, 400); 
+    	Parent root = FXMLLoader.load(getClass().getResource("Mainpage.fxml")); 
     	Scene scene = new Scene(root, 600, 400);
     	stage.setTitle("Main Page");
     	stage.setScene(scene);
-    	//scene.getStylesheets().add("/DurhamHollisWillis-MidtermElectionApp/src/com/csci360/electionapp/view/style.css");
         stage.show();
     }
 
