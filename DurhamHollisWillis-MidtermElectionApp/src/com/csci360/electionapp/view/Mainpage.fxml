@@ -11,5 +11,6 @@
       <Button layoutX="182.0" layoutY="289.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="237.0" text="Vote!" />
       <Text layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="headerText" text="Welcome to our Voting Application" wrappingWidth="600.0000025227782" />
       <Text layoutX="1.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subheader" text="Please choose one of the options below" wrappingWidth="600.0" />
+      <Button layoutX="433.0" layoutY="360.0" mnemonicParsing="false" text="Election Official Login" />
    </children>
 </AnchorPane>
