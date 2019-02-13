@@ -33,7 +33,9 @@ public class main extends Application {
        
         }
     @FXML
-    Button btnReg;
+    public Button btnReg;
+    @FXML
+    public Button closeButton;
 
     @FXML
     public void regButtonClicked() throws Exception{
@@ -80,7 +82,11 @@ public class main extends Application {
         stage.showAndWait();
   
      }
-  
+    public void btnClose_clicked(ActionEvent event) throws IOException {
+    	Stage stage = (Stage) closeButton.getScene().getWindow();
+        stage.close();
+
+}
     
         
     
