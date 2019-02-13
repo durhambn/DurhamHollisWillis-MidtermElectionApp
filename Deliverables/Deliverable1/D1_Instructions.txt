@@ -1,3 +1,0 @@
-D1 - Inception (10 pts): For this deliverable, you will need to submit the following inception documents for your software such as: Vision, Use-Case enumeration with 2 use cases "fully dressed", use case UML diagram, supplemental specs, and a glossary.
-Code: You will need to start working on the design of your User Interface (UI). You may use powerpoint or draw.io. You need to have a good design, multiple screens, clean buttons etc. You may start coding the basic view using Java FX and screen builder. Code submission in this case is not required but encouraged.
-Demo: short (min 7 mins, max 15 mins) presentation of vision, use cases, GUI prototype, and any other items you would like to add. Demo day: Sept, 20 during class
