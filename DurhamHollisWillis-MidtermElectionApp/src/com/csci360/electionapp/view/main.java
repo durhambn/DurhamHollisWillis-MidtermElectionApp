@@ -49,6 +49,7 @@ public class main extends Application {
        stage.showAndWait();
  
     }
+    @FXML
     public void checkButtonClicked() throws Exception{
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("checkStatus.fxml"));
         Parent root = fxmlLoader.load();
@@ -60,6 +61,7 @@ public class main extends Application {
         stage.showAndWait();
   
      }
+    @FXML
     public void voteButtonClicked() throws Exception{
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("votingPage.fxml"));
         Parent root = fxmlLoader.load();
@@ -71,6 +73,7 @@ public class main extends Application {
         stage.showAndWait();
   
      }
+    @FXML
     public void adminButtonClicked() throws Exception{
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("admin.fxml"));
         Parent root = fxmlLoader.load();
@@ -82,6 +85,7 @@ public class main extends Application {
         stage.showAndWait();
   
      }
+    @FXML
     public void btnClose_clicked(ActionEvent event) throws IOException {
     	Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
