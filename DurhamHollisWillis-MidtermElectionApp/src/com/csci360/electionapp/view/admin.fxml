@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@app.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@app.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.csci360.electionapp.view.main">
    <children>
       <Text layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subheader" text="Admin Page" wrappingWidth="600.0" />
       <GridPane layoutX="157.0" layoutY="136.0" prefHeight="64.0" prefWidth="286.0">
@@ -32,7 +31,7 @@
       </GridPane>
       <ButtonBar layoutX="256.0" layoutY="229.0" prefHeight="40.0" prefWidth="200.0">
         <buttons>
-          <Button mnemonicParsing="false" text="Cancel" />
+          <Button fx:id="closeButton" mnemonicParsing="false" onAction="#btnClose_clicked" text="Cancel" />
             <Button mnemonicParsing="false" text="Submit" />
         </buttons>
       </ButtonBar>
