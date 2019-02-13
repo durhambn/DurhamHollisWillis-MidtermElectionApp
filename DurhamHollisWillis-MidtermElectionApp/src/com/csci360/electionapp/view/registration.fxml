@@ -15,8 +15,8 @@
       <Text layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subheader" text="Registration Page" wrappingWidth="599.9999913573265" />
       <ButtonBar layoutX="300.0" layoutY="333.0" prefHeight="40.0" prefWidth="200.0">
         <buttons>
-          <Button mnemonicParsing="false" text="Submit" />
             <Button layoutX="140.0" layoutY="17.0" mnemonicParsing="false" text="Cancel" />
+          <Button mnemonicParsing="false" text="Submit" />
         </buttons>
       </ButtonBar>
       <GridPane layoutX="107.0" layoutY="98.0" prefHeight="171.0" prefWidth="415.0">

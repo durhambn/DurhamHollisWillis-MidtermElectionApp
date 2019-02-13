@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TitledPane?>
@@ -9,16 +10,10 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@app.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button layoutX="547.0" layoutY="361.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Submit" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="15.0" />
-      <Label alignment="CENTER" layoutX="7.0" layoutY="6.0" prefHeight="25.0" prefWidth="587.0" styleClass="subheader" text="CSCI 360 Elections" AnchorPane.bottomAnchor="369.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="10.0">
-         <font>
-            <Font size="30.0" />
-         </font>
-      </Label>
       <Accordion layoutY="58.0" prefHeight="295.0" prefWidth="202.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="100.0">
         <panes>
           <TitledPane animated="false" prefHeight="263.0" prefWidth="590.0" text="President">
@@ -131,7 +126,13 @@
             </TitledPane>
         </panes>
       </Accordion>
-      <Label layoutX="14.0" layoutY="75.0" text="You may only have one candidate selected for each catagory before submitting ballot." AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
-      <Button layoutX="464.0" layoutY="383.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Back" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="85.0" />
+      <Label layoutX="14.0" layoutY="75.0" styleClass="text" text="You may only have one candidate selected for each catagory before submitting ballot." AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
+      <ButtonBar layoutX="361.0" layoutY="346.0" prefHeight="40.0" prefWidth="200.0">
+        <buttons>
+          <Button mnemonicParsing="false" text="Cancel" />
+            <Button mnemonicParsing="false" text="Submit" />
+        </buttons>
+      </ButtonBar>
+      <Text layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subheader" text="Voting Page" textAlignment="CENTER" wrappingWidth="600.0" />
    </children>
 </AnchorPane>
