@@ -25,14 +25,14 @@
          <children>
             <Label text="Username" />
             <Label text="Password" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="username" GridPane.columnIndex="1" />
+            <TextField fx:id="password" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
       <ButtonBar layoutX="256.0" layoutY="229.0" prefHeight="40.0" prefWidth="200.0">
         <buttons>
           <Button fx:id="closeButton" mnemonicParsing="false" onAction="#btnClose_clicked" text="Cancel" />
-            <Button mnemonicParsing="false" text="Submit" />
+            <Button fx:id="adminSubmit" mnemonicParsing="false" onAction="#adminSubmit" text="Submit" />
         </buttons>
       </ButtonBar>
    </children>

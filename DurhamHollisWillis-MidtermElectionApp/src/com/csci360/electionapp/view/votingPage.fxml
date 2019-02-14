@@ -31,9 +31,9 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <CheckBox mnemonicParsing="false" text="Candidate 1" />
-                              <CheckBox mnemonicParsing="false" text="Candidate 2" GridPane.rowIndex="1" />
-                              <CheckBox mnemonicParsing="false" text="Candidate 3" GridPane.rowIndex="2" />
+                              <CheckBox fx:id="C1" mnemonicParsing="false" text="Candidate 1" />
+                              <CheckBox fx:id="C2" mnemonicParsing="false" text="Candidate 2" GridPane.rowIndex="1" />
+                              <CheckBox fx:id="C3" mnemonicParsing="false" text="Candidate 3" GridPane.rowIndex="2" />
                               <Label prefHeight="36.0" prefWidth="419.0" text="Description for Candidate 1" GridPane.columnIndex="1" />
                               <Label prefHeight="36.0" prefWidth="419.0" text="Description for Candidate 1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label prefHeight="36.0" prefWidth="419.0" text="Description for Candidate 1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -58,9 +58,9 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <CheckBox mnemonicParsing="false" text="Candidate 1" />
-                              <CheckBox mnemonicParsing="false" text="Candidate 2" GridPane.rowIndex="1" />
-                              <CheckBox mnemonicParsing="false" text="Candidate 3" GridPane.rowIndex="2" />
+                              <CheckBox fx:id="C4" mnemonicParsing="false" text="Candidate 1" />
+                              <CheckBox fx:id="C5" mnemonicParsing="false" text="Candidate 2" GridPane.rowIndex="1" />
+                              <CheckBox fx:id="C6" mnemonicParsing="false" text="Candidate 3" GridPane.rowIndex="2" />
                               <Label prefHeight="36.0" prefWidth="419.0" text="Description for Candidate 1" GridPane.columnIndex="1" />
                               <Label prefHeight="36.0" prefWidth="419.0" text="Description for Candidate 1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label prefHeight="36.0" prefWidth="419.0" text="Description for Candidate 1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -85,9 +85,9 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <CheckBox mnemonicParsing="false" text="Candidate 1" />
-                              <CheckBox mnemonicParsing="false" text="Candidate 2" GridPane.rowIndex="1" />
-                              <CheckBox mnemonicParsing="false" text="Candidate 3" GridPane.rowIndex="2" />
+                              <CheckBox fx:id="C7" mnemonicParsing="false" text="Candidate 1" />
+                              <CheckBox fx:id="C8" mnemonicParsing="false" text="Candidate 2" GridPane.rowIndex="1" />
+                              <CheckBox fx:id="C9" mnemonicParsing="false" text="Candidate 3" GridPane.rowIndex="2" />
                               <Label prefHeight="36.0" prefWidth="419.0" text="Description for Candidate 1" GridPane.columnIndex="1" />
                               <Label prefHeight="36.0" prefWidth="419.0" text="Description for Candidate 1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label prefHeight="36.0" prefWidth="419.0" text="Description for Candidate 1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -112,9 +112,9 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <CheckBox mnemonicParsing="false" text="Candidate 1" />
-                              <CheckBox mnemonicParsing="false" text="Candidate 2" GridPane.rowIndex="1" />
-                              <CheckBox mnemonicParsing="false" text="Candidate 3" GridPane.rowIndex="2" />
+                              <CheckBox fx:id="C10" mnemonicParsing="false" text="Candidate 1" />
+                              <CheckBox fx:id="C11" mnemonicParsing="false" text="Candidate 2" GridPane.rowIndex="1" />
+                              <CheckBox fx:id="C12" mnemonicParsing="false" text="Candidate 3" GridPane.rowIndex="2" />
                               <Label prefHeight="36.0" prefWidth="419.0" text="Description for Candidate 1" GridPane.columnIndex="1" />
                               <Label prefHeight="36.0" prefWidth="419.0" text="Description for Candidate 1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label prefHeight="36.0" prefWidth="419.0" text="Description for Candidate 1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -130,7 +130,7 @@
       <ButtonBar layoutX="361.0" layoutY="346.0" prefHeight="40.0" prefWidth="200.0">
         <buttons>
           <Button fx:id="closeButton" mnemonicParsing="false" onAction="#btnClose_clicked" text="Cancel" />
-            <Button mnemonicParsing="false" text="Submit" />
+            <Button fx:id="voteSubmit" mnemonicParsing="false" onAction="#voteSubmit" text="Submit" />
         </buttons>
       </ButtonBar>
       <Text layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subheader" text="Voting Page" textAlignment="CENTER" wrappingWidth="600.0" />
