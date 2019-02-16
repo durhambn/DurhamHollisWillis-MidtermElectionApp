@@ -3,6 +3,7 @@ package com.csci360.electionapp.view;
 import java.io.IOException;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -117,6 +119,8 @@ public class main extends Application {
     	birthdayField.clear();
     	ssn.clear();
     	pswd.clear();
+    	Stage stage = (Stage) regSubmit.getScene().getWindow();
+    	stage.close();
     }
    
     @FXML
@@ -130,6 +134,8 @@ public class main extends Application {
     	lastNameField.clear();
     	birthdayField.clear();
     	ssn.clear();
+    	Stage stage = (Stage) checkSubmit.getScene().getWindow();
+    	stage.close();
     }
     @FXML
     public Button adminSubmit;
@@ -137,6 +143,14 @@ public class main extends Application {
     	System.out.print(username.getText() + "\n");
     	username.clear();
     	password.clear();
+    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("adminInfo.fxml"));
+        Parent root = fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setOpacity(1);
+        stage.setTitle("Election Official Page");
+        stage.setScene(new Scene (root));
+        stage.showAndWait();   	
     }
     @FXML
     public Button voteSubmit;
@@ -164,6 +178,15 @@ public class main extends Application {
     public CheckBox C11;
     @FXML
     public CheckBox C12;
+    @FXML 
+    public Label S1;
+    @FXML 
+    public Label S2;
+    @FXML 
+    public Label S3;
+    @FXML 
+    public Label S4;
+
     public void voteSubmit(ActionEvent event) throws IOException{
     	System.out.println(C1.getText());
     	System.out.println(C1.isSelected());
@@ -189,6 +212,61 @@ public class main extends Application {
     	System.out.println(C11.isSelected());
     	System.out.println(C12.getText());
     	System.out.println(C12.isSelected());
+    	/*
+    	String vote1 = C1.getText();
+    	String vote2 = C4.getText();
+    	String vote3 = C7.getText();
+    	String vote4 = C11.getText();
+    	S1.setText(vote1);
+    	S2.setText(vote2);
+    	S3.setText(vote3);
+    	S4.setText(vote4);
+    	*/
+    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("finalSubmit.fxml"));
+        Parent root = fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setOpacity(1);
+        stage.setTitle("Vote Confirmation Page");
+        stage.setScene(new Scene (root));
+        stage.showAndWait();
+        
+    }
+    @FXML
+    public Button finalSubmit;
+    public void finalSubmit(ActionEvent event) throws IOException{
+    	/*
+    	S1.setText(C1.getText());
+    	S2.setText(C4.getText());
+    	S3.setText(C7.getText());
+    	S4.setText(C11.getText());
+    	*/
+    	
+    	System.out.println(S1.getText());
+    	System.out.println(S2.getText());
+    	System.out.println(S3.getText());
+    	System.out.println(S4.getText());
+    	
+    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("endPage.fxml"));
+        Parent root = fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setOpacity(1);
+        stage.setTitle("Thank You");
+        stage.setScene(new Scene (root));
+        stage.show();    	
+    }
+    @FXML
+    public Button finalCancel;
+    public void finalCancel(ActionEvent event) throws IOException{
+    	System.out.println("Cancel chosen, going back to voting page");
+    	Stage stage = (Stage) finalCancel.getScene().getWindow();
+    	stage.close();
+    }
+    @FXML
+    public Button end;
+    public void closeApp(ActionEvent event) throws IOException{
+    	System.exit(0);
     }
 
     public static void main(String[] args) {
