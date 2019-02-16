@@ -12,7 +12,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@app.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.csci360.electionapp.view.main">
    <children>
-      <Text layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subheader" text="Admin Page" wrappingWidth="600.0" />
+      <Text layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subheader" text="Election Official Login Page" wrappingWidth="600.0" />
       <GridPane layoutX="157.0" layoutY="136.0" prefHeight="64.0" prefWidth="286.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
