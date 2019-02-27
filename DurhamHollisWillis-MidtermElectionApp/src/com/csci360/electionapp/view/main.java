@@ -1,7 +1,7 @@
 package com.csci360.electionapp.view;
 
 import java.io.IOException;
-
+import com.csci360.electionapp.controller.*;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -286,7 +286,16 @@ public class main extends Application {
         System.out.print(birthdayField.getText() + "\n");
         System.out.print(ssn.getText() + "\n");
         System.out.print(pswd.getText() + "\n");
-
+        
+        String firstName = firstNameField.getText();
+        String lastName = lastNameField.getText();
+        String birthday = birthdayField.getText();
+        String ssnString = ssn.getText();
+        String password = pswd.getText();
+        
+        VoterController votingPerson = registrationController.createVoter(firstName, lastName, birthday, ssnString, password);
+        
+        votingPerson.updateView();
         // Clear the text fields
         // (may need to do this after storing somewhere?)
         firstNameField.clear();
