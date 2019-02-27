@@ -287,14 +287,18 @@ public class main extends Application {
         System.out.print(ssn.getText() + "\n");
         System.out.print(pswd.getText() + "\n");
         
+        // Create variables for the creation of a voter object
+        // from the text fields.
         String firstName = firstNameField.getText();
         String lastName = lastNameField.getText();
         String birthday = birthdayField.getText();
         String ssnString = ssn.getText();
         String password = pswd.getText();
         
+        // Pass data to the controller by creating a registrationController object
         VoterController votingPerson = registrationController.createVoter(firstName, lastName, birthday, ssnString, password);
         
+        // Print data to console.
         votingPerson.updateView();
         // Clear the text fields
         // (may need to do this after storing somewhere?)
