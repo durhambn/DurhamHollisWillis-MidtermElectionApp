@@ -301,7 +301,7 @@ public class main extends Application {
         	Alert alert = new Alert(AlertType.WARNING);
             alert.initOwner(regSubmit.getScene().getWindow());
             alert.setTitle("Error");
-            alert.setHeaderText("Not all fields are filled");
+            alert.setHeaderText("Not all fields are filled.");
             alert.setContentText("Please fill in all fields to register.");
 
             alert.showAndWait();
@@ -337,7 +337,22 @@ public class main extends Application {
         System.out.print(lastNameField.getText() + "\n");
         System.out.print(birthdayField.getText() + "\n");
         System.out.print(ssn.getText() + "\n");
+        
+        String firstName = firstNameField.getText();
+        String lastName = lastNameField.getText();
+        String birthday = birthdayField.getText();
+        String ssnString = ssn.getText();
+        
+        if((firstName.isEmpty()) || (lastName.isEmpty()) || (birthday.isEmpty() )|| (ssnString.isEmpty())) {
+        	Alert alert = new Alert(AlertType.WARNING);
+            alert.initOwner(checkSubmit.getScene().getWindow());
+            alert.setTitle("Error");
+            alert.setHeaderText("Not all fields are filled.");
+            alert.setContentText("Please fill in all fields to register.");
 
+            alert.showAndWait();
+        }
+        else {
         // Clear the text fields
         // (may need to do this after storing the data somewhere?)
         firstNameField.clear();
@@ -349,6 +364,7 @@ public class main extends Application {
         Stage stage = (Stage) checkSubmit.getScene().getWindow();
         stage.close();
     }
+    }
 
     /**
      * 
@@ -358,6 +374,19 @@ public class main extends Application {
     public void adminSubmit(ActionEvent event) throws IOException {
         // Print statements for testing purposes (remove later)
         System.out.print(username.getText() + "\n");
+        String uname = username.getText();
+        String pssw = password.getText();
+        
+        if(uname.isEmpty() || pssw.isEmpty()) {
+        	Alert alert = new Alert(AlertType.WARNING);
+            alert.initOwner(adminSubmit.getScene().getWindow());
+            alert.setTitle("Error");
+            alert.setHeaderText("Not all fields are filled.");
+            alert.setContentText("Please fill in all fields to register.");
+
+            alert.showAndWait();
+        }
+        else {
 
         // Clear the text fields
         // (may need to clear this after storing the data somewhere?)
@@ -384,6 +413,7 @@ public class main extends Application {
         stage.setTitle(title);
         stage.setScene(new Scene(root));
         stage.showAndWait();
+    }
     }
 
     /**
