@@ -90,6 +90,9 @@ public class main extends Application {
     @FXML
     public Button adminSubmit;
 
+    //Button variable for voting login page submit (voterLogin page)
+    @FXML
+    public Button voteLoginSubmit;
     /**
      * Text Fields for registration page
      */
@@ -213,8 +216,9 @@ public class main extends Application {
     public void voteButtonClicked() throws Exception {
         // Might incorporate title and resourceName
         // into a class creation method...
-        String resourceName = "votingPage.fxml";
-        String title = "Voting Page";
+    	//votingPage.fxml "Voting Page"
+        String resourceName = "voterLogin.fxml";
+        String title = "Voter Login";
 
         // FXMLLoader variable to grab the votingPage.fxml file.
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(resourceName));
@@ -366,6 +370,55 @@ public class main extends Application {
     }
     }
 
+    //voter login submit method
+    //click submit and goes to voting page
+    /**
+     * 
+     * @param event
+     * @throws IOException
+     */
+    public void voteLoginSubmit(ActionEvent event) throws IOException{
+    	System.out.print(username.getText() + "\n");
+        String uname = username.getText();
+        String pssw = password.getText();
+        
+        if(uname.isEmpty() || pssw.isEmpty()) {
+        	Alert alert = new Alert(AlertType.WARNING);
+            alert.initOwner(voteLoginSubmit.getScene().getWindow());
+            alert.setTitle("Error");
+            alert.setHeaderText("Not all fields are filled.");
+            alert.setContentText("Please fill in all fields to register.");
+
+            alert.showAndWait();
+        }
+        else {
+        	username.clear();
+            password.clear();
+            
+         // Might incorporate title and resourceName
+            // into a class creation method...
+            String resourceName = "votingPage.fxml";
+            String title = "Voting Page";
+
+            // FXMLLoader variable to grab the adminInfo.fxml file.
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(resourceName));
+
+            // Store adminInfo.fxml into Parent variable
+            Parent root = fxmlLoader.load();
+
+            // Create a new stage and initialize the modality
+            // set the opacity to 1 and set the title and show
+            // root as the scene.
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setOpacity(1);
+            stage.setTitle(title);
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+        }
+    }
+    
+    
     /**
      * 
      * @param event
