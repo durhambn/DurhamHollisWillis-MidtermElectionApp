@@ -12,6 +12,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -294,7 +296,17 @@ public class main extends Application {
         String birthday = birthdayField.getText();
         String ssnString = ssn.getText();
         String password = pswd.getText();
-        
+        //check if any fields are empty and no let it continue
+        if((firstName.isEmpty()) || (lastName.isEmpty()) || (birthday.isEmpty() )|| (ssnString.isEmpty()) || (password.isEmpty())) {
+        	Alert alert = new Alert(AlertType.WARNING);
+            alert.initOwner(regSubmit.getScene().getWindow());
+            alert.setTitle("Error");
+            alert.setHeaderText("Not all fields are filled");
+            alert.setContentText("Please fill in all fields to register.");
+
+            alert.showAndWait();
+        }
+        else {
         // Pass data to the controller by creating a registrationController object
         VoterController votingPerson = registrationController.createVoter(firstName, lastName, birthday, ssnString, password);
         
@@ -311,6 +323,7 @@ public class main extends Application {
         // Get the current window and close it.
         Stage stage = (Stage) regSubmit.getScene().getWindow();
         stage.close();
+    }
     }
 
     /**
