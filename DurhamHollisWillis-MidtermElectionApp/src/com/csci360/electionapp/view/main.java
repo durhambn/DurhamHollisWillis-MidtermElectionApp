@@ -341,13 +341,15 @@ public class main extends Application {
         System.out.print(lastNameField.getText() + "\n");
         System.out.print(birthdayField.getText() + "\n");
         System.out.print(ssn.getText() + "\n");
+        System.out.print(pswd.getText() + "\n");
         
         String firstName = firstNameField.getText();
         String lastName = lastNameField.getText();
         String birthday = birthdayField.getText();
         String ssnString = ssn.getText();
+        String pswdString = pswd.getText();
         
-        if((firstName.isEmpty()) || (lastName.isEmpty()) || (birthday.isEmpty() )|| (ssnString.isEmpty())) {
+        if(firstName.isEmpty() || lastName.isEmpty() || birthday.isEmpty() || ssnString.isEmpty() || pswdString.isEmpty()) {
         	Alert alert = new Alert(AlertType.WARNING);
             alert.initOwner(checkSubmit.getScene().getWindow());
             alert.setTitle("Error");
@@ -379,6 +381,7 @@ public class main extends Application {
      */
     public void voteLoginSubmit(ActionEvent event) throws IOException{
     	System.out.print(username.getText() + "\n");
+    	System.out.print(password.getText() + "\n");
         String uname = username.getText();
         String pssw = password.getText();
         
@@ -427,6 +430,7 @@ public class main extends Application {
     public void adminSubmit(ActionEvent event) throws IOException {
         // Print statements for testing purposes (remove later)
         System.out.print(username.getText() + "\n");
+    	System.out.print(password.getText() + "\n");
         String uname = username.getText();
         String pssw = password.getText();
         
