@@ -489,8 +489,6 @@ public class main extends Application {
         stage.setOpacity(1);
         stage.setTitle(title);
         stage.setScene(new Scene(root));
-        V1.setText("100");
-        V2.setText("800");
         
         stage.showAndWait();
       
