@@ -29,8 +29,8 @@ public class VoterController {
 		return model.getLastName();
 	}
 	
-	public void setVoterBirthday(String birthday) {
-		model.setBirthday(birthday);
+	public void setVoterBirthday(String birthday1, String birthday2, String birthday3) {
+		model.setBirthday(birthday1, birthday2, birthday3);
 	}
 	
 	public String getVoterBirthday() {

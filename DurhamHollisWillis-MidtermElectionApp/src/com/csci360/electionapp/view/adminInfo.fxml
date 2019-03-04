@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -71,8 +72,8 @@
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Registered Voters" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of completed Voters" GridPane.rowIndex="1" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="V1" text="Label" GridPane.columnIndex="1" />
+            <Label fx:id="V2" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
       <Button fx:id="closeButton" layoutX="366.0" layoutY="309.0" mnemonicParsing="false" onAction="#btnClose_clicked" text="Close" />
