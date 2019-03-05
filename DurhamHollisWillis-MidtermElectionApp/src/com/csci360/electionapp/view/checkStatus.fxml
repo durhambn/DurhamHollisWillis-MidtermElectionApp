@@ -12,10 +12,14 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@app.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.csci360.electionapp.view.main">
    <children>
-      <GridPane layoutX="103.0" layoutY="94.0" prefHeight="133.0" prefWidth="395.0">
+      <GridPane layoutX="59.0" layoutY="97.0" prefHeight="130.0" prefWidth="487.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="209.0" minWidth="10.0" prefWidth="185.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="80.0" minWidth="0.0" prefWidth="76.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="102.0" minWidth="10.0" prefWidth="25.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="79.0" minWidth="10.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="86.0" minWidth="10.0" prefWidth="86.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -27,11 +31,15 @@
             <Label text="First Name" />
             <Label text="Last Name" GridPane.rowIndex="1" />
             <Label text="Social Security Number" GridPane.rowIndex="3" />
-            <Label text="Date of Birth" GridPane.rowIndex="2" />
-            <TextField fx:id="firstNameField" GridPane.columnIndex="1" />
-            <TextField fx:id="lastNameField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="birthdayField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="ssn" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label text="Date of Birth (MM/DD/YYY)" GridPane.rowIndex="2" />
+            <TextField fx:id="firstNameField" prefHeight="26.0" prefWidth="353.0" GridPane.columnIndex="1" GridPane.columnSpan="5" />
+            <TextField fx:id="lastNameField" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="1" />
+            <TextField fx:id="birthdayFieldMth" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="ssn" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="3" />
+            <TextField fx:id="birthdayFieldDay" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <TextField fx:id="birthdayFieldYear" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="  /  " GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="  /  " GridPane.columnIndex="4" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <Text layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subheader" text="Check Registration Status" wrappingWidth="600.0" />
