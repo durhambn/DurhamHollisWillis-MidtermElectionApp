@@ -388,6 +388,8 @@ public class main extends Application {
         firstNameField.clear();
         lastNameField.clear();
         birthdayFieldMth.clear();
+        birthdayFieldDay.clear();
+        birthdayFieldYear.clear();
         ssn.clear();
 
         // Get the current window and close it
