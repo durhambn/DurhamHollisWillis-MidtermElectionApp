@@ -1,6 +1,8 @@
 package com.csci360.electionapp.view;
 
 import java.io.IOException;
+import java.time.LocalDate;
+
 import com.csci360.electionapp.controller.*;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -16,6 +18,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -104,7 +107,11 @@ public class main extends Application {
     @FXML
     private TextField lastNameField;
     @FXML
-    private TextField birthdayField;
+    private TextField birthdayFieldMth;
+    @FXML
+    private TextField birthdayFieldDay;
+    @FXML
+    private TextField birthdayFieldYear;
     @FXML
     private TextField ssn;
     @FXML
@@ -149,6 +156,12 @@ public class main extends Application {
     public Label S3;
     @FXML
     public Label S4;
+    @FXML
+    public Label V1;
+    @FXML
+    public Label V2;
+    
+    final DatePicker datePicker = new DatePicker();
 
     /**
      * 
@@ -289,7 +302,9 @@ public class main extends Application {
         // Print statements for testing purposes (remove later)
         System.out.print(firstNameField.getText() + "\n");
         System.out.print(lastNameField.getText() + "\n");
-        System.out.print(birthdayField.getText() + "\n");
+        System.out.print(birthdayFieldMth.getText() + "\n");
+        System.out.print(birthdayFieldDay.getText() + "\n");
+        System.out.print(birthdayFieldYear.getText() + "\n");
         System.out.print(ssn.getText() + "\n");
         System.out.print(pswd.getText() + "\n");
         
@@ -297,11 +312,18 @@ public class main extends Application {
         // from the text fields.
         String firstName = firstNameField.getText();
         String lastName = lastNameField.getText();
-        String birthday = birthdayField.getText();
+        //LocalDate birthday = datePicker.getValue();
+        String birthdayMth = birthdayFieldMth.getText();
+        String birthdayDay = birthdayFieldDay.getText();
+        String birthdayYear = birthdayFieldYear.getText();
         String ssnString = ssn.getText();
         String password = pswd.getText();
+        
+        //if(birthdayMth<0 || birthdayMth>12 )
+        //Need to make sure date is real
+        
         //check if any fields are empty and no let it continue
-        if((firstName.isEmpty()) || (lastName.isEmpty()) || (birthday.isEmpty() )|| (ssnString.isEmpty()) || (password.isEmpty())) {
+        if((firstName.isEmpty()) || (lastName.isEmpty()) || (birthdayMth.isEmpty() )||(birthdayDay.isEmpty() )||(birthdayYear.isEmpty() )|| (ssnString.isEmpty()) || (password.isEmpty())) {
         	Alert alert = new Alert(AlertType.WARNING);
             alert.initOwner(regSubmit.getScene().getWindow());
             alert.setTitle("Error");
@@ -312,7 +334,7 @@ public class main extends Application {
         }
         else {
         // Pass data to the controller by creating a registrationController object
-        VoterController votingPerson = registrationController.createVoter(firstName, lastName, birthday, ssnString, password);
+        VoterController votingPerson = registrationController.createVoter(firstName, lastName, birthdayMth, birthdayDay, birthdayYear, ssnString, password);
         
         // Print data to console.
         votingPerson.updateView();
@@ -320,7 +342,7 @@ public class main extends Application {
         // (may need to do this after storing somewhere?)
         firstNameField.clear();
         lastNameField.clear();
-        birthdayField.clear();
+        birthdayFieldMth.clear();
         ssn.clear();
         pswd.clear();
 
@@ -339,12 +361,12 @@ public class main extends Application {
         // Print statements for testing purposes (remove later)
         System.out.print(firstNameField.getText() + "\n");
         System.out.print(lastNameField.getText() + "\n");
-        System.out.print(birthdayField.getText() + "\n");
+        System.out.print(birthdayFieldMth.getText() + "\n");
         System.out.print(ssn.getText() + "\n");
         
         String firstName = firstNameField.getText();
         String lastName = lastNameField.getText();
-        String birthday = birthdayField.getText();
+        String birthday = birthdayFieldMth.getText();
         String ssnString = ssn.getText();
         
         if((firstName.isEmpty()) || (lastName.isEmpty()) || (birthday.isEmpty() )|| (ssnString.isEmpty())) {
@@ -361,7 +383,7 @@ public class main extends Application {
         // (may need to do this after storing the data somewhere?)
         firstNameField.clear();
         lastNameField.clear();
-        birthdayField.clear();
+        birthdayFieldMth.clear();
         ssn.clear();
 
         // Get the current window and close it
@@ -450,13 +472,15 @@ public class main extends Application {
         // into a class creation method...
         String resourceName = "adminInfo.fxml";
         String title = "Election Official Page";
-
+        
+       
+      
         // FXMLLoader variable to grab the adminInfo.fxml file.
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(resourceName));
 
         // Store adminInfo.fxml into Parent variable
         Parent root = fxmlLoader.load();
-
+        
         // Create a new stage and initialize the modality
         // set the opacity to 1 and set the title and show
         // root as the scene.
@@ -465,7 +489,10 @@ public class main extends Application {
         stage.setOpacity(1);
         stage.setTitle(title);
         stage.setScene(new Scene(root));
+        
         stage.showAndWait();
+      
+       
     }
     }
 
