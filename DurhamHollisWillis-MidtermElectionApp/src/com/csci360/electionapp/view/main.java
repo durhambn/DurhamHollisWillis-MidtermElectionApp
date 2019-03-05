@@ -362,14 +362,18 @@ public class main extends Application {
         System.out.print(firstNameField.getText() + "\n");
         System.out.print(lastNameField.getText() + "\n");
         System.out.print(birthdayFieldMth.getText() + "\n");
+        System.out.print(birthdayFieldDay.getText() + "\n");
+        System.out.print(birthdayFieldYear.getText() + "\n");
         System.out.print(ssn.getText() + "\n");
         
         String firstName = firstNameField.getText();
         String lastName = lastNameField.getText();
-        String birthday = birthdayFieldMth.getText();
+        String birthdayMth = birthdayFieldMth.getText();
+        String birthdayDay = birthdayFieldDay.getText();
+        String birthdayYear = birthdayFieldYear.getText();
         String ssnString = ssn.getText();
         
-        if((firstName.isEmpty()) || (lastName.isEmpty()) || (birthday.isEmpty() )|| (ssnString.isEmpty())) {
+        if((firstName.isEmpty()) || (lastName.isEmpty()) || (birthdayMth.isEmpty() )||(birthdayDay.isEmpty() )|| (birthdayYear.isEmpty() )||(ssnString.isEmpty())) {
         	Alert alert = new Alert(AlertType.WARNING);
             alert.initOwner(checkSubmit.getScene().getWindow());
             alert.setTitle("Error");
