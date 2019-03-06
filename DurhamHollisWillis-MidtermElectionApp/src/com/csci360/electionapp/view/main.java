@@ -161,7 +161,7 @@ public class main extends Application {
     @FXML
     public Label V2;
     
-    final DatePicker datePicker = new DatePicker();
+    //final DatePicker datePicker = new DatePicker();
 
     /**
      * 

@@ -57,7 +57,9 @@
             <TextField fx:id="birthdayFieldYear" GridPane.columnIndex="5" GridPane.rowIndex="2" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="  /" GridPane.columnIndex="2" GridPane.rowIndex="2" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="  /" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-            <PasswordField fx:id="pswd" prefHeight="23.0" prefWidth="164.0" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="4" />
+            <PasswordField fx:id="pswd" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="4" />
+            <PasswordField fx:id="pswd" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="4" />
+
          </children>
       </GridPane>
    </children>
