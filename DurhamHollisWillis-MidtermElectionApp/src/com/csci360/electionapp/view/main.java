@@ -45,16 +45,7 @@ public class main extends Application {
         String title = "Main Page";
         String resourceName = "Mainpage.fxml";
 
-        // Store the Mainpage.fxml file into root as a "Parent"
-        Parent root = FXMLLoader.load(getClass().getResource(resourceName));
-
-        // Create a new stage and set the title
-        // and show root as the scene.
-        Scene scene = new Scene(root);
-        stage.setTitle(title);
-        stage.setScene(scene);
-        stage.show();
-
+        setStage(title, resourceName);
     }
 
     // Button variable for registering page (registration page)
