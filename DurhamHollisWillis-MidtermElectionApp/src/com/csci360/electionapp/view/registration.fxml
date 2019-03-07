@@ -50,7 +50,7 @@
             <Label prefHeight="18.0" prefWidth="185.0" text="Social Security Number" GridPane.rowIndex="3" />
             <TextField fx:id="firstNameField" prefHeight="6.0" prefWidth="313.0" GridPane.columnIndex="1" GridPane.columnSpan="5" />
             <TextField fx:id="lastNameField" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="1" />
-            <TextField fx:id="birthdayFieldMth" prefHeight="26.0" prefWidth="75.0" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="2" />
+            <TextField fx:id="birthdayFieldMth" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="2" />
             <TextField fx:id="ssn" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="3" />
             <Label text="Password" GridPane.rowIndex="4" />
             <TextField fx:id="birthdayFieldDay" GridPane.columnIndex="3" GridPane.rowIndex="2" />
