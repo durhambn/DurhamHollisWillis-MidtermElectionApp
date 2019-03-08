@@ -57,10 +57,10 @@ public class database {
 	private final int portNumber = 3306;
 
 	/** The name of the database we are testing with (this default is installed with MySQL) */
-	private final String dbName = "test";
+	private final String dbName = "election_database";
 	
 	/** The name of the table we are testing with */
-	private final String tableName = "JDBC_TEST";
+	private final String tableName = "VOTERS";
 	
 	/**
 	 * Get a new database connection
@@ -103,7 +103,7 @@ public class database {
 	/**
 	 * Connect to MySQL and do some stuff.
 	 */
-	public static void connect() {
+	public void run() {
 
 		// Connect to MySQL
 		Connection conn = null;
@@ -152,13 +152,22 @@ public class database {
 		}
 		*/
 	}
-	public void addToVoters(VoterController voter) {
+	public void addToVoters(VoterController voter, Connection conn) throws SQLException {
 		String query =" insert into voters (name, last_name, date_of_birth_month, date_of_birth_day, date_of_birth_year, ssn, username, password)" + " values (?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		PreparedStatement preparedStmt = conn.prepareStatement(query);
 		preparedStmt.setString(1, voter.getVoterFirstName());
 		preparedStmt.setString(2,  voter.getVoterLastName());
-		preparedStmt.setString(3, voter.getVoterBirthdayMonth());
+		preparedStmt.setString(3, voter.getVoterBirthdayMth());
+		preparedStmt.setString(4,  voter.getVoterBirthdayDay());
+		preparedStmt.setString(5,  voter.getVoterBirthdayYear());
+		preparedStmt.setString(6,  voter.getVoterSSN());
+		preparedStmt.setString(7,  voter.getVoterUsername());
+		preparedStmt.setString(8,  voter.getVoterPassword());
+		
+		preparedStmt.execute();
+	      
+	    conn.close();
 		
 		
 	}
@@ -168,6 +177,6 @@ public class database {
 	 */
 	public static void main(String[] args) {
 		database app = new database();
-		//app.run();
+		app.run();
 	}
 }
