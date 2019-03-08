@@ -1,6 +1,7 @@
 package com.csci360.electionapp.view;
 
 import java.io.IOException;
+import com.csci360.electionapp.model.database;
 import java.time.LocalDate;
 
 import com.csci360.electionapp.controller.*;
@@ -54,7 +55,7 @@ public class main extends Application {
         stage.setTitle(title);
         stage.setScene(scene);
         stage.show();
-
+        //database.connect();
     }
 
     // Button variable for registering page (registration page)
