@@ -34,7 +34,53 @@ public class VoterController {
 	}
 	
 	public String getVoterBirthday() {
-		return model.getBirthday();
+		return (model.getBirthdayMth() + "/" + model.getBirthdayDay() +"/" + model.getBirthdayYear());
+	}
+	
+	public String getVoterBirthdayMth() {
+		return model.getBirthdayMth();
+	}
+	
+	public String getVoterBirthdayDay() {
+		return model.getBirthdayDay();
+	}
+	
+	public String getVoterBirthdayYear() {
+		return model.getBirthdayYear();
+	}
+	
+	public void setBirthday(String birthday2, String birthday3, String birthday4) {
+		model.setBirthdayMth(birthday2);
+		model.setBirthdayDay(birthday3);
+		model.setBirthdayYear(birthday4);
+	}
+	
+	public void setBirthdayDay(String birthday2) {
+		model.setBirthdayDay(birthday2);
+	}
+	
+	public void setBirthdayMth(String birthday3) {
+		model.setBirthdayMth(birthday3);
+	}
+	
+	public void setBirthdayYear(String birthday4) {
+		model.setBirthdayYear(birthday4);
+	}
+	
+	public Integer getVoterBirthdayMonthNum() {
+		int mth = Integer.valueOf(model.getBirthdayMonthNum());
+		System.out.println(mth);
+		return mth;
+	}
+	public Integer getVoterBirthdayDayNum() {
+		int day = Integer.valueOf(model.getBirthdayDayNum());
+		System.out.println(day);
+		return day;
+	}
+	public Integer getVoterBirthdayYearNum() {
+		int year = Integer.valueOf(model.getBirthdayYearNum());
+		System.out.println(year);
+		return year;
 	}
 	
 	public void setVoterSSN(String SSN) {

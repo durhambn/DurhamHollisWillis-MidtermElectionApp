@@ -5,6 +5,7 @@ import com.csci360.electionapp.view.*;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
@@ -152,6 +153,12 @@ public class database {
 		*/
 	}
 	public void addToVoters(VoterController voter) {
+		String query =" insert into voters (name, last_name, date_of_birth_month, date_of_birth_day, date_of_birth_year, ssn, username, password)" + " values (?, ?, ?, ?, ?, ?, ?, ?)";
+		
+		PreparedStatement preparedStmt = conn.prepareStatement(query);
+		preparedStmt.setString(1, voter.getVoterFirstName());
+		preparedStmt.setString(2,  voter.getVoterLastName());
+		preparedStmt.setString(3, voter.getVoterBirthdayMonth());
 		
 		
 	}

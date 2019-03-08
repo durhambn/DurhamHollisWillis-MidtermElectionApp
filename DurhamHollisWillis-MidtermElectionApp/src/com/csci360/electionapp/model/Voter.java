@@ -47,10 +47,34 @@ public class Voter {
 	public String getBirthday() {
 		return (birthdayMth + "/" + birthdayDay +"/" + birthdayYear);
 	}
-
+	
+	public String getBirthdayMth() {
+		return this.birthdayMth;
+	}
+	
+	public String getBirthdayDay() {
+		return this.birthdayDay;
+	}
+	
+	public String getBirthdayYear() {
+		return this.getBirthdayYear();
+	}
+	
 	public void setBirthday(String birthday2, String birthday3, String birthday4) {
 		this.birthdayMth = birthday2;
 		this.birthdayDay = birthday3;
+		this.birthdayYear = birthday4;
+	}
+	
+	public void setBirthdayDay(String birthday2) {
+		this.birthdayDay = birthday2;
+	}
+	
+	public void setBirthdayMth(String birthday3) {
+		this.birthdayMth = birthday3;
+	}
+	
+	public void setBirthdayYear(String birthday4) {
 		this.birthdayYear = birthday4;
 	}
 
@@ -86,17 +110,17 @@ public class Voter {
 		else
 			return true;
 	}
-	private Integer getBirthdayMonth() {
+	public Integer getBirthdayMonthNum() {
 		int mth = Integer.valueOf(birthdayMth);
 		System.out.println(mth);
 		return mth;
 	}
-	private Integer getBirthdayDay() {
+	public Integer getBirthdayDayNum() {
 		int day = Integer.valueOf(birthdayDay);
 		System.out.println(day);
 		return day;
 	}
-	private Integer getBirthdayYear() {
+	public Integer getBirthdayYearNum() {
 		int year = Integer.valueOf(birthdayYear);
 		System.out.println(year);
 		return year;
@@ -104,7 +128,7 @@ public class Voter {
 	
 	public boolean checkEligibility() {
 		Date today = new Date(); //todays date
-		Date birthday = new Date(getBirthdayYear(), getBirthdayMonth(), getBirthdayDay());
+		Date birthday = new Date(getBirthdayYearNum(), getBirthdayMonthNum(), getBirthdayDayNum());
 		//Date birthday = new Date(getBirthdayMonth(), getBirthdayDay(), getBirthdayYear());
 		int age = today.compareTo(birthday);
 		System.out.println("Age: " + age);
