@@ -1,6 +1,7 @@
 package com.csci360.electionapp.view;
 
 import java.io.IOException;
+import com.csci360.electionapp.model.database;
 import java.time.LocalDate;
 
 import com.csci360.electionapp.controller.*;
