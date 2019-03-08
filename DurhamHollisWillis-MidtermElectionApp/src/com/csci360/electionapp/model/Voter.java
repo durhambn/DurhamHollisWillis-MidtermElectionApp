@@ -102,6 +102,7 @@ public class Voter {
 		return year;
 	}
 	
+	@SuppressWarnings("deprecation")
 	public boolean checkEligibility() {
 		Date today = new Date(); //todays date
 		Date birthday = new Date(getBirthdayYear(), getBirthdayMonth(), getBirthdayDay());
