@@ -154,9 +154,9 @@ public class database {
 	}
 	
 	public void createVotersTable(Connection conn) throws SQLException {
-		String query ="CREATE TABLE IF NOT EXISTS VOTERS((id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, name varchar(256) "
+		String query ="CREATE TABLE IF NOT EXISTS VOTERS(id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, name varchar(256) "
 				+ "NOT NULL, last_name varchar(256) NOT NULL, date_of_birth date NOT NULL, ssn varchar(128) NOT NULL, "
-				+ "username varchar(256) NOT NULL, password varchar(256) NOT NULL)";
+				+ "username varchar(256) NOT NULL, password varchar(256) NOT NULL);";
 		
 		PreparedStatement preparedStmt = conn.prepareStatement(query);
 		/*preparedStmt.setString(1, voter.getVoterFirstName());
