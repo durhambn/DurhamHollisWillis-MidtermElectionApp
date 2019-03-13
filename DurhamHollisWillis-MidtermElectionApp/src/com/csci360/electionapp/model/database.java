@@ -48,7 +48,7 @@ public class database {
 	private final String userName = "root";
 
 	/** The password for the MySQL account (or empty for anonymous) */
-	private final String password = "sqlserver";
+	private final String password = "root";
 
 	/** The name of the computer running MySQL */
 	private final String serverName = "localhost";
@@ -152,18 +152,41 @@ public class database {
 		}
 		*/
 	}
+	
+	public void createVotersTable(Connection conn) throws SQLException {
+		String query ="CREATE TABLE IF NOT EXISTS VOTERS((id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, name varchar(256) "
+				+ "NOT NULL, last_name varchar(256) NOT NULL, date_of_birth date NOT NULL, ssn varchar(128) NOT NULL, "
+				+ "username varchar(256) NOT NULL, password varchar(256) NOT NULL)";
+		
+		PreparedStatement preparedStmt = conn.prepareStatement(query);
+		/*preparedStmt.setString(1, voter.getVoterFirstName());
+		preparedStmt.setString(2,  voter.getVoterLastName());
+		preparedStmt.setString(3, voter.convertDOB());
+		//preparedStmt.setString(4,  voter.getVoterBirthdayDay());
+		//preparedStmt.setString(5,  voter.getVoterBirthdayYear());
+		preparedStmt.setString(4,  voter.getVoterSSN());
+		preparedStmt.setString(5,  voter.getVoterUsername());
+		preparedStmt.setString(6,  voter.getVoterPassword());
+		*/
+		preparedStmt.execute();
+	      
+	    conn.close();
+		
+		
+	}
+	
 	public void addToVoters(VoterController voter, Connection conn) throws SQLException {
-		String query =" insert into voters (name, last_name, date_of_birth_month, date_of_birth_day, date_of_birth_year, ssn, username, password)" + " values (?, ?, ?, ?, ?, ?, ?, ?)";
+		String query =" insert into VOTERS (name, last_name, date_of_birth, ssn, username, password)" + " values (?, ?, ?, ?, ?, ?)";
 		
 		PreparedStatement preparedStmt = conn.prepareStatement(query);
 		preparedStmt.setString(1, voter.getVoterFirstName());
 		preparedStmt.setString(2,  voter.getVoterLastName());
-		preparedStmt.setString(3, voter.getVoterBirthdayMth());
-		preparedStmt.setString(4,  voter.getVoterBirthdayDay());
-		preparedStmt.setString(5,  voter.getVoterBirthdayYear());
-		preparedStmt.setString(6,  voter.getVoterSSN());
-		preparedStmt.setString(7,  voter.getVoterUsername());
-		preparedStmt.setString(8,  voter.getVoterPassword());
+		preparedStmt.setString(3, voter.convertDOB());
+		//preparedStmt.setString(4,  voter.getVoterBirthdayDay());
+		//preparedStmt.setString(5,  voter.getVoterBirthdayYear());
+		preparedStmt.setString(4,  voter.getVoterSSN());
+		preparedStmt.setString(5,  voter.getVoterUsername());
+		preparedStmt.setString(6,  voter.getVoterPassword());
 		
 		preparedStmt.execute();
 	      

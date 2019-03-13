@@ -1,9 +1,12 @@
 package com.csci360.electionapp.controller;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Date;
 
 import com.csci360.electionapp.model.Voter;
+import com.csci360.electionapp.model.database;
 import com.csci360.electionapp.view.*;
 
 /**
@@ -15,10 +18,10 @@ import com.csci360.electionapp.view.*;
 public class registrationController {
 	// Voter object that will be created
 	private Voter v;
+	//database db;
 	
 	// ??? what goes here.
 	public registrationController() {
-		
 	}
 	
 	/**
@@ -46,10 +49,13 @@ public class registrationController {
 		return controller;
 	}
 	
-	public void add() {
+	public static void add(VoterController v, database db) throws SQLException {
 		//add voter v
-		if(v.getStatus() == false) {
-			if(v.checkEligibility()==true) {
+		if(v.getVoterStatus() == false) {
+			if(v.getVoterProfile().checkEligibility() == true) {
+				Connection conn = db.getConnection();
+				db.addToVoters(v, conn);
+				//v.updateRegStatus();
 				//add to database
 				System.out.println("The voter has been added to the database");
 			}

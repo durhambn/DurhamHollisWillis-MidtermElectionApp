@@ -18,6 +18,7 @@ public class Voter {
 	private String ssn;
 	private String password;
 	private String username;
+	private boolean status;
 	
 	public Voter(String firstName, String lastName, String birthday2, String birthday3, String birthday4, String ssn, String password) {
 		this.setFirstName(firstName);
@@ -26,6 +27,7 @@ public class Voter {
 		this.setSsn(ssn);
 		this.setPassword(password);
 		this.setUsername(firstName, lastName);
+		this.status = false;
 	}
 
 	public String getFirstName() {
@@ -57,7 +59,7 @@ public class Voter {
 	}
 	
 	public String getBirthdayYear() {
-		return this.getBirthdayYear();
+		return this.birthdayYear;
 	}
 	
 	public void setBirthday(String birthday2, String birthday3, String birthday4) {
@@ -104,22 +106,26 @@ public class Voter {
 	
 	public boolean getStatus() {
 		//calls database and returns if in the database
-		if (true) {//call inDatabase(v)
+		if (this.status == true) {//call inDatabase(v)
 			return true;
 		}
-		else
-			return true;
+		else {
+			return false;
+		}
 	}
+	
 	public Integer getBirthdayMonthNum() {
 		int mth = Integer.valueOf(birthdayMth);
 		System.out.println(mth);
 		return mth;
 	}
+	
 	public Integer getBirthdayDayNum() {
 		int day = Integer.valueOf(birthdayDay);
 		System.out.println(day);
 		return day;
 	}
+	
 	public Integer getBirthdayYearNum() {
 		int year = Integer.valueOf(birthdayYear);
 		System.out.println(year);
@@ -129,15 +135,16 @@ public class Voter {
 	@SuppressWarnings("deprecation")
 	public boolean checkEligibility() {
 		Date today = new Date(); //todays date
-		Date birthday = new Date(getBirthdayYearNum(), getBirthdayMonthNum(), getBirthdayDayNum());
+		//Date birthday = new Date(getBirthdayYearNum(), getBirthdayMonthNum(), getBirthdayDayNum());
+		int todayYear = today.getYear();
 		//Date birthday = new Date(getBirthdayMonth(), getBirthdayDay(), getBirthdayYear());
-		int age = today.compareTo(birthday);
+		int age = 17;//this.getBirthdayYearNum() - todayYear;
 		System.out.println("Age: " + age);
 		if(age < 18) {
 			return false;
 		}
 		else {
-		return true;
+			return true;
 		}
 	}
 }
