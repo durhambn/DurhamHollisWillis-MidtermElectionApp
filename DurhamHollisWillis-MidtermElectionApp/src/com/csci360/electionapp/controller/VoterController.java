@@ -83,6 +83,19 @@ public class VoterController {
 		return year;
 	}
 	
+	public String convertDOB() {
+		String DOB = this.getVoterBirthdayYear() + "-" + this.getVoterBirthdayMth() + "-" + this.getVoterBirthdayDay();
+		return DOB;
+	}
+	
+	public boolean getVoterStatus() {
+		return model.getStatus();
+	}
+	
+	public boolean getVoterEligibility() {
+		return model.checkEligibility();
+	}
+	
 	public void setVoterSSN(String SSN) {
 		model.setSsn(SSN);
 	}
@@ -105,6 +118,10 @@ public class VoterController {
 	
 	public String getVoterPassword() {
 		return model.getPassword();
+	}
+	
+	public Voter getVoterProfile() {
+		return this.model;
 	}
 	
 	public void updateView() {

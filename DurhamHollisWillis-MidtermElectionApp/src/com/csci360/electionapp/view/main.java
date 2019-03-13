@@ -1,6 +1,9 @@
 package com.csci360.electionapp.view;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
+
 import com.csci360.electionapp.model.database;
 import java.time.LocalDate;
 
@@ -29,18 +32,32 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
+import com.csci360.electionapp.model.*;
+
 /**
  * 
  * @author Brandi Durham, Austin Hollis, Justin Willis
  *
  */
 public class main extends Application {
+	
+	database db = new database();
+	
+	public Connection connectToDB() throws SQLException {
+		return this.db.getConnection();
+	}
+	
+	public void createTables(Connection conn) throws SQLException {
+		this.db.createVotersTable(conn);
+	}
 
     /**
      * Method for starting screen
      */
     @Override
     public void start(Stage stage) throws Exception {
+    	connectToDB();
+    	createTables(connectToDB());
         // Might incorporate title and resourceName
         // into a class creation method...
         String title = "Main Page";
@@ -112,6 +129,9 @@ public class main extends Application {
     private TextField username;
     @FXML
     private TextField password;
+    	
+	registrationController rc = new registrationController();
+
 
     /**
      * CheckBox and Label variables for voting page
@@ -249,8 +269,9 @@ public class main extends Application {
      * 
      * @param event
      * @throws IOException
+     * @throws SQLException 
      */
-    public void regSubmit(ActionEvent event) throws IOException {
+    public void regSubmit(ActionEvent event) throws IOException, SQLException {
         // Print statements for testing purposes (remove later)
         System.out.print(firstNameField.getText() + "\n");
         System.out.print(lastNameField.getText() + "\n");
@@ -287,7 +308,7 @@ public class main extends Application {
         else {
         // Pass data to the controller by creating a registrationController object
         VoterController votingPerson = registrationController.createVoter(firstName, lastName, birthdayMth, birthdayDay, birthdayYear, ssnString, password);
-        
+        registrationController.add(votingPerson, this.db);
         // Print data to console.
         votingPerson.updateView();
         // Clear the text fields
