@@ -333,6 +333,8 @@ public class main extends Application {
         firstNameField.clear();
         lastNameField.clear();
         birthdayFieldMth.clear();
+        birthdayFieldDay.clear();
+        birthdayFieldYear.clear();
         ssn.clear();
         pswd.clear();
 
@@ -372,20 +374,37 @@ public class main extends Application {
 
             alert.showAndWait();
         }
-        else {
-        // Clear the text fields
-        // (may need to do this after storing the data somewhere?)
-        firstNameField.clear();
-        lastNameField.clear();
-        birthdayFieldMth.clear();
-        birthdayFieldDay.clear();
-        birthdayFieldYear.clear();
-        ssn.clear();
+        
+        	else {
+                // Pass data to the controller by creating a registrationController object
+        		String password = "";
+                VoterController votingPerson = registrationController.createVoter(firstName, lastName, birthdayMth, birthdayDay, birthdayYear, ssnString, password);
+                boolean addResult = votingPerson.getRegStatus(db);
+                if(addResult) {
+                	//popup saying they are already added
+                	System.out.println("The voter is already registered to vote");
+                }
+                else {
+                	//popup saying they are not registered
+                	System.out.println("The voter is not registered to vote");
+                }
+                //System.out.println("The result from adding person to the database is: " + addResult);
+                // Print data to console.
+                votingPerson.updateView();
+                // Clear the text fields
+                // (may need to do this after storing somewhere?)
+                firstNameField.clear();
+                lastNameField.clear();
+                birthdayFieldMth.clear();
+                birthdayFieldDay.clear();
+                birthdayFieldYear.clear();
+                ssn.clear();
 
-        // Get the current window and close it
-        Stage stage = (Stage) checkSubmit.getScene().getWindow();
-        stage.close();
-    }
+                // Get the current window and close it.
+                Stage stage = (Stage) checkSubmit.getScene().getWindow();
+                stage.close();
+            }
+        
     }
 
     //voter login submit method
