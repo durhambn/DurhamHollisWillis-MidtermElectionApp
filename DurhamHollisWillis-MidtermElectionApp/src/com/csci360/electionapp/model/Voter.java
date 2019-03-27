@@ -3,6 +3,7 @@ package com.csci360.electionapp.model;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.Date;
 
 //voter person will have an object of ballot, set attributes set to null, vp.getBallot()
@@ -134,11 +135,12 @@ public class Voter {
 	
 	@SuppressWarnings("deprecation")
 	public boolean checkEligibility() {
-		Date today = new Date(); //todays date
-		//Date birthday = new Date(getBirthdayYearNum(), getBirthdayMonthNum(), getBirthdayDayNum());
-		int todayYear = today.getYear();
+		LocalDate today = LocalDate.now(); //todays date
+		LocalDate birthday = LocalDate.of(getBirthdayYearNum(), getBirthdayMonthNum(), getBirthdayDayNum());
+		//int todayYear = today.getYear();
+		Period p = Period.between(birthday, today);
 		//Date birthday = new Date(getBirthdayMonth(), getBirthdayDay(), getBirthdayYear());
-		int age = 18;//this.getBirthdayYearNum() - todayYear;
+		int age = p.getYears();//this.getBirthdayYearNum() - todayYear;
 		System.out.println("Age: " + age);
 		if(age < 18) {
 			return false;
