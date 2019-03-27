@@ -157,10 +157,10 @@ public class database {
 	    conn.close();
 	}
 	
-	public boolean checkVoters(VoterController voter, Connection conn) throws SQLException {
+	public static boolean checkVoters(String social, Connection conn) throws SQLException {
 		boolean result;
 		Statement stmt = conn.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT ssn FROM VOTERS WHERE ssn=" + voter.getVoterSSN() + ";");
+		ResultSet rs = stmt.executeQuery("SELECT ssn FROM VOTERS WHERE ssn=" + social + ";");
 		if(rs.next()) {
 			result = true;
 			return result;
