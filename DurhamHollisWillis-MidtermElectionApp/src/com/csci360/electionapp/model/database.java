@@ -6,6 +6,7 @@ import com.csci360.electionapp.view.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
@@ -124,7 +125,7 @@ public class database {
 		Statement s = conn.createStatement();
 		String s1 = "CREATE TABLE IF NOT EXISTS VOTERS(" + "id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, name varchar(256) NOT NULL, "
 				+ "last_name varchar(256) NOT NULL, date_of_birth date NOT NULL, ssn varchar(128) NOT NULL, username varchar(256) NOT NULL, "
-				+ "password varchar(256) NOT NULL, status boolean NOT NULL DEFAULT 0, UNIQUE(id, ssn));";
+				+ "password varchar(256) NOT NULL, status boolean NOT NULL DEFAULT 0, CONSTRAINT Unique_ssn UNIQUE KEY(ssn));";
 		String s2 = "CREATE TABLE IF NOT EXISTS ADMIN(" + "id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, name varchar(256) NOT NULL, "
 				+ "last_name varchar(256) NOT NULL, username varchar(256) NOT NULL, password varchar(256) NOT NULL" + ");";
 		String s3 = "CREATE TABLE IF NOT EXISTS CANDIDATES(" + "id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,name varchar(256) NOT NULL, "
@@ -154,6 +155,20 @@ public class database {
 		preparedStmt.execute();
 	      
 	    conn.close();
+	}
+	
+	public boolean checkVoters(VoterController voter, Connection conn) throws SQLException {
+		boolean result;
+		Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery("SELECT ssn FROM VOTERS WHERE ssn=" + voter.getVoterSSN() + ";");
+		if(rs.next()) {
+			result = true;
+			return result;
+		}
+		else {
+			result = false;
+			return result;
+		}
 	}
 	
 	public void initialAdmin(Connection conn) throws SQLException {

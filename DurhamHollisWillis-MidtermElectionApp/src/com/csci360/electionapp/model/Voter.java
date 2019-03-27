@@ -106,7 +106,7 @@ public class Voter {
 	}
 	
 	public boolean getStatus() {
-		//calls database and returns if in the database
+		//calls database and returns if able to vote today
 		if (this.status == true) {//call inDatabase(v)
 			return true;
 		}
