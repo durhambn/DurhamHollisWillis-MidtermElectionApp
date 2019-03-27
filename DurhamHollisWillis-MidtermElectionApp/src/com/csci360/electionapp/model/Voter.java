@@ -133,7 +133,17 @@ public class Voter {
 		return year;
 	}
 	
-	@SuppressWarnings("deprecation")
+	public boolean getRegistrationStatus() {
+		//calls database and returns if in the database
+		if(database.checkVoters()) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	//@SuppressWarnings("deprecation")
 	public boolean checkEligibility() {
 		LocalDate today = LocalDate.now(); //todays date
 		LocalDate birthday = LocalDate.of(getBirthdayYearNum(), getBirthdayMonthNum(), getBirthdayDayNum());
