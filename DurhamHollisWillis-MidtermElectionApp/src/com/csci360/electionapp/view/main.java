@@ -324,7 +324,8 @@ public class main extends Application {
         else {
         // Pass data to the controller by creating a registrationController object
         VoterController votingPerson = registrationController.createVoter(firstName, lastName, birthdayMth, birthdayDay, birthdayYear, ssnString, password);
-        registrationController.add(votingPerson, this.db);
+        String addResult = registrationController.add(votingPerson, this.db);
+        System.out.println("The result from adding person to the database is: " + addResult);
         // Print data to console.
         votingPerson.updateView();
         // Clear the text fields
