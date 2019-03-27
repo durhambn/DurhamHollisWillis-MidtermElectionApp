@@ -1,6 +1,7 @@
 package com.csci360.electionapp.controller;
 
 import com.csci360.electionapp.model.Voter;
+import com.csci360.electionapp.model.database;
 import com.csci360.electionapp.view.VoterView;
 
 public class VoterController {
@@ -90,6 +91,10 @@ public class VoterController {
 	
 	public boolean getVoterStatus() {
 		return model.getStatus();
+	}
+	
+	public boolean getRegStatus(database db) {
+		return model.getRegistrationStatus(db);
 	}
 	
 	public boolean getVoterEligibility() {

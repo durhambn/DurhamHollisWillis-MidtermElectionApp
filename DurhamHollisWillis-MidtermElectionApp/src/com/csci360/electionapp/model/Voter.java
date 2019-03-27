@@ -1,5 +1,6 @@
 package com.csci360.electionapp.model;
 
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -133,7 +134,29 @@ public class Voter {
 		return year;
 	}
 	
-	@SuppressWarnings("deprecation")
+	public boolean getRegistrationStatus(database db) {
+		//calls database and returns if in the database
+		String social = this.getSsn();
+		boolean result;
+		try {
+			if(database.checkVoters(social, db.getConnection())) {
+				result=true;
+				return result;
+			}
+			else {
+				result=false;
+				return result;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			result=false;
+			return result;
+			
+		}
+	}
+	
+	//@SuppressWarnings("deprecation")
 	public boolean checkEligibility() {
 		LocalDate today = LocalDate.now(); //todays date
 		LocalDate birthday = LocalDate.of(getBirthdayYearNum(), getBirthdayMonthNum(), getBirthdayDayNum());

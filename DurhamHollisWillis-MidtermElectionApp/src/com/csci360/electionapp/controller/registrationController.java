@@ -52,7 +52,7 @@ public class registrationController {
 	public static String add(VoterController v, database db) throws SQLException {
 		String Result = "";
 		//add voter v
-		if(v.getVoterStatus() == false) {
+		if(v.getRegStatus(db) == false) {
 			if(v.getVoterProfile().checkEligibility() == true) {
 				Connection conn = db.getConnection();
 				db.addToVoters(v, conn);
