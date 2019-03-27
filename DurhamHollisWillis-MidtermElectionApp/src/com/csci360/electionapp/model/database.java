@@ -62,6 +62,7 @@ public class database {
 	/** The name of the table we are testing with */
 	private final String tableName = "VOTERS";
 	
+	
 	/**
 	 * Get a new database connection
 	 * 
@@ -73,10 +74,11 @@ public class database {
 		Properties connectionProps = new Properties();
 		connectionProps.put("user", this.userName);
 		connectionProps.put("password", this.password);
+		//connectionProps.put("useSSL", "false");
+		connectionProps.put("createDatabaseIfNotExist", "true");
 
 		conn = DriverManager.getConnection("jdbc:mysql://"
-				+ this.serverName + ":" + this.portNumber + "/" + this.dbName,
-				connectionProps);
+				+ this.serverName + ":" + this.portNumber + "/" + this.dbName, connectionProps);
 
 		return conn;
 	}
@@ -116,63 +118,26 @@ public class database {
 			return;
 		}
 		
-		/*
-		// Create a table
-		try {
-			
-		    String createString =
-			        "CREATE TABLE " + this.tableName + " ( " +
-			        "ID INTEGER NOT NULL, " +
-			        "NAME varchar(40) NOT NULL, " +
-			        "STREET varchar(40) NOT NULL, " +
-			        "CITY varchar(20) NOT NULL, " +
-			        "STATE char(2) NOT NULL, " +
-			        "ZIP char(5), " +
-			        "PRIMARY KEY (ID))";
-			this.executeUpdate(conn, createString);
-			System.out.println("Created a table");
-			
-	    } catch (SQLException e) {
-			System.out.println("ERROR: Could not create the table");
-			e.printStackTrace();
-			return;
-		}
-		*/
-		
-		// Drop the table
-		/*
-		try {
-		    String dropString = "DROP TABLE " + this.tableName;
-			this.executeUpdate(conn, dropString);
-			System.out.println("Dropped the table");
-	    } catch (SQLException e) {
-			System.out.println("ERROR: Could not drop the table");
-			e.printStackTrace();
-			return;
-		}
-		*/
 	}
 	
-	public void createVotersTable(Connection conn) throws SQLException {
-		String query ="CREATE TABLE IF NOT EXISTS VOTERS(id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, name varchar(256) "
-				+ "NOT NULL, last_name varchar(256) NOT NULL, date_of_birth date NOT NULL, ssn varchar(128) NOT NULL, "
-				+ "username varchar(256) NOT NULL, password varchar(256) NOT NULL);";
+	public void createTables(Connection conn) throws SQLException {
+		Statement s = conn.createStatement();
+		String s1 = "CREATE TABLE IF NOT EXISTS VOTERS(" + "id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, name varchar(256) NOT NULL, "
+				+ "last_name varchar(256) NOT NULL, date_of_birth date NOT NULL, ssn varchar(128) NOT NULL, username varchar(256) NOT NULL, "
+				+ "password varchar(256) NOT NULL, status boolean NOT NULL DEFAULT 0, UNIQUE(id, ssn));";
+		String s2 = "CREATE TABLE IF NOT EXISTS ADMIN(" + "id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, name varchar(256) NOT NULL, "
+				+ "last_name varchar(256) NOT NULL, username varchar(256) NOT NULL, password varchar(256) NOT NULL" + ");";
+		String s3 = "CREATE TABLE IF NOT EXISTS CANDIDATES(" + "id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,name varchar(256) NOT NULL, "
+				+ "last_name varchar(256) NOT NULL, category varchar(256) NOT NULL, votes INTEGER NOT NULL DEFAULT 0" + ");";
+		String s4 = "CREATE TABLE IF NOT EXISTS BALLOT(" + "id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, category1 boolean NOT NULL DEFAULT 0, "
+				+ "category2 boolean NOT NULL DEFAULT 0,category3 boolean NOT NULL DEFAULT 0, category4 boolean NOT NULL DEFAULT 0" + ");";
 		
-		PreparedStatement preparedStmt = conn.prepareStatement(query);
-		/*preparedStmt.setString(1, voter.getVoterFirstName());
-		preparedStmt.setString(2,  voter.getVoterLastName());
-		preparedStmt.setString(3, voter.convertDOB());
-		//preparedStmt.setString(4,  voter.getVoterBirthdayDay());
-		//preparedStmt.setString(5,  voter.getVoterBirthdayYear());
-		preparedStmt.setString(4,  voter.getVoterSSN());
-		preparedStmt.setString(5,  voter.getVoterUsername());
-		preparedStmt.setString(6,  voter.getVoterPassword());
-		*/
-		preparedStmt.execute();
-	      
-	    conn.close();
-		
-		
+		s.addBatch(s1);
+		s.addBatch(s2);  
+		s.addBatch(s3);
+		s.addBatch(s4);
+		s.executeBatch();
+		initialAdmin(conn);
 	}
 	
 	public void addToVoters(VoterController voter, Connection conn) throws SQLException {
@@ -182,8 +147,6 @@ public class database {
 		preparedStmt.setString(1, voter.getVoterFirstName());
 		preparedStmt.setString(2,  voter.getVoterLastName());
 		preparedStmt.setString(3, voter.convertDOB());
-		//preparedStmt.setString(4,  voter.getVoterBirthdayDay());
-		//preparedStmt.setString(5,  voter.getVoterBirthdayYear());
 		preparedStmt.setString(4,  voter.getVoterSSN());
 		preparedStmt.setString(5,  voter.getVoterUsername());
 		preparedStmt.setString(6,  voter.getVoterPassword());
@@ -191,8 +154,21 @@ public class database {
 		preparedStmt.execute();
 	      
 	    conn.close();
+	}
+	
+	public void initialAdmin(Connection conn) throws SQLException {
+		String query = "INSERT INTO ADMIN(name, last_name, username, password)" + " VALUES(?, ?, ?, ?);";
 		
+		PreparedStatement preparedStmt = conn.prepareStatement(query);
 		
+		preparedStmt.setString(1, "Admin");
+		preparedStmt.setString(2, "Admin");
+		preparedStmt.setString(3, "admin");
+		preparedStmt.setString(4, "admin");
+		
+		preparedStmt.execute();
+		
+		conn.close();
 	}
 	
 	/**
