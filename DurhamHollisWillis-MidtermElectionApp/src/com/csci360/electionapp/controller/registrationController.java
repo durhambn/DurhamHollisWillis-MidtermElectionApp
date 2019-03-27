@@ -49,7 +49,8 @@ public class registrationController {
 		return controller;
 	}
 	
-	public static void add(VoterController v, database db) throws SQLException {
+	public static String add(VoterController v, database db) throws SQLException {
+		String Result = "";
 		//add voter v
 		if(v.getVoterStatus() == false) {
 			if(v.getVoterProfile().checkEligibility() == true) {
@@ -57,14 +58,20 @@ public class registrationController {
 				db.addToVoters(v, conn);
 				//v.updateRegStatus();
 				//add to database
-				System.out.println("The voter has been added to the database");
+				//System.out.println("The voter has been added to the database");
+				Result = "The voter has been added to the database";
+				return Result;
 			}
 			else {
-				System.out.println("The voter is not ellligibile to register");
+				Result = "The voter is not eligible to register.";
+				return Result;
+				//System.out.println("The voter is not eligible to register");
 			}
 		}
 		else {
-			System.out.println("The voter has already registered");
+			Result = "The voter has already registered.";
+			return Result;
+			//System.out.println("The voter has already registered");
 		}
 		
 	}
