@@ -138,7 +138,7 @@ public class Voter {
 		//Date birthday = new Date(getBirthdayYearNum(), getBirthdayMonthNum(), getBirthdayDayNum());
 		int todayYear = today.getYear();
 		//Date birthday = new Date(getBirthdayMonth(), getBirthdayDay(), getBirthdayYear());
-		int age = 17;//this.getBirthdayYearNum() - todayYear;
+		int age = 18;//this.getBirthdayYearNum() - todayYear;
 		System.out.println("Age: " + age);
 		if(age < 18) {
 			return false;
