@@ -92,6 +92,10 @@ public class VoterController {
 		return model.getStatus();
 	}
 	
+	public boolean getRegStatus() {
+		return model.getRegistrationStatus();
+	}
+	
 	public boolean getVoterEligibility() {
 		return model.checkEligibility();
 	}
