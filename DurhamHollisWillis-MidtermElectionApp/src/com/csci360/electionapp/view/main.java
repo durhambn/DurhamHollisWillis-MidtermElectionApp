@@ -326,6 +326,14 @@ public class main extends Application {
         VoterController votingPerson = registrationController.createVoter(firstName, lastName, birthdayMth, birthdayDay, birthdayYear, ssnString, password);
         String addResult = registrationController.add(votingPerson, this.db);
         System.out.println("The result from adding person to the database is: " + addResult);
+    	Alert result = new Alert(AlertType.INFORMATION);
+        result.initOwner(regSubmit.getScene().getWindow());
+        result.setTitle("Result");
+        result.setHeaderText("Result");
+        result.setContentText(addResult);
+
+        result.showAndWait();
+        
         // Print data to console.
         votingPerson.updateView();
         // Clear the text fields
@@ -383,10 +391,24 @@ public class main extends Application {
                 if(addResult) {
                 	//popup saying they are already added
                 	System.out.println("The voter is already registered to vote");
+                	Alert resultTrue = new Alert(AlertType.INFORMATION);
+                    resultTrue.initOwner(checkSubmit.getScene().getWindow());
+                    resultTrue.setTitle("Result");
+                    resultTrue.setHeaderText("The voter is already registered to vote");
+                    resultTrue.setContentText("Please go to 'Vote!' Page to vote.");
+
+                    resultTrue.showAndWait();
                 }
                 else {
                 	//popup saying they are not registered
                 	System.out.println("The voter is not registered to vote");
+                	Alert resultFalse = new Alert(AlertType.INFORMATION);
+                    resultFalse.initOwner(checkSubmit.getScene().getWindow());
+                    resultFalse.setTitle("Result");
+                    resultFalse.setHeaderText("The voter is not registered to vote");
+                    resultFalse.setContentText("Please go to 'Register to Vote' page to register to vote.");
+
+                    resultFalse.showAndWait();
                 }
                 //System.out.println("The result from adding person to the database is: " + addResult);
                 // Print data to console.
