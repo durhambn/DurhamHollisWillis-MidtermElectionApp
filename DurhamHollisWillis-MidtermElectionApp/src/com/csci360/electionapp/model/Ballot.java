@@ -6,24 +6,24 @@ public class Ballot {
 	private int numCategories = 4;
 	
 	// Get categories from database maybe?
-	private String Category1;
-	private String Category2;
-	private String Category3;
-	private String Category4;
+	private String Category1 = "President";
+	private String Category2 = "Vice President";
+	private String Category3 = "Secretary";
+	private String Category4 = "Treasurer";
 	
 	// Get Candidates from database maybe?
-	private String Candidate1;
-	private String Candidate2;
-	private String Candidate3;
-	private String Candidate4;
-	private String Candidate5;
-	private String Candidate6;
-	private String Candidate7;
-	private String Candidate8;
-	private String Candidate9;
-	private String Candidate10;
-	private String Candidate11;
-	private String Candidate12;
+	private String Candidate1 = "Leonardo DiCaprio";
+	private String Candidate2 = "Dom Cobb";
+	private String Candidate3 = "Harry Potter";
+	private String Candidate4 = "Nathan Drake";
+	private String Candidate5 = "Bob Barker";
+	private String Candidate6 = "Steve Harvey";
+	private String Candidate7 = "Jeff Riley";
+	private String Candidate8 = "John Smith";
+	private String Candidate9 = "Joseph Gordon-Levitt";
+	private String Candidate10 = "Ellen Page";
+	private String Candidate11 = "Tom Hardy";
+	private String Candidate12 = "Ken Watanabe";
 	
 	public Ballot(int numCategories, String Category1, String Category2, String Category3, 
 			String Category4, String Candidate1, String Candidate2, String Candidate3, 
@@ -50,6 +50,27 @@ public class Ballot {
 		this.Candidate10 = Candidate10;
 		this.Candidate11 = Candidate11;
 		this.Candidate12 = Candidate12;
+	}
+	
+	public Ballot() {
+		Category1 = "President";
+		Category2 = "Vice President";
+		Category3 = "Secretary";
+		Category4 = "Treasurer";
+		
+		// Get Candidates from database maybe?
+		Candidate1 = "Leonardo DiCaprio";
+		Candidate2 = "Dom Cobb";
+		Candidate3 = "Harry Potter";
+		Candidate4 = "Nathan Drake";
+		Candidate5 = "Bob Barker";
+		Candidate6 = "Steve Harvey";
+		Candidate7 = "Jeff Riley";
+		Candidate8 = "John Smith";
+		Candidate9 = "Joseph Gordon-Levitt";
+		Candidate10 = "Ellen Page";
+		Candidate11 = "Tom Hardy";
+		Candidate12 = "Ken Watanabe";
 	}
 	
 	public int getNumCategories() {
