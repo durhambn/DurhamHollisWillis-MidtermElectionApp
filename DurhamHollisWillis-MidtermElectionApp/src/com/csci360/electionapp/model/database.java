@@ -174,20 +174,11 @@ public class database {
 	
 	public static boolean checkUserLogin(String user, String pass, Connection conn) throws SQLException {
 		boolean result;
-		Statement stmt = conn.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT user, pass FROM VOTERS WHERE username=" + user + " AND password=" + pass + ";");
+		String query = "SELECT * FROM VOTERS WHERE username='" + user + "' AND password='" + pass + "'";
+		PreparedStatement stmt = conn.prepareStatement(query);
+		ResultSet rs = stmt.executeQuery();
 		if(rs.next()) {
-			if(rs.getString(1) == user) {
-				if(rs.getString(2) == pass) {
-					result = true;
-				}
-				else {
-					result = false;
-				}
-			}
-			else {
-				result = false;
-			}
+			result = true;
 		}
 		else {
 			result = false;
@@ -197,20 +188,11 @@ public class database {
 	
 	public static boolean checkAdminLogin(String user, String pass, Connection conn) throws SQLException {
 		boolean result;
-		Statement stmt = conn.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT user, pass FROM ADMIN WHERE username=" + user + " AND password=" + pass + ";");
+		String query = "SELECT * FROM ADMIN WHERE username='" + user + "' AND password='" + pass + "'";
+		PreparedStatement stmt = conn.prepareStatement(query);
+		ResultSet rs = stmt.executeQuery();
 		if(rs.next()) {
-			if(rs.getString(1) == user) {
-				if(rs.getString(2) == pass) {
-					result = true;
-				}
-				else {
-					result = false;
-				}
-			}
-			else {
-				result = false;
-			}
+			result = true;
 		}
 		else {
 			result = false;
