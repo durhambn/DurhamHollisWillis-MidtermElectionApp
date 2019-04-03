@@ -383,8 +383,9 @@ public class main extends Application {
      * 
      * @param event
      * @throws IOException
+     * @throws SQLException 
      */
-    public void voteLoginSubmit(ActionEvent event) throws IOException{
+    public void voteLoginSubmit(ActionEvent event) throws IOException, SQLException{
     	System.out.print(username.getText() + "\n");
         String uname = username.getText();
         String pssw = password.getText();
@@ -399,29 +400,35 @@ public class main extends Application {
             alert.showAndWait();
         }
         else {
-        	username.clear();
-            password.clear();
-            
-         // Might incorporate title and resourceName
-            // into a class creation method...
-            String resourceName = "votingPage.fxml";
-            String title = "Voting Page";
+        	boolean result = db.checkUserLogin(uname, pssw, db.getConnection());
+        	if(result == true) {
+        		username.clear();
+                password.clear();
+                
+                // Might incorporate title and resourceName
+                // into a class creation method...
+                String resourceName = "votingPage.fxml";
+                String title = "Voting Page";
 
-            // FXMLLoader variable to grab the adminInfo.fxml file.
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(resourceName));
+                // FXMLLoader variable to grab the adminInfo.fxml file.
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(resourceName));
 
-            // Store adminInfo.fxml into Parent variable
-            Parent root = fxmlLoader.load();
+                // Store adminInfo.fxml into Parent variable
+                Parent root = fxmlLoader.load();
 
-            // Create a new stage and initialize the modality
-            // set the opacity to 1 and set the title and show
-            // root as the scene.
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setOpacity(1);
-            stage.setTitle(title);
-            stage.setScene(new Scene(root));
-            stage.showAndWait();
+                // Create a new stage and initialize the modality
+                // set the opacity to 1 and set the title and show
+                // root as the scene.
+                Stage stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setOpacity(1);
+                stage.setTitle(title);
+                stage.setScene(new Scene(root));
+                stage.showAndWait();
+            }
+        	else {
+        		//PoP uP
+        	}
         }
     }
     
