@@ -127,7 +127,8 @@ public class database {
 				+ "last_name varchar(256) NOT NULL, date_of_birth date NOT NULL, ssn varchar(128) NOT NULL, username varchar(256) NOT NULL, "
 				+ "password varchar(256) NOT NULL, status boolean NOT NULL DEFAULT 0, CONSTRAINT Unique_ssn UNIQUE KEY(ssn));";
 		String s2 = "CREATE TABLE IF NOT EXISTS ADMIN(" + "id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, name varchar(256) NOT NULL, "
-				+ "last_name varchar(256) NOT NULL, username varchar(256) NOT NULL, password varchar(256) NOT NULL" + ");";
+				+ "last_name varchar(256) NOT NULL, username varchar(256) NOT NULL, password varchar(256) NOT NULL" + ", "
+						+ "CONSTRAINT Unique_user UNIQUE KEY(username));";
 		String s3 = "CREATE TABLE IF NOT EXISTS CANDIDATES(" + "id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,name varchar(256) NOT NULL, "
 				+ "last_name varchar(256) NOT NULL, category varchar(256) NOT NULL, votes INTEGER NOT NULL DEFAULT 0" + ");";
 		String s4 = "CREATE TABLE IF NOT EXISTS BALLOT(" + "id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, category1 boolean NOT NULL DEFAULT 0, "
@@ -171,8 +172,54 @@ public class database {
 		}
 	}
 	
+	public static boolean checkUserLogin(String user, String pass, Connection conn) throws SQLException {
+		boolean result;
+		Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery("SELECT user, pass FROM VOTERS WHERE username=" + user + " AND password=" + pass + ";");
+		if(rs.next()) {
+			if(rs.getString(1) == user) {
+				if(rs.getString(2) == pass) {
+					result = true;
+				}
+				else {
+					result = false;
+				}
+			}
+			else {
+				result = false;
+			}
+		}
+		else {
+			result = false;
+		}
+		return result;
+	}
+	
+	public static boolean checkAdminLogin(String user, String pass, Connection conn) throws SQLException {
+		boolean result;
+		Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery("SELECT user, pass FROM ADMIN WHERE username=" + user + " AND password=" + pass + ";");
+		if(rs.next()) {
+			if(rs.getString(1) == user) {
+				if(rs.getString(2) == pass) {
+					result = true;
+				}
+				else {
+					result = false;
+				}
+			}
+			else {
+				result = false;
+			}
+		}
+		else {
+			result = false;
+		}
+		return result;
+	}
+	
 	public void initialAdmin(Connection conn) throws SQLException {
-		String query = "INSERT INTO ADMIN(name, last_name, username, password)" + " VALUES(?, ?, ?, ?);";
+		String query = "INSERT IGNORE INTO ADMIN(name, last_name, username, password)" + " VALUES(?, ?, ?, ?);";
 		
 		PreparedStatement preparedStmt = conn.prepareStatement(query);
 		
