@@ -47,25 +47,7 @@ public class main extends Application {
 		return this.db.getConnection();
 	}
 	
-	/*public void createVotersTable(Connection conn) throws SQLException {
-		this.db.createVotersTable(conn);
-	}
-	
-	public void createAdminTable(Connection conn) throws SQLException {
-		this.db.createAdminTable(conn);
-	}
-	
-	public void createBallotTable(Connection conn) throws SQLException {
-		this.db.createBallotTable(conn);
-	}
-	
-	public void createCandidateTable(Connection conn) throws SQLException {
-		this.db.createCandidateTable(conn);
-	}*/
-	
-	/*public void initialAdmin(Connection conn) throws SQLException {
-		this.db.initialAdmin(conn);
-	}*/
+
 
     /**
      * Method for starting screen
