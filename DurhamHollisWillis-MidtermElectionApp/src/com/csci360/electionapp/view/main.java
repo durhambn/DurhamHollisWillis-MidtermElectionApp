@@ -47,25 +47,7 @@ public class main extends Application {
 		return this.db.getConnection();
 	}
 	
-	/*public void createVotersTable(Connection conn) throws SQLException {
-		this.db.createVotersTable(conn);
-	}
-	
-	public void createAdminTable(Connection conn) throws SQLException {
-		this.db.createAdminTable(conn);
-	}
-	
-	public void createBallotTable(Connection conn) throws SQLException {
-		this.db.createBallotTable(conn);
-	}
-	
-	public void createCandidateTable(Connection conn) throws SQLException {
-		this.db.createCandidateTable(conn);
-	}*/
-	
-	/*public void initialAdmin(Connection conn) throws SQLException {
-		this.db.initialAdmin(conn);
-	}*/
+
 
     /**
      * Method for starting screen
@@ -147,43 +129,9 @@ public class main extends Application {
     private TextField password;
     	
 	registrationController rc = new registrationController();
-
-
-    /**
-     * CheckBox and Label variables for voting page
-     */
-    @FXML
-    public CheckBox C1;
-    @FXML
-    public CheckBox C2;
-    @FXML
-    public CheckBox C3;
-    @FXML
-    public CheckBox C4;
-    @FXML
-    public CheckBox C5;
-    @FXML
-    public CheckBox C6;
-    @FXML
-    public CheckBox C7;
-    @FXML
-    public CheckBox C8;
-    @FXML
-    public CheckBox C9;
-    @FXML
-    public CheckBox C10;
-    @FXML
-    public CheckBox C11;
-    @FXML
-    public CheckBox C12;
-    @FXML
-    public Label S1;
-    @FXML
-    public Label S2;
-    @FXML
-    public Label S3;
-    @FXML
-    public Label S4;
+    
+    
+	
     @FXML
     public Label V1;
     @FXML
@@ -532,121 +480,7 @@ public class main extends Application {
        
     }
     }
-
-    /**
-     * 
-     * @param event
-     * @throws IOException
-     */
-    public void voteSubmit(ActionEvent event) throws IOException {
-        // Print statements for testing purposes (remove later)
-        System.out.println(C1.getText());
-        System.out.println(C1.isSelected());
-        System.out.println(C2.getText());
-        System.out.println(C2.isSelected());
-        System.out.println(C3.getText());
-        System.out.println(C3.isSelected());
-        System.out.println(C4.getText());
-        System.out.println(C4.isSelected());
-        System.out.println(C5.getText());
-        System.out.println(C5.isSelected());
-        System.out.println(C6.getText());
-        System.out.println(C6.isSelected());
-        System.out.println(C7.getText());
-        System.out.println(C7.isSelected());
-        System.out.println(C8.getText());
-        System.out.println(C8.isSelected());
-        System.out.println(C9.getText());
-        System.out.println(C9.isSelected());
-        System.out.println(C10.getText());
-        System.out.println(C10.isSelected());
-        System.out.println(C11.getText());
-        System.out.println(C11.isSelected());
-        System.out.println(C12.getText());
-        System.out.println(C12.isSelected());
-
-        // Trying to store checkbox text into a variable to grab
-        // Not working; may need to use Controller class??
-        /*
-         * String vote1 = C1.getText(); String vote2 = C4.getText(); String vote3 =
-         * C7.getText(); String vote4 = C11.getText(); S1.setText(vote1);
-         * S2.setText(vote2); S3.setText(vote3); S4.setText(vote4);
-         */
-
-        // Might incorporate title and resourceName
-        // into a class creation method...
-        String resourceName = "finalSubmit.fxml";
-        String title = "Vote Confirmation Page";
-
-        // FXMLLoader variable to grab the finalSubmit.fxml file.
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(resourceName));
-
-        // Store finalSubmit.fxml into Parent variable
-        Parent root = fxmlLoader.load();
-
-        // Create a new stage and initialize the modality
-        // set the opacity to 1 and set the title and show
-        // root as the scene.
-        Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setOpacity(1);
-        stage.setTitle(title);
-        stage.setScene(new Scene(root));
-        stage.showAndWait();
-
-    }
-
-    /**
-     * 
-     * @param event
-     * @throws IOException
-     */
-    public void finalSubmit(ActionEvent event) throws IOException {
-
-        // Not able to get the text value from the checkBox objects
-        // may need to use controller class to grab and set data??
-        /*
-         * S1.setText(C1.getText()); S2.setText(C4.getText()); S3.setText(C7.getText());
-         * S4.setText(C11.getText());
-         * 
-         * System.out.println(S1.getText()); System.out.println(S2.getText());
-         * System.out.println(S3.getText()); System.out.println(S4.getText());
-         */
-
-        // Might incorporate title and resourceName
-        // into a class creation method...
-        String resourceName = "endPage.fxml";
-        String title = "Thank You";
-
-        // FXMLLoader variable to grab the endPage.fxml file.
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(resourceName));
-
-        // Store endPage.fxml into Parent variable
-        Parent root = fxmlLoader.load();
-
-        // Create a new stage and initialize the modality
-        // set the opacity to 1 and set the title and show
-        // root as the scene.
-        Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setOpacity(1);
-        stage.setTitle(title);
-        stage.setScene(new Scene(root));
-        stage.show();
-    }
-
-    /**
-     * 
-     * @param event
-     * @throws IOException
-     */
-    public void finalCancel(ActionEvent event) throws IOException {
-        System.out.println("Cancel chosen, going back to voting page");
-
-        // Get the current window and close it
-        Stage stage = (Stage) finalCancel.getScene().getWindow();
-        stage.close();
-    }
+    
 
     /**
      * 
