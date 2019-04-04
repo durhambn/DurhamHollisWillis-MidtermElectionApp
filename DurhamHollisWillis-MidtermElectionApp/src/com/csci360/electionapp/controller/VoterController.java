@@ -1,5 +1,7 @@
 package com.csci360.electionapp.controller;
 
+import java.time.LocalDateTime;
+
 import com.csci360.electionapp.model.Voter;
 import com.csci360.electionapp.model.database;
 import com.csci360.electionapp.view.VoterView;
@@ -131,5 +133,13 @@ public class VoterController {
 	
 	public void updateView() {
 		view.printVoterDetails(model.getFirstName(), model.getLastName(), model.getBirthday(), model.getSsn(), model.getPassword(), model.getUsername());
+	}
+	public String getTime() {
+		LocalDateTime a = this.model.getRegDate();
+		String regDateString = a.getYear() + "-"  + a.getMonthValue() + "-" + a.getDayOfMonth() + " " + a.getHour() + ":" + a.getMinute() + ":" + a.getSecond();
+		return regDateString;
+	}
+	public void setTime(){
+		this.model.setRegDate();
 	}
 }
