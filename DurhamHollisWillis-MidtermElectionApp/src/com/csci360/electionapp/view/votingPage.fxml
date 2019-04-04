@@ -23,8 +23,8 @@
                      <children>
                         <GridPane prefHeight="169.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="268.0" minWidth="10.0" prefWidth="129.33331298828125" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="472.0000228881836" minWidth="10.0" prefWidth="418.66668701171875" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="322.0" minWidth="10.0" prefWidth="319.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="472.0000228881836" minWidth="10.0" prefWidth="228.0" />
                            </columnConstraints>
                            <rowConstraints>
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -35,9 +35,6 @@
                               <CheckBox fx:id="C1" mnemonicParsing="false" text="Candidate 1" />
                               <CheckBox fx:id="C2" mnemonicParsing="false" text="Candidate 2" GridPane.rowIndex="1" />
                               <CheckBox fx:id="C3" mnemonicParsing="false" text="Candidate 3" GridPane.rowIndex="2" />
-                              <Label prefHeight="36.0" prefWidth="419.0" text="Description for Candidate 1" GridPane.columnIndex="1" />
-                              <Label prefHeight="36.0" prefWidth="419.0" text="Description for Candidate 1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Label prefHeight="36.0" prefWidth="419.0" text="Description for Candidate 1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                            </children>
                         </GridPane>
                      </children>
@@ -50,8 +47,8 @@
                      <children>
                         <GridPane prefHeight="169.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="268.0" minWidth="10.0" prefWidth="129.33331298828125" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="472.0000228881836" minWidth="10.0" prefWidth="418.66668701171875" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="356.0" minWidth="10.0" prefWidth="356.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="472.0000228881836" minWidth="10.0" prefWidth="191.0" />
                            </columnConstraints>
                            <rowConstraints>
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -62,9 +59,6 @@
                               <CheckBox fx:id="C4" mnemonicParsing="false" text="Candidate 1" />
                               <CheckBox fx:id="C5" mnemonicParsing="false" text="Candidate 2" GridPane.rowIndex="1" />
                               <CheckBox fx:id="C6" mnemonicParsing="false" text="Candidate 3" GridPane.rowIndex="2" />
-                              <Label prefHeight="36.0" prefWidth="419.0" text="Description for Candidate 1" GridPane.columnIndex="1" />
-                              <Label prefHeight="36.0" prefWidth="419.0" text="Description for Candidate 1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Label prefHeight="36.0" prefWidth="419.0" text="Description for Candidate 1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                            </children>
                         </GridPane>
                      </children>
@@ -77,8 +71,8 @@
                      <children>
                         <GridPane layoutX="71.0" layoutY="32.0" prefHeight="169.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="268.0" minWidth="10.0" prefWidth="129.33331298828125" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="472.0000228881836" minWidth="10.0" prefWidth="418.66668701171875" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="349.00000762939453" minWidth="10.0" prefWidth="349.00000762939453" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="472.0000228881836" minWidth="10.0" prefWidth="197.99999237060547" />
                           </columnConstraints>
                           <rowConstraints>
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -89,9 +83,6 @@
                               <CheckBox fx:id="C7" mnemonicParsing="false" text="Candidate 1" />
                               <CheckBox fx:id="C8" mnemonicParsing="false" text="Candidate 2" GridPane.rowIndex="1" />
                               <CheckBox fx:id="C9" mnemonicParsing="false" text="Candidate 3" GridPane.rowIndex="2" />
-                              <Label prefHeight="36.0" prefWidth="419.0" text="Description for Candidate 1" GridPane.columnIndex="1" />
-                              <Label prefHeight="36.0" prefWidth="419.0" text="Description for Candidate 1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Label prefHeight="36.0" prefWidth="419.0" text="Description for Candidate 1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                            </children>
                         </GridPane>
                      </children>
@@ -104,8 +95,8 @@
                      <children>
                         <GridPane prefHeight="169.0" prefWidth="568.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="268.0" minWidth="10.0" prefWidth="129.33331298828125" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="472.0000228881836" minWidth="10.0" prefWidth="418.66668701171875" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="402.0" minWidth="10.0" prefWidth="402.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="472.0000228881836" minWidth="10.0" prefWidth="145.0" />
                            </columnConstraints>
                            <rowConstraints>
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -116,9 +107,6 @@
                               <CheckBox fx:id="C10" mnemonicParsing="false" text="Candidate 1" />
                               <CheckBox fx:id="C11" mnemonicParsing="false" text="Candidate 2" GridPane.rowIndex="1" />
                               <CheckBox fx:id="C12" mnemonicParsing="false" text="Candidate 3" GridPane.rowIndex="2" />
-                              <Label prefHeight="36.0" prefWidth="419.0" text="Description for Candidate 1" GridPane.columnIndex="1" />
-                              <Label prefHeight="36.0" prefWidth="419.0" text="Description for Candidate 1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Label prefHeight="36.0" prefWidth="419.0" text="Description for Candidate 1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                            </children>
                         </GridPane>
                      </children>

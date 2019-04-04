@@ -3,6 +3,8 @@ package com.csci360.electionapp.view;
 
 import java.io.IOException;
 
+import com.csci360.electionapp.controller.BallotController;
+import com.csci360.electionapp.model.Ballot;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.IntegerBinding;
@@ -97,20 +99,22 @@ public class votingCheckBoxes {
     	C11.setSelected(false);
     	C12.setSelected(false);
     	
-    	
+    	//make call to database to check if username/password then else if
+    	//make ballot when user logs in
+    	Ballot ballot = new Ballot();
     	//these will pull the candidates from the ballot and initialize names on page
-    	//C1.setText(BallotController.getBallotCandidate1());
-    	//C2.setText(BallotController.getBallotCandidate2());
-    	//C3.setText(BallotController.getBallotCandidate1());
-    	//C4.setText(BallotController.getBallotCandidate2());
-    	//C5.setText(BallotController.getBallotCandidate1());
-    	//C6.setText(BallotController.getBallotCandidate2());
-    	//C7.setText(BallotController.getBallotCandidate1());
-    	//C8.setText(BallotController.getBallotCandidate2());
-    	//C9.setText(BallotController.getBallotCandidate1());
-    	//C10.setText(BallotController.getBallotCandidate2());
-    	//C11.setText(BallotController.getBallotCandidate1());
-    	//C12.setText(BallotController.getBallotCandidate2());
+    	C1.setText(ballot.getCandidate1());
+    	C2.setText(ballot.getCandidate2());
+    	C3.setText(ballot.getCandidate3());
+    	C4.setText(ballot.getCandidate4());
+    	C5.setText(ballot.getCandidate5());
+    	C6.setText(ballot.getCandidate6());
+    	C7.setText(ballot.getCandidate7());
+    	C8.setText(ballot.getCandidate8());
+    	C9.setText(ballot.getCandidate9());
+    	C10.setText(ballot.getCandidate10());
+    	C11.setText(ballot.getCandidate11());
+    	C12.setText(ballot.getCandidate12());
     	
         configureCheckBoxP(C1);
         configureCheckBoxP(C2);
