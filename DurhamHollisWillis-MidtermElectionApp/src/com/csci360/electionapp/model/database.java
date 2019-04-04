@@ -134,6 +134,7 @@ public class database {
 		String s4 = "CREATE TABLE IF NOT EXISTS BALLOT(" + "id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, category1 boolean NOT NULL DEFAULT 0, "
 				+ "category2 boolean NOT NULL DEFAULT 0,category3 boolean NOT NULL DEFAULT 0, category4 boolean NOT NULL DEFAULT 0" + ");";
 		
+		/*, created time NOT NULL*/
 		s.addBatch(s1);
 		s.addBatch(s2);  
 		s.addBatch(s3);
@@ -143,7 +144,7 @@ public class database {
 	}
 	
 	public void addToVoters(VoterController voter, Connection conn) throws SQLException {
-		String query =" insert into VOTERS (name, last_name, date_of_birth, ssn, username, password)" + " values (?, ?, ?, ?, ?, ?)";
+		String query =" insert into VOTERS (name, last_name, date_of_birth, ssn, username, password)" /*created)"*/ + " values (?, ?, ?, ?, ?, ?)";
 		
 		PreparedStatement preparedStmt = conn.prepareStatement(query);
 		preparedStmt.setString(1, voter.getVoterFirstName());
@@ -152,6 +153,7 @@ public class database {
 		preparedStmt.setString(4,  voter.getVoterSSN());
 		preparedStmt.setString(5,  voter.getVoterUsername());
 		preparedStmt.setString(6,  voter.getVoterPassword());
+		//preparedStmt.setString(7, voter.getTime());
 		
 		preparedStmt.execute();
 	      
@@ -212,6 +214,14 @@ public class database {
 		
 		preparedStmt.execute();
 		
+		conn.close();
+	}
+	
+	public void initialCandidates(Connection conn) throws SQLException {
+		String query = "INSERT IGNORE INTO CANDIDATES(";
+		
+		//PreparedStatement preparedStmt = conn.prepareStatement()
+				
 		conn.close();
 	}
 	
