@@ -36,9 +36,10 @@
             <TextField fx:id="firstNameField" prefHeight="26.0" prefWidth="353.0" GridPane.columnIndex="1" GridPane.columnSpan="5" />
             <TextField fx:id="lastNameField" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="1" />
             <TextField fx:id="birthdayFieldMth" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="ssn" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="3" />
             <TextField fx:id="birthdayFieldDay" GridPane.columnIndex="3" GridPane.rowIndex="2" />
             <TextField fx:id="birthdayFieldYear" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+            <TextField fx:id="ssn" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="3" />
+            
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="  /  " GridPane.columnIndex="2" GridPane.rowIndex="2" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="  /  " GridPane.columnIndex="4" GridPane.rowIndex="2" />
          </children>

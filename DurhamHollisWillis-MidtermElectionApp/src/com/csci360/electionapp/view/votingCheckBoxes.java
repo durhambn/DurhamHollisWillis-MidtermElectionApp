@@ -351,6 +351,9 @@ public class votingCheckBoxes {
         System.out.println(C12.getText());
         System.out.println(C12.isSelected());
         
+        //setting ballot choices
+        
+        
     	
 
         // Trying to store checkbox text into a variable to grab

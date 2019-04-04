@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.Date;
 
@@ -21,6 +22,7 @@ public class Voter {
 	private String password;
 	private String username;
 	private boolean status;
+	private LocalDateTime regDate;
 	
 	public Voter(String firstName, String lastName, String birthday2, String birthday3, String birthday4, String ssn, String password) {
 		this.setFirstName(firstName);
@@ -30,6 +32,7 @@ public class Voter {
 		this.setPassword(password);
 		this.setUsername(firstName, lastName);
 		this.status = false;
+		this.setRegDate();
 	}
 
 	public String getFirstName() {
@@ -171,5 +174,16 @@ public class Voter {
 		else {
 			return true;
 		}
+	}
+
+	public LocalDateTime getRegDate() {
+		
+		return regDate;
+	}
+
+	public void setRegDate() {
+		LocalDateTime today = LocalDateTime.now();
+		
+		this.regDate = today;
 	}
 }

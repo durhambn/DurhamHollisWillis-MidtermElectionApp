@@ -37,6 +37,11 @@ public class adminView {
     @FXML
     private Label cand12;
     
+    @FXML
+    public Label V1;
+    @FXML
+    public Label V2;
+    
    @FXML
    private Button closeButton;
 
@@ -55,6 +60,11 @@ public class adminView {
 		cand10.setText(ballot.getCandidate10());
 		cand11.setText(ballot.getCandidate11());
 		cand12.setText(ballot.getCandidate12());
+		
+		/*call to database
+		v1.setText();
+		v2.setText();
+		*/
 	}
 	public void btnClose_clicked(ActionEvent event) throws IOException {
         // Get the current window and close it

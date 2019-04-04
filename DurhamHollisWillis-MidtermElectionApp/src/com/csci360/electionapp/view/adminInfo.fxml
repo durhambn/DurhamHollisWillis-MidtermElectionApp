@@ -72,9 +72,9 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Registered Voters" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of completed Voters" GridPane.rowIndex="1" />
-            <Label fx:id="V1" text="Label" GridPane.columnIndex="1" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Registered Voters" textAlignment="CENTER" wrappingWidth="176.3525390625" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ballots Cast" textAlignment="CENTER" wrappingWidth="175.36083984375" GridPane.rowIndex="1" />
+            <Label fx:id="V1" text="Label" textAlignment="CENTER" GridPane.columnIndex="1" />
             <Label fx:id="V2" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>

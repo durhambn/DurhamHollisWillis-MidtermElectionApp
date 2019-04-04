@@ -132,10 +132,7 @@ public class main extends Application {
     
     
 	
-    @FXML
-    public Label V1;
-    @FXML
-    public Label V2;
+    
     
     //final DatePicker datePicker = new DatePicker();
     
@@ -274,6 +271,7 @@ public class main extends Application {
         VoterController votingPerson = registrationController.createVoter(firstName, lastName, birthdayMth, birthdayDay, birthdayYear, ssnString, password);
         String addResult = registrationController.add(votingPerson, this.db);
         System.out.println("The result from adding person to the database is: " + addResult);
+        System.out.println("The time the voter registered: " + votingPerson.getTime());
     	Alert result = new Alert(AlertType.INFORMATION);
         result.initOwner(regSubmit.getScene().getWindow());
         result.setTitle("Result");
