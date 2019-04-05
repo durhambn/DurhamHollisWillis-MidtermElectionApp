@@ -2,6 +2,7 @@ package com.csci360.electionapp.view;
 
 import com.csci360.electionapp.model.Ballot;
 import com.csci360.electionapp.view.votingCheckBoxes;
+import com.csci360.electionapp.controller.VoterController;
 
 import java.io.IOException;
 
@@ -33,7 +34,9 @@ public class finalVoteView {
     @FXML
     public Button finalCancel;
     
-    public void initialize() {
+    VoterController votingPerson;
+    
+    public void initialize(VoterController votingPerson) {
     	//won't let me call votingCheckBoxes without method being static but that
     	//causes more problems for other methods
     	

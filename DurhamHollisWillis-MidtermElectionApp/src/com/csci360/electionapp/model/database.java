@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.Properties;
 
 /**
@@ -107,7 +108,7 @@ public class database {
 		Statement s = conn.createStatement();
 		String s1 = "CREATE TABLE IF NOT EXISTS VOTERS(" + "id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, name varchar(256) NOT NULL, "
 				+ "last_name varchar(256) NOT NULL, date_of_birth date NOT NULL, ssn varchar(128) NOT NULL, username varchar(256) NOT NULL, "
-				+ "password varchar(256) NOT NULL, created time NOT NULL, status boolean NOT NULL DEFAULT 0, CONSTRAINT Unique_ssn UNIQUE KEY(ssn));";
+				+ "password varchar(256) NOT NULL, created datetime NOT NULL, status boolean NOT NULL DEFAULT 0, CONSTRAINT Unique_ssn UNIQUE KEY(ssn));";
 		String s2 = "CREATE TABLE IF NOT EXISTS ADMIN(" + "id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, name varchar(256) NOT NULL, "
 				+ "last_name varchar(256) NOT NULL, username varchar(256) NOT NULL, password varchar(256) NOT NULL" + ", "
 						+ "CONSTRAINT Unique_user UNIQUE KEY(username));";
@@ -370,6 +371,32 @@ public class database {
 		int count = rs.getInt(1);
 		return count;
 	}
+	
+	//1=true, has voted; 0=false, hasn't voted
+	public boolean getStatusToVote(Connection conn, String username) throws SQLException{
+		boolean canVote;
+		String query="SELECT status FROM VOTERS WHERE username='"+ username +"'";
+		PreparedStatement stmt = conn.prepareStatement(query);
+		ResultSet rs = stmt.executeQuery();
+		rs.next();
+		canVote=rs.getBoolean(1);
+		return canVote;
+	}
+	
+	public java.util.Date getCreatedDate(Connection conn, String username) throws SQLException{
+		String query="SELECT created FROM VOTERS WHERE username='"+ username+"'";
+		PreparedStatement stmt = conn.prepareStatement(query);
+		ResultSet rs = stmt.executeQuery();
+		rs.next();
+		Timestamp created = rs.getTimestamp("created");
+		//java.sql.Date date = rs.getDate("created");
+		//java.sql.Time time = rs.getTime("created");
+		//java.util.Date dateTime = new java.util.Date(date.getTime());
+		return created;
+		
+	}
+	
+	
 	
 	/**
 	 * Connect to the DB and do some stuff
