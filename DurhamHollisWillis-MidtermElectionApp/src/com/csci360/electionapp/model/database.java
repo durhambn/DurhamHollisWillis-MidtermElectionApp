@@ -272,10 +272,11 @@ public class database {
 		ResultSet rs = stmt.executeQuery();
 		rs.next();
 		int count = rs.getInt(1);
+
 		return count;
 		
 	}
-	
+
 	public int getNumBallots(Connection conn) throws SQLException{
 		String query= "SELECT COUNT(*) FROM BALLOT";
 		PreparedStatement stmt = conn.prepareStatement(query);
