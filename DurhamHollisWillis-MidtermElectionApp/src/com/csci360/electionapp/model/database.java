@@ -131,7 +131,8 @@ public class database {
 				+ "last_name varchar(256) NOT NULL, username varchar(256) NOT NULL, password varchar(256) NOT NULL" + ", "
 						+ "CONSTRAINT Unique_user UNIQUE KEY(username));";
 		String s3 = "CREATE TABLE IF NOT EXISTS CANDIDATES(" + "id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,name varchar(256) NOT NULL, "
-				+ "last_name varchar(256) NOT NULL, category varchar(256) NOT NULL, votes INTEGER NOT NULL DEFAULT 0" + ");";
+				+ "last_name varchar(256) NOT NULL, category varchar(256) NOT NULL, votes INTEGER NOT NULL DEFAULT 0, "
+				+ "CONSTRAINT Unique_cand UNIQUE KEY(name,last_name,category));";
 		String s4 = "CREATE TABLE IF NOT EXISTS BALLOT(" + "id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, category1 boolean NOT NULL DEFAULT 0, "
 				+ "category2 boolean NOT NULL DEFAULT 0,category3 boolean NOT NULL DEFAULT 0, category4 boolean NOT NULL DEFAULT 0" + ");";
 		
@@ -271,10 +272,11 @@ public class database {
 		ResultSet rs = stmt.executeQuery();
 		rs.next();
 		int count = rs.getInt(1);
-		//System.out.println("rows: "+count);
+
 		return count;
 		
 	}
+
 	public int getNumBallots(Connection conn) throws SQLException{
 		String query= "SELECT COUNT(*) FROM BALLOT";
 		PreparedStatement stmt = conn.prepareStatement(query);
