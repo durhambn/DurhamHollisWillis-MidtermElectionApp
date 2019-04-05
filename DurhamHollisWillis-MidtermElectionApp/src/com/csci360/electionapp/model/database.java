@@ -265,6 +265,34 @@ public class database {
 		s.executeBatch();
 	}
 	
+	public int getRegVoters(Connection conn) throws SQLException{
+		String query = "SELECT COUNT(*) FROM VOTERS";
+		PreparedStatement stmt = conn.prepareStatement(query);
+		ResultSet rs = stmt.executeQuery();
+		rs.next();
+		int count = rs.getInt(1);
+		//System.out.println("rows: "+count);
+		return count;
+		
+	}
+	public int getNumBallots(Connection conn) throws SQLException{
+		String query= "SELECT COUNT(*) FROM BALLOT";
+		PreparedStatement stmt = conn.prepareStatement(query);
+		ResultSet rs = stmt.executeQuery();
+		rs.next();
+		int count = rs.getInt(1);
+		return count;
+	}
+	
+	public int getCandVotes(Connection conn, String candID) throws SQLException{
+		String query="SELECT votes FROM CANDIDATES WHERE id=" + candID;
+		PreparedStatement stmt = conn.prepareStatement(query);
+		ResultSet rs = stmt.executeQuery();
+		rs.next();
+		int count = rs.getInt(1);
+		return count;
+	}
+	
 	/**
 	 * Connect to the DB and do some stuff
 	 */
