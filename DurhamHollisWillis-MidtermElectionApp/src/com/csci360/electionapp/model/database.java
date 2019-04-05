@@ -84,25 +84,6 @@ public class database {
 
 		return conn;
 	}
-
-	/**
-	 * Run a SQL command which does not return a recordset:
-	 * CREATE/INSERT/UPDATE/DELETE/DROP/etc.
-	 * 
-	 * @throws SQLException If something goes wrong
-	 */
-	public boolean executeUpdate(Connection conn, String command) throws SQLException {
-	    Statement stmt = null;
-	    try {
-	        stmt = conn.createStatement();
-	        stmt.executeUpdate(command); // This will throw a SQLException if it fails
-	        return true;
-	    } finally {
-
-	    	// This will run whether we throw an exception or not
-	        if (stmt != null) { stmt.close(); }
-	    }
-	}
 	
 	/**
 	 * Connect to MySQL and do some stuff.
@@ -146,7 +127,7 @@ public class database {
 	}
 	
 	public void addToVoters(VoterController voter, Connection conn) throws SQLException {
-		String query =" insert into VOTERS (name, last_name, date_of_birth, ssn, username, password, created)" + " values (?, ?, ?, ?, ?, ?, ?)";
+		String query = " INSERT INTO VOTERS (name, last_name, date_of_birth, ssn, username, password, created)" + " VALUES (?, ?, ?, ?, ?, ?, ?)";
 		
 		PreparedStatement preparedStmt = conn.prepareStatement(query);
 		preparedStmt.setString(1, voter.getVoterFirstName());
@@ -162,6 +143,99 @@ public class database {
 	    conn.close();
 	}
 	
+	public void addToCandidates(Ballot ballot, Connection conn) throws SQLException {
+		String query1 = "SELECT votes FROM CANDIDATES WHERE name=? AND last_name=? AND category=?;";		
+		PreparedStatement ps1 = conn.prepareStatement(query1);
+		String cat1 = ballot.getCat1Results();
+		String[] winner1 = cat1.split("\\s+");
+		String winner1First = winner1[0];
+		String winner1Last = winner1[1];
+		ps1.setString(1, winner1First);
+		ps1.setString(2, winner1Last);
+		ps1.setString(3, ballot.getCategory1());
+		ResultSet rs1 = ps1.executeQuery();
+		ps1.close();
+		int cat1Votes = rs1.getInt(1) + 1;
+		String finalquery1 = "UPDATE CANDIDATES set votes=? WHERE name=? AND last_name=? AND category=?;";
+		PreparedStatement stmt1 = conn.prepareStatement(finalquery1);
+		stmt1.setInt(1, cat1Votes);
+		stmt1.setString(2, winner1First);
+		stmt1.setString(3, winner1Last);
+		stmt1.setString(4, ballot.getCategory1());
+		stmt1.executeQuery();
+		
+		String query2 = "SELECT votes FROM CANDIDATES WHERE name=? AND last_name=? AND category=?;";
+		PreparedStatement ps2 = conn.prepareStatement(query2);
+		String cat2 = ballot.getCat2Results();
+		String[] winner2 = cat2.split("\\s+");
+		String winner2First = winner2[0];
+		String winner2Last = winner2[1];
+		ps2.setString(1, winner2First);
+		ps2.setString(2, winner2Last);
+		ps2.setString(3, ballot.getCategory2());
+		ResultSet rs2 = ps2.executeQuery();
+		ps2.close();
+		int cat2Votes = rs2.getInt(1) + 1;
+		String finalquery2 = "UPDATE CANDIDATES set votes=? WHERE name=? AND last_name=? AND category=?;";
+		PreparedStatement stmt2 = conn.prepareStatement(finalquery2);
+		stmt2.setInt(1, cat2Votes);
+		stmt2.setString(2, winner2First);
+		stmt2.setString(3, winner2Last);
+		stmt2.setString(4, ballot.getCategory2());
+		stmt2.executeQuery();
+
+
+		String query3 = "SELECT votes FROM CANDIDATES WHERE name=? AND last_name=? AND category=?;";
+		PreparedStatement ps3 = conn.prepareStatement(query3);
+		String cat3 = ballot.getCat3Results();
+		String[] winner3 = cat3.split("\\s+");
+		String winner3First = winner3[0];
+		String winner3Last = winner3[1];
+		ps3.setString(1, winner3First);
+		ps3.setString(2, winner3Last);
+		ps3.setString(3, ballot.getCategory3());
+		ResultSet rs3 = ps3.executeQuery();
+		ps3.close();
+		int cat3Votes = rs3.getInt(1) + 1;
+		String finalquery3 = "UPDATE CANDIDATES set votes=? WHERE name=? AND last_name=? AND category=?;";
+		PreparedStatement stmt3 = conn.prepareStatement(finalquery3);
+		stmt3.setInt(1, cat3Votes);
+		stmt3.setString(2, winner3First);
+		stmt3.setString(3, winner3Last);
+		stmt3.setString(4, ballot.getCategory3());
+		stmt3.executeQuery();
+
+		
+		String query4 = "SELECT votes FROM CANDIDATES WHERE name=? AND last_name=? AND category=?;";
+		PreparedStatement ps4 = conn.prepareStatement(query4);
+		String cat4 = ballot.getCat4Results();
+		String[] winner4 = cat4.split("\\s+");
+		String winner4First = winner4[0];
+		String winner4Last = winner4[1];
+		ps4.setString(1, winner4First);
+		ps4.setString(2, winner4Last);
+		ps4.setString(3, ballot.getCategory4());
+		ResultSet rs4 = ps4.executeQuery();
+		ps4.close();
+		int cat4Votes = rs4.getInt(1) + 1;
+		String finalquery4 = "UPDATE CANDIDATES set votes=? WHERE name=? AND last_name=? AND category=?;";
+		PreparedStatement stmt4 = conn.prepareStatement(finalquery4);
+		stmt4.setInt(1, cat4Votes);
+		stmt4.setString(2, winner4First);
+		stmt4.setString(3, winner4Last);
+		stmt4.setString(4, ballot.getCategory4());
+
+		conn.close();
+	}
+	
+	public void addToBallots(Ballot ballot, Connection conn) throws SQLException {
+		String query = "INSERT INTO BALLOT(category1, category2, category3, category4) VALUES(?,?,?,?);";
+		
+		PreparedStatement ps = conn.prepareStatement(query);
+		ps.setString(1, ballot.getCat1Results());
+	}
+	//Need to fix and change Statement to a PreparedStatement
+	//Refer to: https://alvinalexander.com/java/java-mysql-update-query-example
 	public static boolean checkVoters(String social, Connection conn) throws SQLException {
 		boolean result;
 		Statement stmt = conn.createStatement();
@@ -219,6 +293,7 @@ public class database {
 		conn.close();
 	}
 	
+	//Need to fix Statement and change it into a PreparedStatement maybe?
 	public void initialCandidates(Connection conn) throws SQLException {
 		Ballot ballot = new Ballot();
 		//String query = "INSERT IGNORE INTO CANDIDATES(name, last_name, category, votes)" + " VALUES(?, ?, ?);";
@@ -286,6 +361,7 @@ public class database {
 		return count;
 	}
 	
+	//Need to fix query maybe to account single quotes (See checkAdminLogin)
 	public int getCandVotes(Connection conn, String candID) throws SQLException{
 		String query="SELECT votes FROM CANDIDATES WHERE id=" + candID;
 		PreparedStatement stmt = conn.prepareStatement(query);
