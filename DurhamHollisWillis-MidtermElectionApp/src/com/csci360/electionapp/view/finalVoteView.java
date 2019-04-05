@@ -1,5 +1,6 @@
 package com.csci360.electionapp.view;
 
+import com.csci360.electionapp.model.Ballot;
 import com.csci360.electionapp.view.votingCheckBoxes;
 
 import java.io.IOException;
@@ -60,6 +61,9 @@ public class finalVoteView {
     	//unchecks all the boxes
     	//votingCheckBoxes.clear();
     	
+    	//changes voted status to 1 somehow
+    	//sends ballot information to database
+    	
         // Not able to get the text value from the checkBox objects
         // may need to use controller class to grab and set data??
         /*
@@ -90,5 +94,11 @@ public class finalVoteView {
         stage.setTitle(title);
         stage.setScene(new Scene(root));
         stage.show();
+    }
+    public void transferMessage(Ballot ballot) {
+    	S1.setText(ballot.getCat1Results());
+    	S2.setText(ballot.getCat2Results());
+    	S3.setText(ballot.getCat3Results());
+    	S4.setText(ballot.getCat4Results());
     }
 }
