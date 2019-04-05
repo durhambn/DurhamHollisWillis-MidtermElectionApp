@@ -2,10 +2,16 @@ package com.csci360.electionapp.view;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.SQLException;
 
 import com.csci360.electionapp.model.database;
+
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Period;
+import java.util.concurrent.TimeUnit;
 
 import com.csci360.electionapp.controller.*;
 import javafx.application.Application;
@@ -132,10 +138,7 @@ public class main extends Application {
     
     
 	
-    @FXML
-    public Label V1;
-    @FXML
-    public Label V2;
+    
     
     //final DatePicker datePicker = new DatePicker();
     
@@ -274,6 +277,7 @@ public class main extends Application {
         VoterController votingPerson = registrationController.createVoter(firstName, lastName, birthdayMth, birthdayDay, birthdayYear, ssnString, password);
         String addResult = registrationController.add(votingPerson, this.db);
         System.out.println("The result from adding person to the database is: " + addResult);
+        System.out.println("The time the voter registered: " + votingPerson.getTime());
     	Alert result = new Alert(AlertType.INFORMATION);
         result.initOwner(regSubmit.getScene().getWindow());
         result.setTitle("Result");
@@ -401,7 +405,19 @@ public class main extends Application {
         }
         else {
         	boolean result = db.checkUserLogin(uname, pssw, db.getConnection());
-        	if(result == true) {
+        	//call check if user registered more than 24 hours ago
+        	boolean hasVoted = db.getStatusToVote(db.getConnection(), uname);
+        	java.util.Date created = db.getCreatedDate(db.getConnection(), uname);
+        	System.out.println(created);
+        	
+        	java.util.Date today = new java.util.Date();
+        	
+        	long period = Math.abs(today.getTime()-created.getTime());
+        	//System.out.println(period);
+        	long diff = TimeUnit.HOURS.convert(period,  TimeUnit.MILLISECONDS);
+        	//System.out.println(diff);
+        	
+        	if(result && !hasVoted && (diff>=24)) {
         		username.clear();
                 password.clear();
                 
@@ -431,8 +447,18 @@ public class main extends Application {
         		Alert alert = new Alert(AlertType.ERROR);
                 alert.initOwner(voteLoginSubmit.getScene().getWindow());
                 alert.setTitle("Error");
-                alert.setHeaderText("Incorrect Username/Password");
-                alert.setContentText("Please try again.");
+                if(result == false) {
+                	alert.setHeaderText("Incorrect Username/Password");
+                	alert.setContentText("Please try again.");
+                }
+                else if(hasVoted == true) {
+                	alert.setHeaderText("Voter has already voted");
+                	alert.setContentText("Cannot vote twice");
+                }
+                else if(diff<24) {
+                	alert.setHeaderText("Cannot vote without 24 hours of registration");
+                	alert.setContentText("Please try again later");
+                }
                 alert.showAndWait();
                 username.clear();
                 password.clear();
@@ -465,7 +491,7 @@ public class main extends Application {
         else {
         	boolean result = db.checkAdminLogin(uname, pssw, db.getConnection());
         	if(result == true) {
-
+        		
 		        // Clear the text fields
 		        // (may need to clear this after storing the data somewhere?)
 		        username.clear();
@@ -484,6 +510,8 @@ public class main extends Application {
 		        // Store adminInfo.fxml into Parent variable
 		        Parent root = fxmlLoader.load();
 		        
+		        //admimView admin = fxmlloader.getController();
+		       
 		        // Create a new stage and initialize the modality
 		        // set the opacity to 1 and set the title and show
 		        // root as the scene.
@@ -505,8 +533,7 @@ public class main extends Application {
                 username.clear();
                 password.clear();
         	}
-       
-    }
+        }
     }
     
 

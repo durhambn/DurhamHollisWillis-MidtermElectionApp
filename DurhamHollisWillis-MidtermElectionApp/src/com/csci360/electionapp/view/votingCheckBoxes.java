@@ -4,6 +4,7 @@ package com.csci360.electionapp.view;
 import java.io.IOException;
 
 import com.csci360.electionapp.controller.BallotController;
+import com.csci360.electionapp.controller.VoterController;
 import com.csci360.electionapp.model.Ballot;
 
 import javafx.beans.binding.Bindings;
@@ -25,6 +26,8 @@ public class votingCheckBoxes {
 	/**
      * CheckBox and Label variables for voting page
      */
+	
+	VoterController votingPerson;
 	
 	@FXML
 	public CheckBox C1;
@@ -86,7 +89,7 @@ public class votingCheckBoxes {
 	public String cat4 = "";
 	Ballot ballot = new Ballot();
     
-    public void initialize() {
+    public void initialize(VoterController votingPerson) {
     	C1.setSelected(false);
     	C2.setSelected(false);
     	C3.setSelected(false);
