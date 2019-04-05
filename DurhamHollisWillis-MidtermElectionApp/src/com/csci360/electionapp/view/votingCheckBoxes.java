@@ -84,6 +84,7 @@ public class votingCheckBoxes {
 	public String cat2 = "";
 	public String cat3 = "";
 	public String cat4 = "";
+	Ballot ballot = new Ballot();
     
     public void initialize() {
     	C1.setSelected(false);
@@ -101,7 +102,7 @@ public class votingCheckBoxes {
     	
     	//make call to database to check if username/password then else if
     	//make ballot when user logs in
-    	Ballot ballot = new Ballot();
+    	//Ballot ballot = new Ballot();
     	//these will pull the candidates from the ballot and initialize names on page
     	C1.setText(ballot.getCandidate1());
     	C2.setText(ballot.getCandidate2());
@@ -352,14 +353,21 @@ public class votingCheckBoxes {
         System.out.println(C12.isSelected());
         
     	
-
-        // Trying to store checkbox text into a variable to grab
-        // Not working; may need to use Controller class??
-        /*
-         * String vote1 = C1.getText(); String vote2 = C4.getText(); String vote3 =
-         * C7.getText(); String vote4 = C11.getText(); S1.setText(vote1);
-         * S2.setText(vote2); S3.setText(vote3); S4.setText(vote4);
-         */
+        //grab t/f from checkboxes and call ballot methods
+        ballot.setVoteCand1(C1.isSelected());
+        ballot.setVoteCand2(C2.isSelected());
+        ballot.setVoteCand3(C3.isSelected());
+        ballot.setVoteCand4(C4.isSelected());
+        ballot.setVoteCand5(C5.isSelected());
+        ballot.setVoteCand6(C6.isSelected());
+        ballot.setVoteCand7(C7.isSelected());
+        ballot.setVoteCand8(C8.isSelected());
+        ballot.setVoteCand9(C9.isSelected());
+        ballot.setVoteCand10(C10.isSelected());
+        ballot.setVoteCand11(C11.isSelected());
+        ballot.setVoteCand12(C12.isSelected());
+        
+        System.out.println(ballot.getResults());
 
         // Might incorporate title and resourceName
         // into a class creation method...
@@ -372,6 +380,8 @@ public class votingCheckBoxes {
         // Store finalSubmit.fxml into Parent variable
         Parent root = fxmlLoader.load();
 
+        finalVoteView sceneController = fxmlLoader.getController();
+        sceneController.transferMessage(ballot);
         // Create a new stage and initialize the modality
         // set the opacity to 1 and set the title and show
         // root as the scene.

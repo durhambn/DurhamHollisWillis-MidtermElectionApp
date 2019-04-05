@@ -385,5 +385,107 @@ public class Ballot {
 	public void setVoteCand12(boolean voteCand12) {
 		this.voteCand12 = voteCand12;
 	}
+	public String getCat1Results() {
+		String cat1 = "";
+		if(isVoteCand1()) {
+			cat1 = getCandidate1();
+		}
+		if(isVoteCand2()) {
+			cat1=getCandidate2();
+		}
+		if(isVoteCand3()) {
+			cat1=getCandidate3();
+		}
+		return cat1;
+	}
+	
+	public String getCat2Results() {
+		String cat2 = "";
+		if(isVoteCand4()) {
+			cat2=getCandidate4();
+		}
+		if(isVoteCand5()) {
+			cat2=getCandidate5();
+		}
+		if(isVoteCand6()) {
+			cat2=getCandidate6();
+		}
+		return cat2;
+	}
+	
+	public String getCat3Results() {
+		String cat3 = "";
+		if(isVoteCand7()) {
+			cat3=getCandidate7();
+		}
+		if(isVoteCand8()) {
+			cat3=getCandidate8();
+		}
+		if(isVoteCand9()) {
+			cat3=getCandidate9();
+		}
+		return cat3;
+	}
+	
+	public String getCat4Results() {
+		String cat4 = "";
+		if(isVoteCand10()) {
+			cat4=getCandidate10();
+		}
+		if(isVoteCand11()) {
+			cat4=getCandidate11();
+		}
+		if(isVoteCand12()) {
+			cat4=getCandidate12();
+		}
+		return cat4;
+	}
+	public String getResults() {
+		String cat1 = "";
+		String cat2 = "";
+		String cat3 = "";
+		String cat4 = "";
+		String results="";
+		if(isVoteCand1()) {
+			cat1 = getCandidate1();
+		}
+		if(isVoteCand2()) {
+			cat1=getCandidate2();
+		}
+		if(isVoteCand3()) {
+			cat1=getCandidate3();
+		}
+		if(isVoteCand4()) {
+			cat2=getCandidate4();
+		}
+		if(isVoteCand5()) {
+			cat2=getCandidate5();
+		}
+		if(isVoteCand6()) {
+			cat2=getCandidate6();
+		}
+		if(isVoteCand7()) {
+			cat3=getCandidate7();
+		}
+		if(isVoteCand8()) {
+			cat3=getCandidate8();
+		}
+		if(isVoteCand9()) {
+			cat3=getCandidate9();
+		}
+		if(isVoteCand10()) {
+			cat4=getCandidate10();
+		}
+		if(isVoteCand11()) {
+			cat4=getCandidate11();
+		}
+		if(isVoteCand12()) {
+			cat4=getCandidate12();
+		}
+		results="Category 1: " + cat1 + "\nCategory 2: " + cat2 + "\nCategory 3: " + cat3 + "\nCategory 4: " + cat4;
+		
+		return results;
+		
+	}
 	
 }
