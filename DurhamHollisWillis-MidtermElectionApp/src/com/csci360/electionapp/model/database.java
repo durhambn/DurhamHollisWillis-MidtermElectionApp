@@ -2,6 +2,7 @@ package com.csci360.electionapp.model;
 import com.csci360.electionapp.controller.VoterController;
 import com.csci360.electionapp.model.Voter;
 import com.csci360.electionapp.view.*;
+import com.csci360.electionapp.model.Ballot;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -125,7 +126,7 @@ public class database {
 		Statement s = conn.createStatement();
 		String s1 = "CREATE TABLE IF NOT EXISTS VOTERS(" + "id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, name varchar(256) NOT NULL, "
 				+ "last_name varchar(256) NOT NULL, date_of_birth date NOT NULL, ssn varchar(128) NOT NULL, username varchar(256) NOT NULL, "
-				+ "password varchar(256) NOT NULL, status boolean NOT NULL DEFAULT 0, CONSTRAINT Unique_ssn UNIQUE KEY(ssn));";
+				+ "password varchar(256) NOT NULL, created time NOT NULL, status boolean NOT NULL DEFAULT 0, CONSTRAINT Unique_ssn UNIQUE KEY(ssn));";
 		String s2 = "CREATE TABLE IF NOT EXISTS ADMIN(" + "id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, name varchar(256) NOT NULL, "
 				+ "last_name varchar(256) NOT NULL, username varchar(256) NOT NULL, password varchar(256) NOT NULL" + ", "
 						+ "CONSTRAINT Unique_user UNIQUE KEY(username));";
@@ -134,17 +135,17 @@ public class database {
 		String s4 = "CREATE TABLE IF NOT EXISTS BALLOT(" + "id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, category1 boolean NOT NULL DEFAULT 0, "
 				+ "category2 boolean NOT NULL DEFAULT 0,category3 boolean NOT NULL DEFAULT 0, category4 boolean NOT NULL DEFAULT 0" + ");";
 		
-		/*, created time NOT NULL*/
 		s.addBatch(s1);
 		s.addBatch(s2);  
 		s.addBatch(s3);
 		s.addBatch(s4);
 		s.executeBatch();
+		initialCandidates(conn);
 		initialAdmin(conn);
 	}
 	
 	public void addToVoters(VoterController voter, Connection conn) throws SQLException {
-		String query =" insert into VOTERS (name, last_name, date_of_birth, ssn, username, password)" /*created)"*/ + " values (?, ?, ?, ?, ?, ?)";
+		String query =" insert into VOTERS (name, last_name, date_of_birth, ssn, username, password, created)" + " values (?, ?, ?, ?, ?, ?, ?)";
 		
 		PreparedStatement preparedStmt = conn.prepareStatement(query);
 		preparedStmt.setString(1, voter.getVoterFirstName());
@@ -153,7 +154,7 @@ public class database {
 		preparedStmt.setString(4,  voter.getVoterSSN());
 		preparedStmt.setString(5,  voter.getVoterUsername());
 		preparedStmt.setString(6,  voter.getVoterPassword());
-		//preparedStmt.setString(7, voter.getTime());
+		preparedStmt.setString(7, voter.getTime());
 		
 		preparedStmt.execute();
 	      
@@ -218,11 +219,50 @@ public class database {
 	}
 	
 	public void initialCandidates(Connection conn) throws SQLException {
-		String query = "INSERT IGNORE INTO CANDIDATES(";
+		Ballot ballot = new Ballot();
+		//String query = "INSERT IGNORE INTO CANDIDATES(name, last_name, category, votes)" + " VALUES(?, ?, ?);";
+		Statement s = conn.createStatement();
+
+		String s1 = "INSERT IGNORE INTO CANDIDATES(name, last_name, category) VALUES('" +
+				ballot.getCandidate1First() + "', '" + ballot.getCandidate1Last() + "', '" + ballot.getCandidate1Cat() + "');";
+			
+		String s2 = "INSERT IGNORE INTO CANDIDATES(name, last_name, category) VALUES('" +
+				ballot.getCandidate2First() + "', '" + ballot.getCandidate2Last() + "', '" + ballot.getCandidate2Cat() + "');";		
+		String s3 = "INSERT IGNORE INTO CANDIDATES(name, last_name, category) VALUES('" +
+				ballot.getCandidate3First() + "', '" + ballot.getCandidate3Last() + "', '" + ballot.getCandidate3Cat() + "');";
+		String s4 = "INSERT IGNORE INTO CANDIDATES(name, last_name, category) VALUES('" +
+				ballot.getCandidate4First() + "', '" + ballot.getCandidate4Last() + "', '" + ballot.getCandidate4Cat() + "');";
+		String s5 = "INSERT IGNORE INTO CANDIDATES(name, last_name, category) VALUES('" +
+				ballot.getCandidate5First() + "', '" + ballot.getCandidate5Last() + "', '" + ballot.getCandidate5Cat() + "');";
+		String s6 = "INSERT IGNORE INTO CANDIDATES(name, last_name, category) VALUES('" +
+				ballot.getCandidate6First() + "', '" + ballot.getCandidate6Last() + "', '" + ballot.getCandidate6Cat() + "');";
+		String s7 = "INSERT IGNORE INTO CANDIDATES(name, last_name, category) VALUES('" +
+				ballot.getCandidate7First() + "', '" + ballot.getCandidate7Last() + "', '" + ballot.getCandidate7Cat() + "');";
+		String s8 = "INSERT IGNORE INTO CANDIDATES(name, last_name, category) VALUES('" +
+				ballot.getCandidate8First() + "', '" + ballot.getCandidate8Last() + "', '" + ballot.getCandidate8Cat() + "');";
+		String s9 = "INSERT IGNORE INTO CANDIDATES(name, last_name, category) VALUES('" +
+				ballot.getCandidate9First() + "', '" + ballot.getCandidate9Last() + "', '" + ballot.getCandidate9Cat() + "');";
+		String s10 = "INSERT IGNORE INTO CANDIDATES(name, last_name, category) VALUES('" +
+				ballot.getCandidate10First() + "', '" + ballot.getCandidate10Last() + "', '" + ballot.getCandidate10Cat() + "');";
+		String s11 = "INSERT IGNORE INTO CANDIDATES(name, last_name, category) VALUES('" +
+				ballot.getCandidate11First() + "', '" + ballot.getCandidate11Last() + "', '" + ballot.getCandidate11Cat() + "');";
+		String s12 = "INSERT IGNORE INTO CANDIDATES(name, last_name, category) VALUES('" +
+				ballot.getCandidate12First() + "', '" + ballot.getCandidate12Last() + "', '" + ballot.getCandidate12Cat() + "');";
 		
-		//PreparedStatement preparedStmt = conn.prepareStatement()
-				
-		conn.close();
+		s.addBatch(s1);
+		s.addBatch(s2);  
+		s.addBatch(s3);
+		s.addBatch(s4);
+		s.addBatch(s5);
+		s.addBatch(s6);
+		s.addBatch(s7);
+		s.addBatch(s8);
+		s.addBatch(s9);
+		s.addBatch(s10);
+		s.addBatch(s11);
+		s.addBatch(s12);
+		
+		s.executeBatch();
 	}
 	
 	/**

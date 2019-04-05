@@ -37,54 +37,10 @@ public class Ballot {
 	private boolean voteCand10 = false;
 	private boolean voteCand11 = false;
 	private boolean voteCand12 = false;
-	/*int numCategories, String Category1, String Category2, String Category3, 
-	String Category4, Candidate Candidate1, Candidate Candidate2, Candidate Candidate3, 
-	Candidate Candidate4, Candidate Candidate5, Candidate Candidate6, Candidate Candidate7, 
-	Candidate Candidate8, Candidate Candidate9, Candidate Candidate10, Candidate Candidate11, 
-	Candidate Candidate12*/
+	
 	public Ballot() {
 		
-		/*this.numCategories = numCategories;
-		
-		this.Category1 = Category1;
-		this.Category2 = Category2;
-		this.Category3 = Category3;
-		this.Category4 = Category4;
-		
-		this.Candidate1 = Candidate1;
-		this.Candidate2 = Candidate2;
-		this.Candidate3 = Candidate3;
-		this.Candidate4 = Candidate4;
-		this.Candidate5 = Candidate5;
-		this.Candidate6 = Candidate6;
-		this.Candidate7 = Candidate7;
-		this.Candidate8 = Candidate8;
-		this.Candidate9 = Candidate9;
-		this.Candidate10 = Candidate10;
-		this.Candidate11 = Candidate11;
-		this.Candidate12 = Candidate12;*/
 	}
-	
-	/*public Ballot() {
-		Category1 = "President";
-		Category2 = "Vice President";
-		Category3 = "Secretary";
-		Category4 = "Treasurer";
-		
-		// Get Candidates from database maybe?
-		Candidate1 = "Leonardo DiCaprio";
-		Candidate2 = "Dom Cobb";
-		Candidate3 = "Harry Potter";
-		Candidate4 = "Nathan Drake";
-		Candidate5 = "Bob Barker";
-		Candidate6 = "Steve Harvey";
-		Candidate7 = "Jeff Riley";
-		Candidate8 = "John Smith";
-		Candidate9 = "Joseph Gordon-Levitt";
-		Candidate10 = "Ellen Page";
-		Candidate11 = "Tom Hardy";
-		Candidate12 = "Ken Watanabe";
-	}*/
 	
 	public int getNumCategories() {
 		return numCategories;
@@ -129,6 +85,118 @@ public class Ballot {
 	public String getCandidate1() {
 		return this.Candidate1.getName();
 	}
+	
+	public String getCandidate1First() {
+		return this.Candidate1.getFirstName();
+	}
+	
+	public String getCandidate2First() {
+		return this.Candidate2.getFirstName();
+	}
+	public String getCandidate3First() {
+		return this.Candidate3.getFirstName();
+	}
+	public String getCandidate4First() {
+		return this.Candidate4.getFirstName();
+	}
+	public String getCandidate5First() {
+		return this.Candidate5.getFirstName();
+	}
+	public String getCandidate6First() {
+		return this.Candidate6.getFirstName();
+	}
+	public String getCandidate7First() {
+		return this.Candidate7.getFirstName();
+	}
+	public String getCandidate8First() {
+		return this.Candidate8.getFirstName();
+	}
+	public String getCandidate9First() {
+		return this.Candidate9.getFirstName();
+	}
+	public String getCandidate10First() {
+		return this.Candidate10.getFirstName();
+	}
+	public String getCandidate11First() {
+		return this.Candidate11.getFirstName();
+	}
+	public String getCandidate12First() {
+		return this.Candidate12.getFirstName();
+	}
+	
+	public String getCandidate1Last() {
+		return this.Candidate1.getLastName();
+	}
+	public String getCandidate2Last() {
+		return this.Candidate2.getLastName();
+	}
+	public String getCandidate3Last() {
+		return this.Candidate3.getLastName();
+	}
+	public String getCandidate4Last() {
+		return this.Candidate4.getLastName();
+	}
+	public String getCandidate5Last() {
+		return this.Candidate5.getLastName();
+	}
+	public String getCandidate6Last() {
+		return this.Candidate6.getLastName();
+	}
+	public String getCandidate7Last() {
+		return this.Candidate7.getLastName();
+	}
+	public String getCandidate8Last() {
+		return this.Candidate8.getLastName();
+	}
+	public String getCandidate9Last() {
+		return this.Candidate9.getLastName();
+	}
+	public String getCandidate10Last() {
+		return this.Candidate10.getLastName();
+	}
+	public String getCandidate11Last() {
+		return this.Candidate11.getLastName();
+	}
+	public String getCandidate12Last() {
+		return this.Candidate12.getLastName();
+	}
+	public String getCandidate1Cat() {
+		return this.Candidate1.getCategory();
+	}
+	public String getCandidate2Cat() {
+		return this.Candidate2.getCategory();
+	}
+	public String getCandidate3Cat() {
+		return this.Candidate3.getCategory();
+	}
+	public String getCandidate4Cat() {
+		return this.Candidate4.getCategory();
+	}
+	public String getCandidate5Cat() {
+		return this.Candidate5.getCategory();
+	}
+	public String getCandidate6Cat() {
+		return this.Candidate6.getCategory();
+	}
+	public String getCandidate7Cat() {
+		return this.Candidate7.getCategory();
+	}
+	public String getCandidate8Cat() {
+		return this.Candidate8.getCategory();
+	}
+	public String getCandidate9Cat() {
+		return this.Candidate9.getCategory();
+	}
+	public String getCandidate10Cat() {
+		return this.Candidate10.getCategory();
+	}
+	public String getCandidate11Cat() {
+		return this.Candidate11.getCategory();
+	}
+	public String getCandidate12Cat() {
+		return this.Candidate12.getCategory();
+	}
+	
 	
 	public void setCandidate1(Candidate Candidate1) {
 		this.Candidate1 = Candidate1;
