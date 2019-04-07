@@ -106,17 +106,19 @@ public class database {
 	
 	public void createTables(Connection conn) throws SQLException {
 		Statement s = conn.createStatement();
-		String s1 = "CREATE TABLE IF NOT EXISTS VOTERS(" + "id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, name varchar(256) NOT NULL, "
+		String s1 = "CREATE TABLE IF NOT EXISTS VOTERS(id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, name varchar(256) NOT NULL, "
 				+ "last_name varchar(256) NOT NULL, date_of_birth date NOT NULL, ssn varchar(128) NOT NULL, username varchar(256) NOT NULL, "
 				+ "password varchar(256) NOT NULL, created datetime NOT NULL, status boolean NOT NULL DEFAULT 0, CONSTRAINT Unique_ssn UNIQUE KEY(ssn));";
-		String s2 = "CREATE TABLE IF NOT EXISTS ADMIN(" + "id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, name varchar(256) NOT NULL, "
-				+ "last_name varchar(256) NOT NULL, username varchar(256) NOT NULL, password varchar(256) NOT NULL" + ", "
-						+ "CONSTRAINT Unique_user UNIQUE KEY(username));";
-		String s3 = "CREATE TABLE IF NOT EXISTS CANDIDATES(" + "id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,name varchar(256) NOT NULL, "
+		
+		String s2 = "CREATE TABLE IF NOT EXISTS ADMIN(id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, name varchar(256) NOT NULL, "
+				+ "last_name varchar(256) NOT NULL, username varchar(256) NOT NULL, password varchar(256) NOT NULL, CONSTRAINT Unique_user UNIQUE KEY(username));";
+		
+		String s3 = "CREATE TABLE IF NOT EXISTS CANDIDATES(id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,name varchar(256) NOT NULL, "
 				+ "last_name varchar(256) NOT NULL, category varchar(256) NOT NULL, votes INTEGER NOT NULL DEFAULT 0, "
 				+ "CONSTRAINT Unique_cand UNIQUE KEY(name,last_name,category));";
-		String s4 = "CREATE TABLE IF NOT EXISTS BALLOT(" + "id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, category1 boolean NOT NULL DEFAULT 0, "
-				+ "category2 boolean NOT NULL DEFAULT 0,category3 boolean NOT NULL DEFAULT 0, category4 boolean NOT NULL DEFAULT 0" + ");";
+		
+		String s4 = "CREATE TABLE IF NOT EXISTS BALLOT(id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, category1 varchar(256) NOT NULL, "
+				+ "category2 varchar(256) NOT NULL,category3 varchar(256) NOT NULL, category4 varchar(256) NOT NULL);";
 		
 		s.addBatch(s1);
 		s.addBatch(s2);  
@@ -225,6 +227,7 @@ public class database {
 		stmt4.setString(2, winner4First);
 		stmt4.setString(3, winner4Last);
 		stmt4.setString(4, ballot.getCategory4());
+		stmt4.executeQuery();
 
 		conn.close();
 	}
@@ -234,13 +237,20 @@ public class database {
 		
 		PreparedStatement ps = conn.prepareStatement(query);
 		ps.setString(1, ballot.getCat1Results());
+		ps.setString(2, ballot.getCat2Results());
+		ps.setString(3, ballot.getCat3Results());
+		ps.setString(4, ballot.getCategory4());
+		ps.executeQuery();
+		
 	}
 	//Need to fix and change Statement to a PreparedStatement
 	//Refer to: https://alvinalexander.com/java/java-mysql-update-query-example
 	public static boolean checkVoters(String social, Connection conn) throws SQLException {
 		boolean result;
-		Statement stmt = conn.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT ssn FROM VOTERS WHERE ssn=" + social + ";");
+		String query = "SELECT ssn FROM VOTERS WHERE ssn=?;";
+		PreparedStatement stmt = conn.prepareStatement(query);
+		stmt.setString(1, social);
+		ResultSet rs = stmt.executeQuery(query);
 		if(rs.next()) {
 			result = true;
 			return result;
@@ -251,10 +261,35 @@ public class database {
 		}
 	}
 	
+	public String checkUsername(String username, Connection conn) throws SQLException {
+		String newUsername = username;
+		boolean uniqueUser = true;
+		String query = "SELECT username FROM VOTERS WHERE username=?;";
+		String query1 = "SELECT username FROM VOTERS WHERE username=?;";
+		PreparedStatement stmt = conn.prepareStatement(query);
+		stmt.setString(1, username);
+		ResultSet rs = stmt.executeQuery();
+		if(rs.next()) {
+			String usernameNum = "";
+			int count = 0;
+			while(uniqueUser != true) {
+				newUsername = username;
+				usernameNum = newUsername + count;
+				PreparedStatement stmt1 = conn.prepareStatement(query1);
+				stmt1.setString(1, newUsername);
+				uniqueUser = stmt1.execute(query1);
+				count++;
+			}
+		}
+		return newUsername;
+	}
+	
 	public static boolean checkUserLogin(String user, String pass, Connection conn) throws SQLException {
 		boolean result;
-		String query = "SELECT * FROM VOTERS WHERE username='" + user + "' AND password='" + pass + "'";
+		String query = "SELECT * FROM VOTERS WHERE username=? AND password=?;";
 		PreparedStatement stmt = conn.prepareStatement(query);
+		stmt.setString(1, user);
+		stmt.setString(2, pass);
 		ResultSet rs = stmt.executeQuery();
 		if(rs.next()) {
 			result = true;
@@ -267,8 +302,10 @@ public class database {
 	
 	public static boolean checkAdminLogin(String user, String pass, Connection conn) throws SQLException {
 		boolean result;
-		String query = "SELECT * FROM ADMIN WHERE username='" + user + "' AND password='" + pass + "'";
+		String query = "SELECT * FROM ADMIN WHERE username=? AND password=?;";
 		PreparedStatement stmt = conn.prepareStatement(query);
+		stmt.setString(1, user);
+		stmt.setString(2, pass);
 		ResultSet rs = stmt.executeQuery();
 		if(rs.next()) {
 			result = true;
@@ -342,8 +379,17 @@ public class database {
 		s.executeBatch();
 	}
 	
+	public void setStatus(String username, Connection conn) throws SQLException {
+		String query = "UPDATE VOTERS SET status=1 WHERE username=?;";
+		PreparedStatement stmt = conn.prepareStatement(query);
+		stmt.setString(1, username);
+		stmt.executeQuery();
+		conn.close();
+		
+	}
+	
 	public int getRegVoters(Connection conn) throws SQLException{
-		String query = "SELECT COUNT(*) FROM VOTERS";
+		String query = "SELECT COUNT(*) FROM VOTERS;";
 		PreparedStatement stmt = conn.prepareStatement(query);
 		ResultSet rs = stmt.executeQuery();
 		rs.next();
@@ -364,8 +410,9 @@ public class database {
 	
 	//Need to fix query maybe to account single quotes (See checkAdminLogin)
 	public int getCandVotes(Connection conn, String candID) throws SQLException{
-		String query="SELECT votes FROM CANDIDATES WHERE id=" + candID;
+		String query="SELECT votes FROM CANDIDATES WHERE id=?;";
 		PreparedStatement stmt = conn.prepareStatement(query);
+		stmt.setString(1, candID);
 		ResultSet rs = stmt.executeQuery();
 		rs.next();
 		int count = rs.getInt(1);
@@ -375,8 +422,9 @@ public class database {
 	//1=true, has voted; 0=false, hasn't voted
 	public boolean getStatusToVote(Connection conn, String username) throws SQLException{
 		boolean canVote;
-		String query="SELECT status FROM VOTERS WHERE username='"+ username +"'";
+		String query="SELECT status FROM VOTERS WHERE username=?;";
 		PreparedStatement stmt = conn.prepareStatement(query);
+		stmt.setString(1, username);
 		ResultSet rs = stmt.executeQuery();
 		rs.next();
 		canVote=rs.getBoolean(1);
@@ -384,8 +432,9 @@ public class database {
 	}
 	
 	public java.util.Date getCreatedDate(Connection conn, String username) throws SQLException{
-		String query="SELECT created FROM VOTERS WHERE username='"+ username+"'";
+		String query="SELECT created FROM VOTERS WHERE username=?;";
 		PreparedStatement stmt = conn.prepareStatement(query);
+		stmt.setString(1, username);
 		ResultSet rs = stmt.executeQuery();
 		rs.next();
 		Timestamp created = rs.getTimestamp("created");
