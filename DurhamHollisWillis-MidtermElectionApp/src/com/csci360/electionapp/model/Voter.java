@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.Date;
 
+import java.sql.Connection;
 //voter person will have an object of ballot, set attributes set to null, vp.getBallot()
 //connect to voting person
 //ballots going to need to know how many categories 
@@ -24,7 +25,10 @@ public class Voter {
 	private boolean status;
 	private LocalDateTime regDate;
 	
-	public Voter(String firstName, String lastName, String birthday2, String birthday3, String birthday4, String ssn, String password) {
+	database db = new database();
+	Connection conn;
+	
+	public Voter(String firstName, String lastName, String birthday2, String birthday3, String birthday4, String ssn, String password) throws SQLException {
 		this.setFirstName(firstName);
 		this.setLastName(lastName);
 		this.setBirthday(birthday2, birthday3, birthday4);
@@ -101,8 +105,10 @@ public class Voter {
 		this.password = password;
 	}
 	
-	public void setUsername(String firstName, String lastName) {
+	public void setUsername(String firstName, String lastName) throws SQLException {
+		conn = db.getConnection();
 		this.username = lastName + firstName.charAt(0);
+		this.username = db.checkUsername(this.username, conn);
 	}
 	
 	public String getUsername() {

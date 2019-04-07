@@ -34,9 +34,10 @@ public class registrationController {
 	 * @param ssn
 	 * @param password
 	 * @return the controller
+	 * @throws SQLException 
 	 * 
 	 */
-	public static VoterController createVoter(String firstName, String lastName, String birthdayMth,String birthdayDay, String birthdayYear, String ssn, String password) {
+	public static VoterController createVoter(String firstName, String lastName, String birthdayMth,String birthdayDay, String birthdayYear, String ssn, String password) throws SQLException {
 		// Creates a new voter object
 		Voter v = new Voter(firstName, lastName, birthdayMth, birthdayDay, birthdayYear, ssn, password);
 		

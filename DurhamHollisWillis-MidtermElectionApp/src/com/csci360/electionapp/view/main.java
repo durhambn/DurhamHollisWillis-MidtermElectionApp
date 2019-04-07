@@ -296,7 +296,7 @@ public class main extends Application {
 		// Need to make sure date is real
 
 		// Password check for validation
-		final String PASSWORD_REGEX = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!~<>,;:_=?*+#.\"&§%°()\\|\\[\\]\\-\\$\\^\\@\\/]).{8,40}$";
+		final String PASSWORD_REGEX = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!~<>,;:_=?*+#.\"&ï¿½%ï¿½()\\|\\[\\]\\-\\$\\^\\@\\/]).{8,40}$";
 		final Pattern PASSWORD_PATTERN = Pattern.compile(PASSWORD_REGEX);
 
 		// Fields are empty
@@ -342,6 +342,7 @@ public class main extends Application {
 			result.setTitle("Result");
 			result.setHeaderText("Result");
 			result.setContentText(addResult);
+			result.setContentText("Your username is: " + votingPerson.getVoterUsername());
 
 			result.showAndWait();
 
@@ -367,8 +368,9 @@ public class main extends Application {
 	 * 
 	 * @param event
 	 * @throws IOException
+	 * @throws SQLException 
 	 */
-	public void checkSubmit(ActionEvent event) throws IOException {
+	public void checkSubmit(ActionEvent event) throws IOException, SQLException {
 		// Print statements for testing purposes (remove later)
 		System.out.print(firstNameField.getText() + "\n");
 		System.out.print(lastNameField.getText() + "\n");
@@ -491,22 +493,37 @@ public class main extends Application {
 				// into a class creation method...
 				String resourceName = "votingPage.fxml";
 				String title = "Voting Page";
+				
+				// FXMLLoader variable to grab the registration.fxml file.
+				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(resourceName));
 
-				setStage(title, resourceName);
+				// Store the registration.fxml file into root as a "Parent"
+				Parent root = fxmlLoader.load();
+
+				votingCheckBoxes sceneController = fxmlLoader.getController();
+                sceneController.initialize(uname);
+				// Create a new stage and initialize the modality
+				// set the opacity to 1 and set the title and show
+				// root as the scene.
+				Stage stage = new Stage();
+				stage.initModality(Modality.APPLICATION_MODAL);
+				stage.setOpacity(1);
+				stage.setTitle(title);
+				stage.setScene(new Scene(root));
+				stage.showAndWait();
+				
 			} else {
 				// PoP uP
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.initOwner(voteLoginSubmit.getScene().getWindow());
 				alert.setTitle("Error");
+				alert.setHeaderText("Cannot Login");
 				if (result == false) {
-					alert.setHeaderText("Incorrect Username/Password");
-					alert.setContentText("Please try again.");
+					alert.setContentText("Incorrect Username/Password");
 				} else if (hasVoted == true) {
-					alert.setHeaderText("Voter has already voted");
-					alert.setContentText("Cannot vote twice");
+					alert.setContentText("Voter has already voted");
 				} else if (diff < 24) {
-					alert.setHeaderText("Cannot vote without 24 hours of registration");
-					alert.setContentText("Please try again later");
+					alert.setContentText("Cannot vote without 24 hours of registration");
 				}
 				alert.showAndWait();
 				username.clear();
