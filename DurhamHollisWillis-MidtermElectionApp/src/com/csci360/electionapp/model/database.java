@@ -250,7 +250,7 @@ public class database {
 		String query = "SELECT ssn FROM VOTERS WHERE ssn=?;";
 		PreparedStatement stmt = conn.prepareStatement(query);
 		stmt.setString(1, social);
-		ResultSet rs = stmt.executeQuery(query);
+		ResultSet rs = stmt.executeQuery();
 		if(rs.next()) {
 			result = true;
 			return result;
@@ -277,7 +277,7 @@ public class database {
 				usernameNum = newUsername + count;
 				PreparedStatement stmt1 = conn.prepareStatement(query1);
 				stmt1.setString(1, newUsername);
-				uniqueUser = stmt1.execute(query1);
+				uniqueUser = stmt1.execute();
 				count++;
 			}
 		}
