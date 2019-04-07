@@ -3,6 +3,7 @@ package com.csci360.electionapp.view;
 import com.csci360.electionapp.model.Ballot;
 import com.csci360.electionapp.view.votingCheckBoxes;
 import com.csci360.electionapp.controller.VoterController;
+import com.csci360.electionapp.model.database;
 
 import java.io.IOException;
 
@@ -15,8 +16,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 public class finalVoteView {
+	database db = new database();
+	Connection conn;
 	
 	@FXML
 	public Label S1;
@@ -34,9 +39,13 @@ public class finalVoteView {
     @FXML
     public Button finalCancel;
     
-    VoterController votingPerson;
+    //VoterController votingPerson;
     
-    public void initialize(VoterController votingPerson) {
+    public String uname;
+	
+    Ballot ballot;
+    
+    public void initialize() {
     	//won't let me call votingCheckBoxes without method being static but that
     	//causes more problems for other methods
     	
@@ -59,7 +68,7 @@ public class finalVoteView {
         Stage stage = (Stage) finalCancel.getScene().getWindow();
         stage.close();
     }
-    public void finalSubmit(ActionEvent event) throws IOException {
+    public void finalSubmit(ActionEvent event) throws IOException,SQLException {
 
     	//unchecks all the boxes
     	//votingCheckBoxes.clear();
@@ -76,6 +85,11 @@ public class finalVoteView {
          * System.out.println(S1.getText()); System.out.println(S2.getText());
          * System.out.println(S3.getText()); System.out.println(S4.getText());
          */
+    	
+    	db.addToBallots(ballot, conn);
+    	db.addToCandidates(ballot, conn);
+
+    	conn = db.getConnection();
 
         // Might incorporate title and resourceName
         // into a class creation method...
@@ -98,10 +112,12 @@ public class finalVoteView {
         stage.setScene(new Scene(root));
         stage.show();
     }
-    public void transferMessage(Ballot ballot) {
+    public void transferMessage(Ballot ballot, String username) {
+    	this.ballot = ballot;
     	S1.setText(ballot.getCat1Results());
     	S2.setText(ballot.getCat2Results());
     	S3.setText(ballot.getCat3Results());
     	S4.setText(ballot.getCat4Results());
+    	uname = username;
     }
 }
