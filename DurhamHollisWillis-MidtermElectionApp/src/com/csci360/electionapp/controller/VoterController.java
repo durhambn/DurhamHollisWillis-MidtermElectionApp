@@ -1,5 +1,6 @@
 package com.csci360.electionapp.controller;
 
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 import com.csci360.electionapp.model.Voter;
@@ -111,7 +112,7 @@ public class VoterController {
 		return model.getSsn();
 	}
 	
-	public void setVoterUsername(String username) {
+	public void setVoterUsername(String username) throws SQLException {
 		model.setUsername(getVoterFirstName(), getVoterLastName());
 	}
 	

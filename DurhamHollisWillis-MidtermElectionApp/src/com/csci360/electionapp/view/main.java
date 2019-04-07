@@ -368,8 +368,9 @@ public class main extends Application {
 	 * 
 	 * @param event
 	 * @throws IOException
+	 * @throws SQLException 
 	 */
-	public void checkSubmit(ActionEvent event) throws IOException {
+	public void checkSubmit(ActionEvent event) throws IOException, SQLException {
 		// Print statements for testing purposes (remove later)
 		System.out.print(firstNameField.getText() + "\n");
 		System.out.print(lastNameField.getText() + "\n");

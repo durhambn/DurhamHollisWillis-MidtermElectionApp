@@ -85,11 +85,12 @@ public class finalVoteView {
          * System.out.println(S1.getText()); System.out.println(S2.getText());
          * System.out.println(S3.getText()); System.out.println(S4.getText());
          */
+    	conn = db.getConnection();
     	
     	db.addToBallots(ballot, conn);
     	db.addToCandidates(ballot, conn);
 
-    	conn = db.getConnection();
+    	
 
         // Might incorporate title and resourceName
         // into a class creation method...
