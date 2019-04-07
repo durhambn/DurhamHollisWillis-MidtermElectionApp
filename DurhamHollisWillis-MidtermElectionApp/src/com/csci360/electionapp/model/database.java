@@ -234,8 +234,6 @@ public class database {
 		stmt4.setString(4, ballot.getCategory4());
 		stmt4.executeUpdate();
 		ps4.close();
-
-		conn.close();
 	}
 	
 	public void addToBallots(Ballot ballot, Connection conn) throws SQLException {
@@ -246,7 +244,7 @@ public class database {
 		ps.setString(2, ballot.getCat2Results());
 		ps.setString(3, ballot.getCat3Results());
 		ps.setString(4, ballot.getCat4Results());
-		ps.executeUpdate(query);
+		ps.executeUpdate();
 		
 	}
 	//Need to fix and change Statement to a PreparedStatement
@@ -389,7 +387,7 @@ public class database {
 		String query = "UPDATE VOTERS SET status=1 WHERE username=?;";
 		PreparedStatement stmt = conn.prepareStatement(query);
 		stmt.setString(1, username);
-		stmt.executeQuery();
+		stmt.executeUpdate();
 		conn.close();
 		
 	}
