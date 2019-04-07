@@ -89,7 +89,7 @@ public class finalVoteView {
     	
     	db.addToBallots(ballot, conn);
     	db.addToCandidates(ballot, conn);
-
+    	db.setStatus(uname, conn);
     	
 
         // Might incorporate title and resourceName
