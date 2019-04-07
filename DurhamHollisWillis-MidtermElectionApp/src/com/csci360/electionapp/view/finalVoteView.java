@@ -1,10 +1,13 @@
 package com.csci360.electionapp.view;
 
 import com.csci360.electionapp.model.Ballot;
+import com.csci360.electionapp.model.database;
 import com.csci360.electionapp.view.votingCheckBoxes;
 import com.csci360.electionapp.controller.VoterController;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,6 +21,8 @@ import javafx.stage.Stage;
 
 public class finalVoteView {
 	
+	database db = new database();
+	Connection conn;
 	@FXML
 	public Label S1;
     @FXML
@@ -34,9 +39,13 @@ public class finalVoteView {
     @FXML
     public Button finalCancel;
     
-    VoterController votingPerson;
+    //VoterController votingPerson;
     
-    public void initialize(VoterController votingPerson) {
+    public String uname;
+    
+    Ballot ballot;
+    
+    public void initialize() {
     	//won't let me call votingCheckBoxes without method being static but that
     	//causes more problems for other methods
     	
@@ -48,7 +57,6 @@ public class finalVoteView {
     	S4.setText(votingCheckBoxes.getCat4());
     	*/
     	
-        
     }
 
 	
@@ -59,7 +67,7 @@ public class finalVoteView {
         Stage stage = (Stage) finalCancel.getScene().getWindow();
         stage.close();
     }
-    public void finalSubmit(ActionEvent event) throws IOException {
+    public void finalSubmit(ActionEvent event) throws IOException, SQLException {
 
     	//unchecks all the boxes
     	//votingCheckBoxes.clear();
@@ -67,16 +75,15 @@ public class finalVoteView {
     	//changes voted status to 1 somehow
     	//sends ballot information to database
     	
-        // Not able to get the text value from the checkBox objects
-        // may need to use controller class to grab and set data??
-        /*
-         * S1.setText(C1.getText()); S2.setText(C4.getText()); S3.setText(C7.getText());
-         * S4.setText(C11.getText());
-         * 
-         * System.out.println(S1.getText()); System.out.println(S2.getText());
-         * System.out.println(S3.getText()); System.out.println(S4.getText());
-         */
-
+    	db.addToBallots(ballot, conn);
+    	db.addToCandidates(ballot, conn);
+    	
+    	conn = db.getConnection();
+    	//call to database to 
+    	//db.setStatus(uname, conn);
+    	
+    	
+    	//votingPerson.setVoterStatus(true);
         // Might incorporate title and resourceName
         // into a class creation method...
         String resourceName = "endPage.fxml";
@@ -98,10 +105,15 @@ public class finalVoteView {
         stage.setScene(new Scene(root));
         stage.show();
     }
-    public void transferMessage(Ballot ballot) {
+    public void transferMessage(Ballot ballot, String username) {
+    	this.ballot = ballot;
     	S1.setText(ballot.getCat1Results());
     	S2.setText(ballot.getCat2Results());
     	S3.setText(ballot.getCat3Results());
     	S4.setText(ballot.getCat4Results());
+    	
+    	uname = username;
+    	
+    	
     }
 }

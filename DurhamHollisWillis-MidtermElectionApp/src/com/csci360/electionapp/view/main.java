@@ -283,6 +283,7 @@ public class main extends Application {
         result.setTitle("Result");
         result.setHeaderText("Result");
         result.setContentText(addResult);
+        result.setContentText("Your username is: " + votingPerson.getVoterUsername());
 
         result.showAndWait();
         
@@ -342,7 +343,7 @@ public class main extends Application {
                 boolean addResult = votingPerson.getRegStatus(db);
                 if(addResult) {
                 	//popup saying they are already added
-                	System.out.println("The voter is already registered to vote");
+                	System.out.println("The voter is registered to vote");
                 	Alert resultTrue = new Alert(AlertType.INFORMATION);
                     resultTrue.initOwner(checkSubmit.getScene().getWindow());
                     resultTrue.setTitle("Result");
@@ -417,7 +418,9 @@ public class main extends Application {
         	long diff = TimeUnit.HOURS.convert(period,  TimeUnit.MILLISECONDS);
         	//System.out.println(diff);
         	
+        	System.out.println("Results: "+result + "\nHasVotes: " +hasVoted+"\ndiff: " + diff);
         	if(result && !hasVoted && (diff>=24)) {
+        		System.out.println("In in loop, calling voting page");
         		username.clear();
                 password.clear();
                 
@@ -431,7 +434,9 @@ public class main extends Application {
 
                 // Store adminInfo.fxml into Parent variable
                 Parent root = fxmlLoader.load();
-
+                
+                votingCheckBoxes sceneController = fxmlLoader.getController();
+                sceneController.initialize(uname);
                 // Create a new stage and initialize the modality
                 // set the opacity to 1 and set the title and show
                 // root as the scene.
@@ -447,17 +452,18 @@ public class main extends Application {
         		Alert alert = new Alert(AlertType.ERROR);
                 alert.initOwner(voteLoginSubmit.getScene().getWindow());
                 alert.setTitle("Error");
+                alert.setHeaderText("Cannot Login");
                 if(result == false) {
-                	alert.setHeaderText("Incorrect Username/Password");
-                	alert.setContentText("Please try again.");
+                	
+                	alert.setContentText("Incorrect Username/Password");
                 }
                 else if(hasVoted == true) {
-                	alert.setHeaderText("Voter has already voted");
-                	alert.setContentText("Cannot vote twice");
+                	
+                	alert.setContentText("Voter has already voted");
                 }
                 else if(diff<24) {
-                	alert.setHeaderText("Cannot vote without 24 hours of registration");
-                	alert.setContentText("Please try again later");
+                	
+                	alert.setContentText("Cannot vote without 24 hours of registration");
                 }
                 alert.showAndWait();
                 username.clear();

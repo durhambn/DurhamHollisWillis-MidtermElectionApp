@@ -1,5 +1,6 @@
 package com.csci360.electionapp.model;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -12,6 +13,8 @@ import java.util.Date;
 //connect to voting person
 //ballots going to need to know how many categories 
 public class Voter {
+	database db = new database();
+	Connection conn;
 	
 	private String firstName;
 	private String lastName;
@@ -25,6 +28,7 @@ public class Voter {
 	private LocalDateTime regDate;
 	
 	public Voter(String firstName, String lastName, String birthday2, String birthday3, String birthday4, String ssn, String password) {
+		
 		this.setFirstName(firstName);
 		this.setLastName(lastName);
 		this.setBirthday(birthday2, birthday3, birthday4);
@@ -102,7 +106,9 @@ public class Voter {
 	}
 	
 	public void setUsername(String firstName, String lastName) {
+		conn = db.getConnection();
 		this.username = lastName + firstName.charAt(0);
+		this.username = checkUsername(this.username, conn);
 	}
 	
 	public String getUsername() {

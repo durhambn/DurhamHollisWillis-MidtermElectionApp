@@ -2,6 +2,7 @@ package com.csci360.electionapp.view;
 
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import com.csci360.electionapp.controller.BallotController;
 import com.csci360.electionapp.controller.VoterController;
@@ -18,6 +19,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -88,8 +90,10 @@ public class votingCheckBoxes {
 	public String cat3 = "";
 	public String cat4 = "";
 	Ballot ballot = new Ballot();
-    
-    public void initialize(VoterController votingPerson) {
+    String uname;
+    public void initialize(String username) {
+    	
+    	String uname = username;
     	C1.setSelected(false);
     	C2.setSelected(false);
     	C3.setSelected(false);
@@ -325,9 +329,10 @@ public class votingCheckBoxes {
      * 
      * @param event
      * @throws IOException
+     * @throws SQLException 
      */
     
-    public void voteSubmit(ActionEvent event) throws IOException {
+    public void voteSubmit(ActionEvent event) throws IOException, SQLException {
         // Print statements for testing purposes (remove later)
     	
         System.out.println(C1.getText());
@@ -384,7 +389,7 @@ public class votingCheckBoxes {
         Parent root = fxmlLoader.load();
 
         finalVoteView sceneController = fxmlLoader.getController();
-        sceneController.transferMessage(ballot);
+        sceneController.transferMessage(ballot, uname);
         // Create a new stage and initialize the modality
         // set the opacity to 1 and set the title and show
         // root as the scene.
