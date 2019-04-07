@@ -157,15 +157,17 @@ public class database {
 		ps1.setString(2, winner1Last);
 		ps1.setString(3, ballot.getCategory1());
 		ResultSet rs1 = ps1.executeQuery();
-		ps1.close();
-		int cat1Votes = rs1.getInt(1) + 1;
+		rs1.next();
+		int cat1Votes = rs1.getInt("votes") + 1;
 		String finalquery1 = "UPDATE CANDIDATES set votes=? WHERE name=? AND last_name=? AND category=?;";
 		PreparedStatement stmt1 = conn.prepareStatement(finalquery1);
 		stmt1.setInt(1, cat1Votes);
 		stmt1.setString(2, winner1First);
 		stmt1.setString(3, winner1Last);
 		stmt1.setString(4, ballot.getCategory1());
-		stmt1.executeQuery();
+		stmt1.executeUpdate();
+		ps1.close();
+
 		
 		String query2 = "SELECT votes FROM CANDIDATES WHERE name=? AND last_name=? AND category=?;";
 		PreparedStatement ps2 = conn.prepareStatement(query2);
@@ -177,15 +179,16 @@ public class database {
 		ps2.setString(2, winner2Last);
 		ps2.setString(3, ballot.getCategory2());
 		ResultSet rs2 = ps2.executeQuery();
-		ps2.close();
-		int cat2Votes = rs2.getInt(1) + 1;
+		rs2.next();
+		int cat2Votes = rs2.getInt("votes") + 1;
 		String finalquery2 = "UPDATE CANDIDATES set votes=? WHERE name=? AND last_name=? AND category=?;";
 		PreparedStatement stmt2 = conn.prepareStatement(finalquery2);
 		stmt2.setInt(1, cat2Votes);
 		stmt2.setString(2, winner2First);
 		stmt2.setString(3, winner2Last);
 		stmt2.setString(4, ballot.getCategory2());
-		stmt2.executeQuery();
+		stmt2.executeUpdate();
+		ps2.close();
 
 
 		String query3 = "SELECT votes FROM CANDIDATES WHERE name=? AND last_name=? AND category=?;";
@@ -198,15 +201,17 @@ public class database {
 		ps3.setString(2, winner3Last);
 		ps3.setString(3, ballot.getCategory3());
 		ResultSet rs3 = ps3.executeQuery();
-		ps3.close();
-		int cat3Votes = rs3.getInt(1) + 1;
+		rs3.next();
+		int cat3Votes = rs3.getInt("votes") + 1;
 		String finalquery3 = "UPDATE CANDIDATES set votes=? WHERE name=? AND last_name=? AND category=?;";
 		PreparedStatement stmt3 = conn.prepareStatement(finalquery3);
 		stmt3.setInt(1, cat3Votes);
 		stmt3.setString(2, winner3First);
 		stmt3.setString(3, winner3Last);
 		stmt3.setString(4, ballot.getCategory3());
-		stmt3.executeQuery();
+		stmt3.executeUpdate();
+		ps3.close();
+
 
 		
 		String query4 = "SELECT votes FROM CANDIDATES WHERE name=? AND last_name=? AND category=?;";
@@ -219,15 +224,16 @@ public class database {
 		ps4.setString(2, winner4Last);
 		ps4.setString(3, ballot.getCategory4());
 		ResultSet rs4 = ps4.executeQuery();
-		ps4.close();
-		int cat4Votes = rs4.getInt(1) + 1;
+		rs4.next();
+		int cat4Votes = rs4.getInt("votes") + 1;
 		String finalquery4 = "UPDATE CANDIDATES set votes=? WHERE name=? AND last_name=? AND category=?;";
 		PreparedStatement stmt4 = conn.prepareStatement(finalquery4);
 		stmt4.setInt(1, cat4Votes);
 		stmt4.setString(2, winner4First);
 		stmt4.setString(3, winner4Last);
 		stmt4.setString(4, ballot.getCategory4());
-		stmt4.executeQuery();
+		stmt4.executeUpdate();
+		ps4.close();
 
 		conn.close();
 	}
@@ -240,7 +246,7 @@ public class database {
 		ps.setString(2, ballot.getCat2Results());
 		ps.setString(3, ballot.getCat3Results());
 		ps.setString(4, ballot.getCat4Results());
-		ps.executeQuery();
+		ps.executeUpdate(query);
 		
 	}
 	//Need to fix and change Statement to a PreparedStatement
