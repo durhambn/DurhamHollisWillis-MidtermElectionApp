@@ -239,7 +239,7 @@ public class database {
 		ps.setString(1, ballot.getCat1Results());
 		ps.setString(2, ballot.getCat2Results());
 		ps.setString(3, ballot.getCat3Results());
-		ps.setString(4, ballot.getCategory4());
+		ps.setString(4, ballot.getCat4Results());
 		ps.executeQuery();
 		
 	}
