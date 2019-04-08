@@ -94,7 +94,7 @@ public class votingCheckBoxes {
 	String uname;
 	
     public void initialize(String username) {
-    	String uname = username;
+    	uname = username;
     	
     	C1.setSelected(false);
     	C2.setSelected(false);
