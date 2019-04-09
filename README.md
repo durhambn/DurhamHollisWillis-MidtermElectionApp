@@ -11,7 +11,7 @@ CSCI_360_Project
 4. Java 8
 
 ### Instructions on building the application:
-1. Download code
+1. Clone the repository
 2. Configure the Build Path to have JUnit 4 and mysql-connector-java-5.1.47-bin.jar
 2. In database.java, com.csci360.electionap.model.database.java, on line 49 and 52 change username and password to your mySQL information.
 3. Start a process of mySQL database server:
