@@ -60,7 +60,7 @@ public class registrationController {
 				//v.updateRegStatus();
 				//add to database
 				//System.out.println("The voter has been added to the database");
-				Result = "The voter has been added to the database";
+				Result = "The voter has been added to the database\nYour username is: "+v.getVoterUsername();
 				return Result;
 			}
 			else {

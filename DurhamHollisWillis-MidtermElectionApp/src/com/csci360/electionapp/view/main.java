@@ -342,7 +342,6 @@ public class main extends Application {
 			result.setTitle("Result");
 			result.setHeaderText("Result");
 			result.setContentText(addResult);
-			result.setContentText("Your username is: " + votingPerson.getVoterUsername());
 
 			result.showAndWait();
 
