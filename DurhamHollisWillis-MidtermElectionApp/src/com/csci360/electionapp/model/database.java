@@ -4,6 +4,12 @@ import com.csci360.electionapp.model.Voter;
 import com.csci360.electionapp.view.*;
 import com.csci360.electionapp.model.Ballot;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Scanner; 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -104,7 +110,7 @@ public class database {
 		
 	}
 	
-	public void createTables(Connection conn) throws SQLException {
+	public void createTables(Connection conn) throws SQLException, IOException {
 		Statement s = conn.createStatement();
 		String s1 = "CREATE TABLE IF NOT EXISTS VOTERS(id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, name varchar(256) NOT NULL, "
 				+ "last_name varchar(256) NOT NULL, date_of_birth date NOT NULL, ssn varchar(128) NOT NULL, username varchar(256) NOT NULL, "
@@ -320,18 +326,52 @@ public class database {
 		return result;
 	}
 	
-	public void initialAdmin(Connection conn) throws SQLException {
+	public boolean countVotes(Connection conn) throws SQLException, FileNotFoundException {
+		boolean votesMatch = false;
+		int voteCount = getNumBallots(conn);
+		int voteCountCheck = 0;
+		File file = new File(System.getProperty("user.dir") + "backupBallot.txt"); 
+		Scanner sc = new Scanner(file); 
+		while (sc.hasNextLine()) {
+			voteCountCheck++;
+		} 
+		sc.close();
+		if(voteCount == voteCountCheck) {
+			votesMatch = true;
+		}
+		return votesMatch;
+	}
+	
+	public void initialAdmin(Connection conn) throws SQLException, IOException {
 		String query = "INSERT IGNORE INTO ADMIN(name, last_name, username, password)" + " VALUES(?, ?, ?, ?);";
-		
 		PreparedStatement preparedStmt = conn.prepareStatement(query);
+		int count = 0;
+		FileReader file = new FileReader(System.getProperty("user.dir") + "/admin.txt");
+	    BufferedReader reader = new BufferedReader(file);
+	    String[] admin = new String[5];
+	    String key = "";
+	    String line = reader.readLine();
+	    while (line != null) {
+	    	key = line;
+	        line = reader.readLine();
+	        admin[count] = key;
+	        count++;
+	    }
+	    count = 1;
+	    int i = 0;
+	    while(i < admin.length-1) {
+	    	preparedStmt.setString(count, admin[i]);
+	    	count++;
+	    	i++;
+	    }
 		
-		preparedStmt.setString(1, "Admin");
+		/*preparedStmt.setString(1, "Admin");
 		preparedStmt.setString(2, "Admin");
 		preparedStmt.setString(3, "admin");
 		preparedStmt.setString(4, "admin");
-		
+		*/
 		preparedStmt.execute();
-		
+		reader.close();
 		conn.close();
 	}
 	
