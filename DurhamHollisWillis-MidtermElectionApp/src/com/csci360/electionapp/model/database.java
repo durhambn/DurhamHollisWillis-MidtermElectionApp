@@ -346,7 +346,7 @@ public class database {
 		String query = "INSERT IGNORE INTO ADMIN(name, last_name, username, password)" + " VALUES(?, ?, ?, ?);";
 		PreparedStatement preparedStmt = conn.prepareStatement(query);
 		int count = 0;
-		FileReader file = new FileReader("./admin.txt");
+		FileReader file = new FileReader("./src/com/csci360/electionapp/model/admin.txt");
 	    BufferedReader reader = new BufferedReader(file);
 	    String[] admin = new String[5];
 	    String key = "";
