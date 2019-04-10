@@ -47,6 +47,4 @@ CSCI_360_Project
          mysql> UPDATE VOTERS SET created="2019-04-05 17:21:49" WHERE username=<Your Username Here>;
          ```
          (The username is shown to you after registering a voter and is supplied in the console as well. This will enable the voter to vote and tell the database that more than 24 hours have elapsed. Note: Any time can be used in the created date as long as it is 24 hours before the current time.)
-   * At current the default Admin login is:
-      * username: admin
-      * password: admin
+   * At current the default Admin login is set up by reading from a file labeled admin.txt
