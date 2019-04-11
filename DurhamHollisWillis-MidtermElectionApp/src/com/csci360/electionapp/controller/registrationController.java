@@ -1,5 +1,7 @@
 package com.csci360.electionapp.controller;
 
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -8,6 +10,7 @@ import java.util.Date;
 import com.csci360.electionapp.model.Voter;
 import com.csci360.electionapp.model.database;
 import com.csci360.electionapp.view.*;
+import com.csci360.electionapp.security.*;
 
 /**
  * 
@@ -50,17 +53,22 @@ public class registrationController {
 		return controller;
 	}
 	
-	public static String add(VoterController v, database db) throws SQLException {
+	public static String add(VoterController v, database db) throws SQLException, NoSuchAlgorithmException, IOException {
+		hashPasses hashed = new hashPasses();
 		String Result = "";
 		//add voter v
 		if(v.getRegStatus(db) == false) {
 			if(v.getVoterProfile().checkEligibility() == true) {
-				Connection conn = db.getConnection();
-				db.addToVoters(v, conn);
+				//String username = v.getVoterUsername();
+				//String password = v.getVoterPassword();
+				String hashedPass = hashed.hashPassword(v);
+				//v.setVoterPassword(hashedPass);
+				//Connection conn = db.getConnection();
+				//db.addToVoters(v, conn);
 				//v.updateRegStatus();
 				//add to database
 				//System.out.println("The voter has been added to the database");
-				Result = "The voter has been added to the database\nYour username is: "+v.getVoterUsername();
+				Result = "The voter has been added to the database\nYour username is: " + v.getVoterUsername();
 				return Result;
 			}
 			else {
