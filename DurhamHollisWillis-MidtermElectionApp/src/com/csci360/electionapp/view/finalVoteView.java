@@ -5,6 +5,8 @@ import com.csci360.electionapp.view.votingCheckBoxes;
 import com.csci360.electionapp.controller.VoterController;
 import com.csci360.electionapp.model.database;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import javafx.event.ActionEvent;
@@ -18,6 +20,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 
 public class finalVoteView {
 	database db = new database();
@@ -31,7 +34,7 @@ public class finalVoteView {
     public Label S3;
     @FXML
     public Label S4;
- // Button variable for submitting final choices (review page)
+    //Button variable for submitting final choices (review page)
     @FXML
     public Button finalSubmit;
 
@@ -62,35 +65,36 @@ public class finalVoteView {
 
 	
 	public void finalCancel(ActionEvent event) throws IOException {
-        System.out.println("Cancel chosen, going back to voting page");
+		String logName = "log.txt";
+    	BufferedWriter writer1 = new BufferedWriter(new FileWriter(logName, true));
+    	String str = LocalDateTime.now() + "\nChange Button choosen, going back to voting page\n" + uname + "\n\n";
+        writer1.write(str);
+        writer1.close();
+    	System.out.println("Cancel chosen, going back to voting page");
 
         // Get the current window and close it
         Stage stage = (Stage) finalCancel.getScene().getWindow();
         stage.close();
     }
     public void finalSubmit(ActionEvent event) throws IOException,SQLException {
-
-    	//unchecks all the boxes
-    	//votingCheckBoxes.clear();
     	
-    	//changes voted status to 1 somehow
-    	//sends ballot information to database
-    	
-        // Not able to get the text value from the checkBox objects
-        // may need to use controller class to grab and set data??
-        /*
-         * S1.setText(C1.getText()); S2.setText(C4.getText()); S3.setText(C7.getText());
-         * S4.setText(C11.getText());
-         * 
-         * System.out.println(S1.getText()); System.out.println(S2.getText());
-         * System.out.println(S3.getText()); System.out.println(S4.getText());
-         */
+    	String logName = "log.txt";
+    	BufferedWriter writer1 = new BufferedWriter(new FileWriter(logName, true));
+    	String log = LocalDateTime.now()+ "\nVote Cast\n" + uname + "\n\n";
+    	writer1.write(log);
+    	writer1.close();
     	conn = db.getConnection();
     	
     	db.addToBallots(ballot, conn);
     	db.addToCandidates(ballot, conn);
     	db.setStatus(uname, conn);
     	
+    	String fileName = "backupBallot.txt";
+    	String str = ballot.getCat1Results() + ", " + ballot.getCat2Results() +", " + ballot.getCat3Results() + ", " + ballot.getCat4Results() + "\n";
+    	BufferedWriter writer2 = new BufferedWriter(new FileWriter(fileName, true));
+        writer2.append(str);
+         
+        writer2.close();
 
         // Might incorporate title and resourceName
         // into a class creation method...

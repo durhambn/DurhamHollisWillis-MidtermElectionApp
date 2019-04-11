@@ -1,5 +1,7 @@
 package com.csci360.electionapp.view;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
@@ -280,8 +282,8 @@ public class main extends Application {
 		System.out.print(birthdayFieldMth.getText() + "\n");
 		System.out.print(birthdayFieldDay.getText() + "\n");
 		System.out.print(birthdayFieldYear.getText() + "\n");
-		System.out.print(ssn.getText() + "\n");
-		System.out.print(pswd.getText() + "\n");
+		//System.out.print(ssn.getText() + "\n");
+		//System.out.print(pswd.getText() + "\n");
 
 		// Create variables for the creation of a voter object
 		// from the text fields.
@@ -372,6 +374,9 @@ public class main extends Application {
 	 * @throws SQLException 
 	 */
 	public void checkSubmit(ActionEvent event) throws IOException, SQLException {
+		String fileName = "log.txt";
+		BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true));
+	    
 		// Print statements for testing purposes (remove later)
 		System.out.print(firstNameField.getText() + "\n");
 		System.out.print(lastNameField.getText() + "\n");
@@ -414,6 +419,9 @@ public class main extends Application {
 			if (addResult) {
 				// popup saying they are already added
 				System.out.println("The voter is already registered to vote");
+				String str = LocalDateTime.now() + "\nCheck registration - already registered\n"+votingPerson.getVoterFirstName()+"\n"+votingPerson.getVoterLastName()+"\n"+votingPerson.getVoterBirthday()+"\n\n";
+				writer.write(str);
+				writer.close();
 				Alert resultTrue = new Alert(AlertType.INFORMATION);
 				resultTrue.initOwner(checkSubmit.getScene().getWindow());
 				resultTrue.setTitle("Result");
@@ -424,6 +432,9 @@ public class main extends Application {
 			} else {
 				// popup saying they are not registered
 				System.out.println("The voter is not registered to vote");
+				String str = LocalDateTime.now() + "\nCheck registration - not registered\n"+votingPerson.getVoterFirstName()+"\n"+votingPerson.getVoterLastName()+"\n"+votingPerson.getVoterBirthday()+"\n\n";
+				writer.write(str);
+				writer.close();
 				Alert resultFalse = new Alert(AlertType.INFORMATION);
 				resultFalse.initOwner(checkSubmit.getScene().getWindow());
 				resultFalse.setTitle("Result");
@@ -463,7 +474,10 @@ public class main extends Application {
 		System.out.print(username.getText() + "\n");
 		String uname = username.getText();
 		String pssw = password.getText();
-
+		
+		String fileName = "log.txt";
+		BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true));
+		
 		if (uname.isEmpty() || pssw.isEmpty()) {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.initOwner(voteLoginSubmit.getScene().getWindow());
@@ -489,7 +503,10 @@ public class main extends Application {
 			if (result && !hasVoted && (diff >= 24)) {
 				username.clear();
 				password.clear();
-
+				
+				String str = LocalDateTime.now() +  "\nSuccessful Voter login\n" + uname +"\n\n";
+				writer.write(str);
+				writer.close();
 				// Might incorporate title and resourceName
 				// into a class creation method...
 				String resourceName = "votingPage.fxml";
@@ -515,16 +532,26 @@ public class main extends Application {
 				
 			} else {
 				// PoP uP
+				
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.initOwner(voteLoginSubmit.getScene().getWindow());
 				alert.setTitle("Error");
 				alert.setHeaderText("Cannot Login");
 				if (result == false) {
 					alert.setContentText("Incorrect Username/Password");
+					String str = LocalDateTime.now() + "\nUnsuccessful Voter login - Incorrect Username/Password\n" + uname +"\n\n";
+					writer.write(str);
+					writer.close();
 				} else if (hasVoted == true) {
 					alert.setContentText("Voter has already voted");
+					String str = LocalDateTime.now() + "\nUnsuccessful Voter login - Voter has already voted\n" + uname +"\n\n";
+					writer.write(str);
+					writer.close();
 				} else if (diff < 24) {
 					alert.setContentText("Cannot vote without 24 hours of registration");
+					String str = LocalDateTime.now() + "\nUnsuccessful Voter login - Cannot vote without 24 hours of registration\n" + uname +"\n\n";
+					writer.write(str);
+					writer.close();
 				}
 				alert.showAndWait();
 				username.clear();
@@ -543,7 +570,9 @@ public class main extends Application {
 		System.out.print(username.getText() + "\n");
 		String uname = username.getText();
 		String pssw = password.getText();
-
+		String fileName = "log.txt";
+    	BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true));
+    	
 		if (uname.isEmpty() || pssw.isEmpty()) {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.initOwner(adminSubmit.getScene().getWindow());
@@ -555,8 +584,10 @@ public class main extends Application {
 		} else {
 			boolean result = db.checkAdminLogin(uname, pssw, db.getConnection());
 			if (result == true) {
-
-				// Clear the text fields
+				String str = LocalDateTime.now() + "\nAdmin Login successful\n" + uname+"\n\n";
+				writer.write(str);
+				writer.close();
+		    	// Clear the text fields
 				// (may need to clear this after storing the data somewhere?)
 				username.clear();
 				password.clear();
@@ -568,6 +599,9 @@ public class main extends Application {
 
 				setStage(title, resourceName);
 			} else {
+				String str = LocalDateTime.now() + "\nAdmin Login unsuccessful\n" + uname+"\n\n";
+				writer.write(str);
+				writer.close();
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.initOwner(adminSubmit.getScene().getWindow());
 				alert.setTitle("Error");

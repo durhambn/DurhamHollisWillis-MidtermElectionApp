@@ -1,16 +1,21 @@
 package com.csci360.electionapp.view;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 
 import com.csci360.electionapp.model.Ballot;
 import com.csci360.electionapp.model.database;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 public class adminView {
@@ -77,11 +82,17 @@ public class adminView {
    private Button closeButton;
    @FXML
    private Button reTally;
+   @FXML
+   private Button add;
+   @FXML
+   private Button delete;
+   
+   Connection conn;
 
 	public void initialize() throws SQLException {
 		
 		Ballot ballot = new Ballot();
-		Connection conn = db.getConnection();
+		conn = db.getConnection();
 		
 		cand1.setText(ballot.getCandidate1());
 		cand2.setText(ballot.getCandidate2());
@@ -123,7 +134,43 @@ public class adminView {
     }
 
 	public void reTally(ActionEvent event) throws IOException, SQLException{
-		System.out.println("Re-tallying votes");
-		initialize();
+		int numBallots = db.getNumBallots(conn);
+		String ballots = String.valueOf(numBallots);
+		String v2 = V2.getText();
+		System.out.println(ballots);
+		System.out.println(v2);
+		if (db.countVotes(conn) && (ballots.equals(v2))) {
+			
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.initOwner(reTally.getScene().getWindow());
+			alert.setTitle("Re-Tally");
+			alert.setHeaderText("Re-Tally Votes");
+			alert.setContentText("Information on page in up to date.");
+			alert.showAndWait();
+			System.out.println("Re-tallying votes");
+			
+			String fileName = "log.txt";
+		    BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true));
+		    String str = LocalDateTime.now() + "\nRe-tally votes\n\n";
+		    writer.append(str);
+		     
+		    writer.close();
+			initialize();
+		}
+		else {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.initOwner(reTally.getScene().getWindow());
+			alert.setTitle("Re-Tally");
+			alert.setHeaderText("Re-Tally Votes");
+			alert.setContentText("The backupBallot file doesn't match database.");
+			alert.showAndWait();
+		}
+		
+	}
+	public void addTest(ActionEvent event) {
+		db.addTester(conn);
+	}
+	public void deleteTest(ActionEvent event) {
+		db.deleteTester(conn);
 	}
 }
