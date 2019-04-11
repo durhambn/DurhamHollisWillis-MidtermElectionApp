@@ -2,6 +2,7 @@ package com.csci360.electionapp.model;
 import com.csci360.electionapp.controller.VoterController;
 import com.csci360.electionapp.model.Voter;
 import com.csci360.electionapp.view.*;
+import com.csci360.electionapp.security.*;
 import com.csci360.electionapp.model.Ballot;
 
 import java.io.BufferedReader;
@@ -17,6 +18,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Properties;
 
 /**
@@ -114,7 +116,8 @@ public class database {
 		Statement s = conn.createStatement();
 		String s1 = "CREATE TABLE IF NOT EXISTS VOTERS(id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, name varchar(256) NOT NULL, "
 				+ "last_name varchar(256) NOT NULL, date_of_birth date NOT NULL, ssn varchar(128) NOT NULL, username varchar(256) NOT NULL, "
-				+ "password varchar(256) NOT NULL, created datetime NOT NULL, status boolean NOT NULL DEFAULT 0, CONSTRAINT Unique_ssn UNIQUE KEY(ssn));";
+				+ "password varchar(256) NOT NULL, created datetime NOT NULL, salt binary(16) NOT NULL, status boolean NOT NULL DEFAULT 0, "
+				+ "CONSTRAINT Unique_ssn UNIQUE KEY(ssn));";
 		
 		String s2 = "CREATE TABLE IF NOT EXISTS ADMIN(id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, name varchar(256) NOT NULL, "
 				+ "last_name varchar(256) NOT NULL, username varchar(256) NOT NULL, password varchar(256) NOT NULL, CONSTRAINT Unique_user UNIQUE KEY(username));";
@@ -135,8 +138,8 @@ public class database {
 		initialAdmin(conn);
 	}
 	
-	public void addToVoters(VoterController voter, Connection conn) throws SQLException {
-		String query = " INSERT INTO VOTERS (name, last_name, date_of_birth, ssn, username, password, created)" + " VALUES (?, ?, ?, ?, ?, ?, ?)";
+	public void addToVoters(VoterController voter, byte[] salt, Connection conn) throws SQLException {
+		String query = " INSERT INTO VOTERS (name, last_name, date_of_birth, ssn, username, password, created, salt)" + " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		PreparedStatement preparedStmt = conn.prepareStatement(query);
 		preparedStmt.setString(1, voter.getVoterFirstName());
@@ -146,6 +149,7 @@ public class database {
 		preparedStmt.setString(5,  voter.getVoterUsername());
 		preparedStmt.setString(6,  voter.getVoterPassword());
 		preparedStmt.setString(7, voter.getTime());
+		preparedStmt.setBytes(8, salt);
 		
 		preparedStmt.execute();
 	      
@@ -274,13 +278,14 @@ public class database {
 	public String checkUsername(String username, Connection conn) throws SQLException {
 		String newUsername = username;
 		boolean uniqueUser = true;
+		String usernameNum = "";
 		String query = "SELECT username FROM VOTERS WHERE username=?;";
 		String query1 = "SELECT username FROM VOTERS WHERE username=?;";
 		PreparedStatement stmt = conn.prepareStatement(query);
 		stmt.setString(1, username);
 		ResultSet rs = stmt.executeQuery();
 		if(rs.next()) {
-			String usernameNum = "";
+			usernameNum = "";
 			int count = 0;
 			while(uniqueUser != true) {
 				newUsername = username;
@@ -294,15 +299,18 @@ public class database {
 		return newUsername;
 	}
 	
-	public static boolean checkUserLogin(String user, String pass, Connection conn) throws SQLException {
+	public static boolean checkUserLogin(String user, String pass, Connection conn) throws SQLException, IOException {
 		boolean result;
-		String query = "SELECT * FROM VOTERS WHERE username=? AND password=?;";
+		byte[] salt;
+		String query = "SELECT password, salt FROM VOTERS WHERE username=?;";
 		PreparedStatement stmt = conn.prepareStatement(query);
+		// read file, find username, grab salt, hash passed in pass compare done.
 		stmt.setString(1, user);
-		stmt.setString(2, pass);
 		ResultSet rs = stmt.executeQuery();
 		if(rs.next()) {
-			result = true;
+			String hashedPass = rs.getString(1);
+			salt = rs.getBytes(2);
+			result = hashPasses.comparePasswords(pass, salt, hashedPass);
 		}
 		else {
 			result = false;
@@ -330,7 +338,7 @@ public class database {
 		boolean votesMatch = false;
 		int voteCount = getNumBallots(conn);
 		int voteCountCheck = 0;
-		File file = new File(System.getProperty("user.dir") + "backupBallot.txt"); 
+		File file = new File("./backupBallot.txt"); 
 		Scanner sc = new Scanner(file); 
 		while (sc.hasNextLine()) {
 			voteCountCheck++;
@@ -346,7 +354,7 @@ public class database {
 		String query = "INSERT IGNORE INTO ADMIN(name, last_name, username, password)" + " VALUES(?, ?, ?, ?);";
 		PreparedStatement preparedStmt = conn.prepareStatement(query);
 		int count = 0;
-		FileReader file = new FileReader("./admin.txt");
+		FileReader file = new FileReader("./src/com/csci360/electionapp/model/admin.txt");
 	    BufferedReader reader = new BufferedReader(file);
 	    String[] admin = new String[5];
 	    String key = "";
@@ -365,11 +373,6 @@ public class database {
 	    	i++;
 	    }
 		
-		/*preparedStmt.setString(1, "Admin");
-		preparedStmt.setString(2, "Admin");
-		preparedStmt.setString(3, "admin");
-		preparedStmt.setString(4, "admin");
-		*/
 		preparedStmt.execute();
 		reader.close();
 		conn.close();
