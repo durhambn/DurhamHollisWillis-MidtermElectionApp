@@ -3,6 +3,7 @@ package com.csci360.electionapp.view;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -272,8 +273,9 @@ public class main extends Application {
 	 * @param event
 	 * @throws IOException
 	 * @throws SQLException
+	 * @throws NoSuchAlgorithmException 
 	 */
-	public void regSubmit(ActionEvent event) throws IOException, SQLException {
+	public void regSubmit(ActionEvent event) throws IOException, SQLException, NoSuchAlgorithmException {
 		// Print statements for testing purposes (remove later)
 		System.out.print(firstNameField.getText() + "\n");
 		System.out.print(lastNameField.getText() + "\n");

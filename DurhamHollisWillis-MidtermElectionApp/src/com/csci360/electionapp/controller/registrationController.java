@@ -3,6 +3,7 @@ package com.csci360.electionapp.controller;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -12,6 +13,7 @@ import java.util.Date;
 import com.csci360.electionapp.model.Voter;
 import com.csci360.electionapp.model.database;
 import com.csci360.electionapp.view.*;
+import com.csci360.electionapp.security.*;
 
 /**
  * 
@@ -54,7 +56,8 @@ public class registrationController {
 		return controller;
 	}
 	
-	public static String add(VoterController v, database db) throws SQLException, IOException {
+	public static String add(VoterController v, database db) throws SQLException, NoSuchAlgorithmException, IOException {
+		hashPasses hashed = new hashPasses();
 		String Result = "";
 		String fileName = "log.txt";
 		String str;
@@ -63,8 +66,12 @@ public class registrationController {
 		//add voter v
 		if(v.getRegStatus(db) == false) {
 			if(v.getVoterProfile().checkEligibility() == true) {
-				Connection conn = db.getConnection();
-				db.addToVoters(v, conn);
+				//String username = v.getVoterUsername();
+				//String password = v.getVoterPassword();
+				String hashedPass = hashed.hashPassword(v);
+				//v.setVoterPassword(hashedPass);
+				//Connection conn = db.getConnection();
+				//db.addToVoters(v, conn);
 				//v.updateRegStatus();
 				//add to database
 				//System.out.println("The voter has been added to the database");
@@ -72,6 +79,7 @@ public class registrationController {
 			    str = LocalDateTime.now() + "\nSuccessful registration\n"+v.getVoterFirstName()+"\n"+v.getVoterLastName()+"\n"+v.getVoterBirthday()+"\n"+v.getVoterPassword()+"\n\n";
 				writer.append(str);
 				writer.close();
+
 				return Result;
 			}
 			else {
