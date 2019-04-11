@@ -1,8 +1,12 @@
 package com.csci360.electionapp.controller;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import com.csci360.electionapp.model.Voter;
@@ -19,7 +23,7 @@ public class registrationController {
 	// Voter object that will be created
 	private Voter v;
 	//database db;
-	
+	static BufferedWriter writer;
 	// ??? what goes here.
 	public registrationController() {
 	}
@@ -50,8 +54,12 @@ public class registrationController {
 		return controller;
 	}
 	
-	public static String add(VoterController v, database db) throws SQLException {
+	public static String add(VoterController v, database db) throws SQLException, IOException {
 		String Result = "";
+		String fileName = "log.txt";
+		String str;
+		writer = new BufferedWriter(new FileWriter(fileName, true));
+	    
 		//add voter v
 		if(v.getRegStatus(db) == false) {
 			if(v.getVoterProfile().checkEligibility() == true) {
@@ -61,16 +69,25 @@ public class registrationController {
 				//add to database
 				//System.out.println("The voter has been added to the database");
 				Result = "The voter has been added to the database\nYour username is: "+v.getVoterUsername();
+			    str = LocalDateTime.now() + "\nSuccessful registration\n"+v.getVoterFirstName()+"\n"+v.getVoterLastName()+"\n"+v.getVoterBirthday()+"\n"+v.getVoterPassword()+"\n\n";
+				writer.append(str);
+				writer.close();
 				return Result;
 			}
 			else {
 				Result = "The voter is not eligible to register.";
+				str=LocalDateTime.now() + "\nUnsuccessful registration - not elligible to register\n"+v.getVoterFirstName()+"\n"+v.getVoterLastName()+"\n"+v.getVoterBirthday()+"\n\n";
+				writer.append(str);
+				writer.close();
 				return Result;
 				//System.out.println("The voter is not eligible to register");
 			}
 		}
 		else {
 			Result = "The voter has already registered.";
+			str=LocalDateTime.now() + "\nUnsuccessful registration - voter has already registered\n"+v.getVoterFirstName()+"\n"+v.getVoterLastName()+"\n"+v.getVoterBirthday()+"\n\n";
+			writer.append(str);
+			writer.close();
 			return Result;
 			//System.out.println("The voter has already registered");
 		}

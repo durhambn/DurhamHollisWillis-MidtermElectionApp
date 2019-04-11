@@ -1,0 +1,52 @@
+Check registration - already registered
+Brandi
+Durham
+10/31/1997
+
+Check registration - already registered
+Brandi
+Durham
+10/31/1997
+
+Uncessful Voter login
+DurhamB
+
+Unsuccessful Voter login - Voter has already voted
+DurhamB
+
+2019-04-10T16:06:45.304
+Admin Login successful
+admin
+
+2019-04-10T16:11:00.732
+Admin Login successful
+admin
+
+2019-04-10T16:41:04.388
+Admin Login successful
+admin
+
+2019-04-10T16:42:19.787
+Admin Login successful
+admin
+
+2019-04-10T16:49:22.024
+Admin Login successful
+admin
+
+2019-04-10T16:51:13.083
+Admin Login successful
+admin
+
+2019-04-10T17:00:57.201
+Admin Login successful
+admin
+
+2019-04-10T17:08:55.083
+Admin Login unsuccessful
+admin
+
+2019-04-10T17:09:13.231
+Admin Login successful
+admin
+

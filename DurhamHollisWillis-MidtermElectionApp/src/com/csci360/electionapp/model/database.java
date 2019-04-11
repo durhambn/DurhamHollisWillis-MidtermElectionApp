@@ -326,17 +326,19 @@ public class database {
 		return result;
 	}
 	
-	public boolean countVotes(Connection conn) throws SQLException, FileNotFoundException {
+	public boolean countVotes(Connection conn) throws SQLException, IOException {
 		boolean votesMatch = false;
 		int voteCount = getNumBallots(conn);
-		int voteCountCheck = 0;
-		File file = new File(System.getProperty("user.dir") + "backupBallot.txt"); 
-		Scanner sc = new Scanner(file); 
-		while (sc.hasNextLine()) {
-			voteCountCheck++;
-		} 
-		sc.close();
-		if(voteCount == voteCountCheck) {
+		int lines = 0;
+		BufferedReader reader = new BufferedReader(new FileReader("backupBallot.txt"));
+		//File file = new File(System.getProperty("user.dir") + "/backupBallot.txt"); 
+		//Scanner sc = new Scanner(file); 
+		while (reader.readLine() != null) {
+			lines++;
+			//System.out.println(lines);
+		}
+		reader.close();
+		if(voteCount == lines) {
 			votesMatch = true;
 		}
 		return votesMatch;

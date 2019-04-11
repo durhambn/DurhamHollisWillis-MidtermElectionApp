@@ -89,5 +89,12 @@
             </Button>
         </buttons>
       </ButtonBar>
+      <ButtonBar layoutX="354.0" layoutY="200.0" prefHeight="40.0" prefWidth="200.0">
+        <buttons>
+          <Button fx:id="add" mnemonicParsing="false" onAction="#addTest" text="Add" />
+            <Button fx:id="delete" layoutX="140.0" layoutY="17.0" mnemonicParsing="false" onAction="#deleteTest" text="Delete" />
+        </buttons>
+      </ButtonBar>
+      <Text layoutX="237.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Voter for testing purposes:" />
    </children>
 </AnchorPane>
