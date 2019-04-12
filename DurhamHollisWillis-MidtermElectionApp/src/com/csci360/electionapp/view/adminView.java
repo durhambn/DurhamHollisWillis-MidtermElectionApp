@@ -3,6 +3,7 @@ package com.csci360.electionapp.view;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -167,10 +168,22 @@ public class adminView {
 		}
 		
 	}
-	public void addTest(ActionEvent event) {
+	public void addTest(ActionEvent event) throws SQLException, NoSuchAlgorithmException, IOException {
 		db.addTester(conn);
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.initOwner(reTally.getScene().getWindow());
+		alert.setTitle("ADD TESTER");
+		alert.setHeaderText("Added Tester User");
+		alert.setContentText("The tester's username is: testerUser \npassword: Test123*");
+		alert.showAndWait();
 	}
-	public void deleteTest(ActionEvent event) {
+	public void deleteTest(ActionEvent event) throws SQLException {
 		db.deleteTester(conn);
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.initOwner(reTally.getScene().getWindow());
+		alert.setTitle("DELETE TESTER");
+		alert.setHeaderText("Deleted Tester User");
+		//alert.setContentText("The tester's username is: testerUser \npassword: Test123*");
+		alert.showAndWait();
 	}
 }

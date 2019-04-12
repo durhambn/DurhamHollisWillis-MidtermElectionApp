@@ -1,5 +1,6 @@
 package com.csci360.electionapp.model;
 import com.csci360.electionapp.controller.VoterController;
+import com.csci360.electionapp.controller.registrationController;
 import com.csci360.electionapp.model.Voter;
 import com.csci360.electionapp.view.*;
 import com.csci360.electionapp.security.*;
@@ -10,6 +11,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Scanner; 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -338,19 +340,26 @@ public class database {
 		boolean votesMatch = false;
 		int voteCount = getNumBallots(conn);
 		int lines = 0;
-		BufferedReader reader = new BufferedReader(new FileReader("backupBallot.txt"));
-		//File file = new File(System.getProperty("user.dir") + "/backupBallot.txt"); 
-		//Scanner sc = new Scanner(file); 
-		while (reader.readLine() != null) {
-			lines++;
-			//System.out.println(lines);
+		File tempFile = new File("backupBallot.txt");
+		boolean exists = tempFile.exists();
+		if(exists) {
+			BufferedReader reader = new BufferedReader(new FileReader("backupBallot.txt"));
+			//File file = new File(System.getProperty("user.dir") + "/backupBallot.txt"); 
+			//Scanner sc = new Scanner(file); 
+			while (reader.readLine() != null) {
+				lines++;
+				//System.out.println(lines);
+			}
+			reader.close();
+			if(voteCount == lines) {
+	
+				votesMatch = true;
+			}
+			return votesMatch;
 		}
-		reader.close();
-		if(voteCount == lines) {
-
-			votesMatch = true;
+		else {
+			return true;
 		}
-		return votesMatch;
 	}
 	
 	public void initialAdmin(Connection conn) throws SQLException, IOException {
@@ -495,6 +504,23 @@ public class database {
 		
 	}
 	
+	public void addTester(Connection conn) throws SQLException, NoSuchAlgorithmException, IOException {
+		database db = new database();
+		VoterController v = registrationController.createVoter("Tester", "Tester", "10", "01", "1990", "269715403", "TestUser123*");
+		//v.setVoterUsername("testUser");
+		registrationController.add(v,db);
+		
+		String query = "UPDATE VOTERS SET created='2019-04-05 17:21:49', username='testUser' WHERE username='testerT';";
+		PreparedStatement preparedStmt = conn.prepareStatement(query);
+		preparedStmt.execute();
+		
+	}
+	public void deleteTester(Connection conn) throws SQLException{
+		String query = "DELETE FROM VOTERS WHERE username=?;";
+		PreparedStatement stmt = conn.prepareStatement(query);
+		stmt.setString(1, "testUser");
+		stmt.executeUpdate();
+	}
 	
 	
 	/**
