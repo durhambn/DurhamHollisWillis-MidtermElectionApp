@@ -4,7 +4,6 @@ package com.csci360.electionapp.view;
 import java.io.IOException;
 
 
-import com.csci360.electionapp.controller.BallotController;
 import com.csci360.electionapp.controller.VoterController;
 import com.csci360.electionapp.model.Ballot;
 

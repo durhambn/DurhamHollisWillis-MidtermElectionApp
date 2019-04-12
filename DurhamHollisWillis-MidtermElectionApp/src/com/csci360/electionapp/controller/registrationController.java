@@ -57,7 +57,7 @@ public class registrationController {
 	}
 	
 	public static String add(VoterController v, database db) throws SQLException, NoSuchAlgorithmException, IOException {
-		hashPasses hashed = new hashPasses();
+		Security hashed = new Security();
 		String Result = "";
 		String fileName = "log.txt";
 		String str;

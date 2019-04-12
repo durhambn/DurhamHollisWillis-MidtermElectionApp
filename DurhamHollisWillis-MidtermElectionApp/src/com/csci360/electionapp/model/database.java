@@ -1,18 +1,14 @@
 package com.csci360.electionapp.model;
 import com.csci360.electionapp.controller.VoterController;
 import com.csci360.electionapp.controller.registrationController;
-import com.csci360.electionapp.model.Voter;
-import com.csci360.electionapp.view.*;
 import com.csci360.electionapp.security.*;
 import com.csci360.electionapp.model.Ballot;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-import java.util.Scanner; 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -20,7 +16,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Properties;
 
 /**
@@ -263,9 +258,10 @@ public class database {
 	//Refer to: https://alvinalexander.com/java/java-mysql-update-query-example
 	public static boolean checkVoters(String social, Connection conn) throws SQLException {
 		boolean result;
+		String encryptedSocial = Security.encrypt(social);
 		String query = "SELECT ssn FROM VOTERS WHERE ssn=?;";
 		PreparedStatement stmt = conn.prepareStatement(query);
-		stmt.setString(1, social);
+		stmt.setString(1, encryptedSocial);
 		ResultSet rs = stmt.executeQuery();
 		if(rs.next()) {
 			result = true;
@@ -312,7 +308,7 @@ public class database {
 		if(rs.next()) {
 			String hashedPass = rs.getString(1);
 			salt = rs.getBytes(2);
-			result = hashPasses.comparePasswords(pass, salt, hashedPass);
+			result = Security.comparePasswords(pass, salt, hashedPass);
 		}
 		else {
 			result = false;
