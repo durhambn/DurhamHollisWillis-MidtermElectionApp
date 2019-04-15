@@ -1,6 +1,9 @@
 package com.csci360.electionapp.testing;
 
 import static org.junit.Assert.*;
+
+import java.sql.SQLException;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,7 +23,7 @@ public class junitTesting {
 	String pw = "5678";
 	
     @Before
-	public void setUp() {
+	public void setUp() throws SQLException {
     	votingPerson = registrationController.createVoter(Fname, Lname, mth, day, year, ssn, pw);
 	}
     
@@ -155,6 +158,14 @@ public class junitTesting {
 	public void testInEligibility() {
 		votingPerson.setBirthdayYear("2005");
 		assertEquals(false, votingPerson.getVoterEligibility());
+	}
+	
+	@Test
+	public void testSetUsername() throws SQLException {
+		votingPerson.setVoterFirstName("Justin");
+		votingPerson.setVoterLastName("Willis");
+		votingPerson.setVoterUsername();
+		assertEquals("WillisJ", votingPerson.getVoterUsername());
 	}
 	
 	
