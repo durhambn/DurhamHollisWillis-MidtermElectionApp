@@ -1,11 +1,13 @@
 package com.csci360.electionapp.security;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import javax.xml.bind.DatatypeConverter;
 import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -19,7 +21,7 @@ import com.csci360.electionapp.model.database;
 
 public class Security {
  
-	 private static final String encryptionKey           = "k9fRQE5o3hmLr0Sx";//IpV0wny6wrpTh1q5";
+	 private static String encryptionKey;
 	 private static final String characterEncoding       = "UTF-8";
 	 private static final String cipherTransformation    = "AES/CBC/PKCS5PADDING";
 	 private static final String aesEncryptionAlgorithem = "AES";
@@ -91,14 +93,26 @@ public class Security {
         return generatedPassword;
     }
     
+    public static final String getEncryptionKey() throws IOException, FileNotFoundException {
+    	String keyForEncryption = "";
+    	String file ="src/com/csci360/electionapp/security/encryptionKey.txt";
+        
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        keyForEncryption = reader.readLine();
+        reader.close();
+    	return keyForEncryption;
+    }
+    
     // The below methods encrypt and decrypt were acquired from the following website
     // https://www.includehelp.com/java-programs/encrypt-decrypt-string-using-aes-128-bits-encryption-algorithm.aspx
     /**
      * Method for Encrypt Plain String Data
      * @param plainText
      * @return encryptedText
+     * @throws IOException 
      */
-    public static String encrypt(String plainText) {
+    public static String encrypt(String plainText) throws IOException {
+    	encryptionKey = getEncryptionKey();
         String encryptedText = "";
         try {
             Cipher cipher   = Cipher.getInstance(cipherTransformation);
@@ -137,15 +151,5 @@ public class Security {
             System.err.println("decrypt Exception : " + E.getMessage());
         }
         return decryptedText;
-    }
-     
-    /**
-     * Use javax.xml.bind.DatatypeConverter class in JDK to convert byte array
-     * to a hexadecimal string. Note that this generates hexadecimal in upper case.
-     * @param hash
-     * @return 
-     */
-    private String  bytesToHex(byte[] hash) {
-        return DatatypeConverter.printHexBinary(hash);
     }
 }
