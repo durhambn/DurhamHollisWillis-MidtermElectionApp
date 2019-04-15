@@ -1,5 +1,6 @@
 package com.csci360.electionapp.controller;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 
@@ -96,7 +97,7 @@ public class VoterController {
 		return model.getStatus();
 	}
 	
-	public boolean getRegStatus(database db) {
+	public boolean getRegStatus(database db) throws IOException {
 		return model.getRegistrationStatus(db);
 	}
 	

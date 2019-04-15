@@ -1,13 +1,10 @@
 package com.csci360.electionapp.model;
 
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
-import java.util.Date;
-
+import java.io.IOException;
 import java.sql.Connection;
 //voter person will have an object of ballot, set attributes set to null, vp.getBallot()
 //connect to voting person
@@ -143,7 +140,7 @@ public class Voter {
 		return year;
 	}
 	
-	public boolean getRegistrationStatus(database db) {
+	public boolean getRegistrationStatus(database db) throws IOException {
 		//calls database and returns if in the database
 		String social = this.getSsn();
 		boolean result;
