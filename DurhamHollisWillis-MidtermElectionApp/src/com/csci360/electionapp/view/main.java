@@ -5,25 +5,17 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.SQLException;
 
 import com.csci360.electionapp.model.database;
 
-import java.time.Duration;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Period;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 import com.csci360.electionapp.controller.*;
 import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -31,18 +23,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
+
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
+
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.Window;
-
-import com.csci360.electionapp.model.*;
 
 /**
  * 
@@ -138,7 +123,6 @@ public class main extends Application {
 
 	registrationController rc = new registrationController();
 
-	// final DatePicker datePicker = new DatePicker();
 
 	// Set the stage to show whatever page is inputted
 	public void setStage(String title, String resourceName) throws Exception {
@@ -205,8 +189,7 @@ public class main extends Application {
 	// Method used if the register button is clicked
 	@FXML
 	public void regButtonClicked() throws Exception {
-		// Might incorporate title and resourceName
-		// into a class creation method...
+		
 		String title = "Registration Page";
 		String resourceName = "registration.fxml";
 
@@ -219,8 +202,7 @@ public class main extends Application {
 	 */
 	// Method used if the check registration button is clicked
 	public void checkButtonClicked() throws Exception {
-		// Might incorporate title and resourceName
-		// into a class creation method...
+		
 		String title = "Check registration Status Page";
 		String resourceName = "checkStatus.fxml";
 
@@ -233,9 +215,7 @@ public class main extends Application {
 	 */
 	// Method used if the vote button is clicked
 	public void voteButtonClicked() throws Exception {
-		// Might incorporate title and resourceName
-		// into a class creation method...
-		// votingPage.fxml "Voting Page"
+		
 		String resourceName = "voterLogin.fxml";
 		String title = "Voter Login";
 
@@ -248,8 +228,7 @@ public class main extends Application {
 	 */
 	// Method used if the admin login button is clicked
 	public void adminButtonClicked() throws Exception {
-		// Might incorporate title and resourceName
-		// into a class creation method...
+		
 		String resourceName = "admin.fxml";
 		String title = "Election Official Page";
 
@@ -277,11 +256,13 @@ public class main extends Application {
 	 */
 	public void regSubmit(ActionEvent event) throws IOException, SQLException, NoSuchAlgorithmException {
 		// Print statements for testing purposes (remove later)
+		/*
 		System.out.print(firstNameField.getText() + "\n");
 		System.out.print(lastNameField.getText() + "\n");
 		System.out.print(birthdayFieldMth.getText() + "\n");
 		System.out.print(birthdayFieldDay.getText() + "\n");
 		System.out.print(birthdayFieldYear.getText() + "\n");
+		*/
 		//System.out.print(ssn.getText() + "\n");
 		//System.out.print(pswd.getText() + "\n");
 
@@ -289,15 +270,12 @@ public class main extends Application {
 		// from the text fields.
 		String firstName = firstNameField.getText();
 		String lastName = lastNameField.getText();
-		// LocalDate birthday = datePicker.getValue();
 		String birthdayMth = birthdayFieldMth.getText();
 		String birthdayDay = birthdayFieldDay.getText();
 		String birthdayYear = birthdayFieldYear.getText();
 		String ssnString = ssn.getText();
 		String password = pswd.getText();
 
-		// if(birthdayMth<0 || birthdayMth>12 )
-		// Need to make sure date is real
 
 		// Password check for validation
 		final String PASSWORD_REGEX = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!~<>,;:_=?*+#.\"&�%�()\\|\\[\\]\\-\\$\\^\\@\\/]).{8,40}$";
@@ -333,14 +311,13 @@ public class main extends Application {
 							+ "- At least 1 number [0-9]\n" + "- At least 1 special character");
 			alert.showAndWait();
 		}
-		// Correct data
 		else {
 			// Pass data to the controller by creating a registrationController object
 			VoterController votingPerson = registrationController.createVoter(firstName, lastName, birthdayMth,
 					birthdayDay, birthdayYear, ssnString, password);
 			String addResult = registrationController.add(votingPerson, this.db);
 			System.out.println("The result from adding person to the database is: " + addResult);
-			System.out.println("The time the voter registered: " + votingPerson.getTime());
+			//System.out.println("The time the voter registered: " + votingPerson.getTime());
 			Alert result = new Alert(AlertType.INFORMATION);
 			result.initOwner(regSubmit.getScene().getWindow());
 			result.setTitle("Result");
@@ -352,7 +329,6 @@ public class main extends Application {
 			// Print data to console.
 			votingPerson.updateView();
 			// Clear the text fields
-			// (may need to do this after storing somewhere?)
 			firstNameField.clear();
 			lastNameField.clear();
 			birthdayFieldMth.clear();
@@ -443,12 +419,10 @@ public class main extends Application {
 
 				resultFalse.showAndWait();
 			}
-			// System.out.println("The result from adding person to the database is: " +
-			// addResult);
+			
 			// Print data to console.
-			votingPerson.updateView();
+			//votingPerson.updateView();
 			// Clear the text fields
-			// (may need to do this after storing somewhere?)
 			firstNameField.clear();
 			lastNameField.clear();
 			birthdayFieldMth.clear();
@@ -491,14 +465,11 @@ public class main extends Application {
 			// call check if user registered more than 24 hours ago
 			boolean hasVoted = db.getStatusToVote(db.getConnection(), uname);
 			java.util.Date created = db.getCreatedDate(db.getConnection(), uname);
-			System.out.println(created);
 
 			java.util.Date today = new java.util.Date();
 
 			long period = Math.abs(today.getTime() - created.getTime());
-			// System.out.println(period);
 			long diff = TimeUnit.HOURS.convert(period, TimeUnit.MILLISECONDS);
-			// System.out.println(diff);
 
 			if (result && !hasVoted && (diff >= 24)) {
 				username.clear();
@@ -507,8 +478,7 @@ public class main extends Application {
 				String str = LocalDateTime.now() +  "\nSuccessful Voter login\n" + uname +"\n\n";
 				writer.write(str);
 				writer.close();
-				// Might incorporate title and resourceName
-				// into a class creation method...
+				
 				String resourceName = "votingPage.fxml";
 				String title = "Voting Page";
 				
@@ -567,7 +537,6 @@ public class main extends Application {
 	 */
 	public void adminSubmit(ActionEvent event) throws Exception {
 		// Print statements for testing purposes (remove later)
-		System.out.print(username.getText() + "\n");
 		String uname = username.getText();
 		String pssw = password.getText();
 		String fileName = "log.txt";
@@ -588,12 +557,10 @@ public class main extends Application {
 				writer.write(str);
 				writer.close();
 		    	// Clear the text fields
-				// (may need to clear this after storing the data somewhere?)
 				username.clear();
 				password.clear();
 
-				// Might incorporate title and resourceName
-				// into a class creation method...
+				
 				String resourceName = "adminInfo.fxml";
 				String title = "Election Official Page";
 

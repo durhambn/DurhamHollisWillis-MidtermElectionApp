@@ -114,7 +114,7 @@ public class Voter {
 	
 	public boolean getStatus() {
 		//calls database and returns if able to vote today
-		if (this.status == true) {//call inDatabase(v)
+		if (this.status == true) {
 			return true;
 		}
 		else {
@@ -124,19 +124,19 @@ public class Voter {
 	
 	public Integer getBirthdayMonthNum() {
 		int mth = Integer.valueOf(birthdayMth);
-		System.out.println(mth);
+		//System.out.println(mth);
 		return mth;
 	}
 	
 	public Integer getBirthdayDayNum() {
 		int day = Integer.valueOf(birthdayDay);
-		System.out.println(day);
+		//System.out.println(day);
 		return day;
 	}
 	
 	public Integer getBirthdayYearNum() {
 		int year = Integer.valueOf(birthdayYear);
-		System.out.println(year);
+		//System.out.println(year);
 		return year;
 	}
 	
@@ -162,15 +162,12 @@ public class Voter {
 		}
 	}
 	
-	//@SuppressWarnings("deprecation")
 	public boolean checkEligibility() {
 		LocalDate today = LocalDate.now(); //todays date
 		LocalDate birthday = LocalDate.of(getBirthdayYearNum(), getBirthdayMonthNum(), getBirthdayDayNum());
-		//int todayYear = today.getYear();
 		Period p = Period.between(birthday, today);
-		//Date birthday = new Date(getBirthdayMonth(), getBirthdayDay(), getBirthdayYear());
-		int age = p.getYears();//this.getBirthdayYearNum() - todayYear;
-		System.out.println("Age: " + age);
+		int age = p.getYears();
+		//System.out.println("Age: " + age);
 		if(age < 18) {
 			return false;
 		}
