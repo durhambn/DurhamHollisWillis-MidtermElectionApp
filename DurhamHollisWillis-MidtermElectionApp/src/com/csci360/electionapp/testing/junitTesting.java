@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import com.csci360.electionapp.controller.VoterController;
 import com.csci360.electionapp.controller.registrationController;
+import com.csci360.electionapp.model.Ballot;
 
 
 public class junitTesting {
@@ -21,11 +22,25 @@ public class junitTesting {
 	String year = "1997";
 	String ssn = "1234";
 	String pw = "5678";
+	private Ballot b;
 	
     @Before
 	public void setUp() throws SQLException {
     	votingPerson = registrationController.createVoter(Fname, Lname, mth, day, year, ssn, pw);
-	}
+    	b = new Ballot();
+    	b.setVoteCand1(false);
+    	b.setVoteCand2(false);
+    	b.setVoteCand3(true);
+    	b.setVoteCand4(true);
+    	b.setVoteCand5(false);
+    	b.setVoteCand6(false);
+    	b.setVoteCand7(true);
+    	b.setVoteCand8(false);
+    	b.setVoteCand9(false);
+    	b.setVoteCand10(true);
+    	b.setVoteCand11(false);
+    	b.setVoteCand12(false);
+    }
     
 	@Test
 	public void testGetFirstName() {
@@ -162,11 +177,70 @@ public class junitTesting {
 	
 	@Test
 	public void testSetUsername() throws SQLException {
-		votingPerson.setVoterFirstName("Justin");
-		votingPerson.setVoterLastName("Willis");
-		votingPerson.setVoterUsername();
-		assertEquals("WillisJ", votingPerson.getVoterUsername());
+		//votingPerson.setVoterUsername();
+		assertEquals("DurhamB", votingPerson.getVoterUsername());
 	}
 	
+	@Test
+	public void testGetCandidate1() {
+		assertEquals("Leonardo DiCaprio", b.getCandidate1());
+	}
+	
+	@Test
+	public void testGetCandidate2() {
+		assertEquals("Dom Cobb", b.getCandidate2());
+	}
+	
+	@Test
+	public void testGetCandidate3() {
+		assertEquals("Harry Potter", b.getCandidate3());
+	}
+	
+	@Test
+	public void testGetCandidate4() {
+		assertEquals("Nathan Drake", b.getCandidate4());
+	}
+	
+	@Test
+	public void testSetCandidate1() {
+		b.setVoteCand1(true);
+		assertEquals(true, b.isVoteCand1());
+	}
+	
+	@Test
+	public void testSetCandidate2() {
+		b.setVoteCand2(false);
+		assertEquals(false, b.isVoteCand2());
+	}
+	@Test
+	public void testSetCandidate3() {
+		b.setVoteCand3(false);
+		assertEquals(false, b.isVoteCand3());
+	}
+	@Test
+	public void testSetCandidate4() {
+		b.setVoteCand4(false);
+		assertEquals(false, b.isVoteCand4());
+	}
+	
+	@Test
+	public void testGetCat1() {
+		assertEquals("Harry Potter", b.getCat1Results());
+	}
+	
+	@Test
+	public void testGetCat2() {
+		assertEquals("Nathan Drake", b.getCat2Results());
+	}
+	
+	@Test
+	public void testGetCat3() {
+		assertEquals("Jeff Riley", b.getCat3Results());
+	}
+	
+	@Test
+	public void testGetCat4() {
+		assertEquals("Ellen Page", b.getCat4Results());
+	}
 	
 }
