@@ -21,7 +21,6 @@ import javafx.scene.control.CheckBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.sql.SQLException;
-import javafx.scene.control.TextField;
 
 public class votingCheckBoxes {
 

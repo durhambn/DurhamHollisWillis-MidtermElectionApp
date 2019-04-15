@@ -1,8 +1,6 @@
 package com.csci360.electionapp.view;
 
 import com.csci360.electionapp.model.Ballot;
-import com.csci360.electionapp.view.votingCheckBoxes;
-import com.csci360.electionapp.controller.VoterController;
 import com.csci360.electionapp.model.database;
 
 import java.io.BufferedWriter;
