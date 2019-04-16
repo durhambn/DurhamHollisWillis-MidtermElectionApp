@@ -30,6 +30,7 @@ public class votingCheckBoxes {
 	
 	VoterController votingPerson;
 	
+	//check box initialization
 	@FXML
 	public CheckBox C1;
 	@FXML
@@ -60,7 +61,7 @@ public class votingCheckBoxes {
 	private Button voteSubmit;
 	 
 	    
-	
+	//this is making sets of checkboxes
 	private ObservableSet<CheckBox> selectedPresident = FXCollections.observableSet();
     private ObservableSet<CheckBox> unselectedPresident = FXCollections.observableSet();
     
@@ -78,12 +79,16 @@ public class votingCheckBoxes {
     private IntegerBinding numCheckBoxesSelectedSec = Bindings.size(selectedSecretary);
     private IntegerBinding numCheckBoxesSelectedTres = Bindings.size(selectedTreasurer);
     
+    //to select how many checkboxes can be select at one time
     private final int maxNumSelected =  1;
+    
+    //to make sure there is at least one selected
     private boolean pSelected = false;
     private boolean vpSelected = false;
     private boolean sSelected = false;
     private boolean tSelected = false;
     
+    //to set which one is chosen
     public String cat1 = "";
 	public String cat2 = "";
 	public String cat3 = "";
@@ -91,9 +96,11 @@ public class votingCheckBoxes {
 	Ballot ballot = new Ballot();
 	String uname;
 	
+	//initialize method being called when scene is loaded
     public void initialize(String username) {
     	uname = username;
     	
+    	//makes sure all checkboxes are not selected when scene is loaded
     	C1.setSelected(false);
     	C2.setSelected(false);
     	C3.setSelected(false);
@@ -107,9 +114,7 @@ public class votingCheckBoxes {
     	C11.setSelected(false);
     	C12.setSelected(false);
     	
-    	//make call to database to check if username/password then else if
-    	//make ballot when user logs in
-    	//Ballot ballot = new Ballot();
+    	
     	//these will pull the candidates from the ballot and initialize names on page
     	C1.setText(ballot.getCandidate1());
     	C2.setText(ballot.getCandidate2());
@@ -124,6 +129,7 @@ public class votingCheckBoxes {
     	C11.setText(ballot.getCandidate11());
     	C12.setText(ballot.getCandidate12());
     	
+    	//these methods to configre the boxes
         configureCheckBoxP(C1);
         configureCheckBoxP(C2);
         configureCheckBoxP(C3);
@@ -140,9 +146,10 @@ public class votingCheckBoxes {
         configureCheckBoxT(C11);
         configureCheckBoxT(C12);
         
-
+        //disables the submit button is not every category has a selection
         voteSubmit.setDisable(true);
 
+        //adds a listener to check when box is selected
         numCheckBoxesSelectedPres.addListener((obs, oldSelectedCount, newSelectedCount) -> {
             if (newSelectedCount.intValue() >= maxNumSelected) {
                 unselectedPresident.forEach(cb -> cb.setDisable(true));
@@ -166,6 +173,7 @@ public class votingCheckBoxes {
                 }
             }
         });
+        
         numCheckBoxesSelectedVP.addListener((obs, oldSelectedCount, newSelectedCount) -> {
             if (newSelectedCount.intValue() >= maxNumSelected) {
                 unselectedVP.forEach(cb -> cb.setDisable(true));
@@ -189,6 +197,7 @@ public class votingCheckBoxes {
                 }
             }
         });
+        
         numCheckBoxesSelectedSec.addListener((obs, oldSelectedCount, newSelectedCount) -> {
             if (newSelectedCount.intValue() >= maxNumSelected) {
                 unselectedSecretary.forEach(cb -> cb.setDisable(true));
@@ -212,6 +221,7 @@ public class votingCheckBoxes {
                 }
             }
         });
+        
         numCheckBoxesSelectedTres.addListener((obs, oldSelectedCount, newSelectedCount) -> {
             if (newSelectedCount.intValue() >= maxNumSelected) {
                 unselectedTreasurer.forEach(cb -> cb.setDisable(true));
@@ -238,6 +248,7 @@ public class votingCheckBoxes {
 
 
     }
+    //configures the checkboxes to add the lists
     public void configureCheckBoxP(CheckBox checkBox) {
 
         if (checkBox.isSelected()) {
@@ -318,6 +329,7 @@ public class votingCheckBoxes {
         });
 
     }
+    
     public void btnClose_clicked(ActionEvent event) throws IOException {
         // Get the current window and close it
         Stage stage = (Stage) closeButton.getScene().getWindow();
@@ -334,7 +346,7 @@ public class votingCheckBoxes {
     
     public void voteSubmit(ActionEvent event) throws IOException, SQLException {
         // Print statements for testing purposes (remove later)
-    	
+    	/*
         System.out.println(C1.getText());
         System.out.println(C1.isSelected());
         System.out.println(C2.getText());
@@ -359,7 +371,7 @@ public class votingCheckBoxes {
         System.out.println(C11.isSelected());
         System.out.println(C12.getText());
         System.out.println(C12.isSelected());
-        
+    	*/
     	
         //grab t/f from checkboxes and call ballot methods
         ballot.setVoteCand1(C1.isSelected());
@@ -465,6 +477,7 @@ public class votingCheckBoxes {
         	}
         return cat4;
     }
+    
     public void clear() {
     	C1.setSelected(false);
     	C2.setSelected(false);

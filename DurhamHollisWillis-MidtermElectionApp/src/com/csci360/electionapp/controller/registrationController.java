@@ -18,8 +18,7 @@ import com.csci360.electionapp.security.*;
  *
  */
 public class registrationController {
-	// Voter object that will be created
-	private Voter v;
+	
 	static BufferedWriter writer;
 	public registrationController() {
 	}
@@ -50,21 +49,28 @@ public class registrationController {
 		return controller;
 	}
 	
+	//method makes the necessary calls to add user to the database
 	public static String add(VoterController v, database db) throws SQLException, NoSuchAlgorithmException, IOException {
 		Security hashed = new Security();
+		
+		//adding log info
 		String Result = "";
 		String fileName = "log.txt";
 		String str;
 		writer = new BufferedWriter(new FileWriter(fileName, true));
 	    
 		//add voter v
+		//false means that you aren't already in the databse
 		if(v.getRegStatus(db) == false) {
+			//checks if you are over 18
 			if(v.getVoterProfile().checkEligibility() == true) {
 				
+				//method hashed password and adds to database
 				String hashedPass = hashed.hashPassword(v);
 				
 				Result = "The voter has been added to the database\nYour username is: "+v.getVoterUsername();
-			    str = LocalDateTime.now() + "\nSuccessful registration\n"+v.getVoterFirstName()+"\n"+v.getVoterLastName()+"\n"+v.getVoterBirthday()+"\n"+v.getVoterPassword()+"\n\n";
+			    
+				str = LocalDateTime.now() + "\nSuccessful registration\n"+v.getVoterFirstName()+"\n"+v.getVoterLastName()+"\n"+v.getVoterBirthday()+"\n"+v.getVoterPassword()+"\n\n";
 				writer.append(str);
 				writer.close();
 

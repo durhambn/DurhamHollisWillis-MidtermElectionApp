@@ -93,14 +93,17 @@ public class VoterController {
 		return DOB;
 	}
 	
+	//if they have voted or not
 	public boolean getVoterStatus() {
 		return model.getStatus();
 	}
 	
+	//checks if they have registered
 	public boolean getRegStatus(database db) throws IOException {
 		return model.getRegistrationStatus(db);
 	}
 	
+	//checks if they are over 18
 	public boolean getVoterEligibility() {
 		return model.checkEligibility();
 	}
@@ -136,11 +139,14 @@ public class VoterController {
 	public void updateView() {
 		view.printVoterDetails(model.getFirstName(), model.getLastName(), model.getBirthday(), model.getSsn(), model.getPassword(), model.getUsername());
 	}
+	
+	//gets the timestamp of when they registered
 	public String getTime() {
 		LocalDateTime a = this.model.getRegDate();
 		String regDateString = a.getYear() + "-"  + a.getMonthValue() + "-" + a.getDayOfMonth() + " " + a.getHour() + ":" + a.getMinute() + ":" + a.getSecond();
 		return regDateString;
 	}
+	
 	public void setTime(){
 		this.model.setRegDate();
 	}

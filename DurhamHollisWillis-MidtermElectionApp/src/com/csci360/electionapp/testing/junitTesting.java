@@ -177,7 +177,6 @@ public class junitTesting {
 	
 	@Test
 	public void testSetUsername() throws SQLException {
-		//votingPerson.setVoterUsername();
 		assertEquals("DurhamB", votingPerson.getVoterUsername());
 	}
 	
@@ -202,44 +201,44 @@ public class junitTesting {
 	}
 	
 	@Test
-	public void testSetCandidate1() {
+	public void testSetVoteCandidate1() {
 		b.setVoteCand1(true);
 		assertEquals(true, b.isVoteCand1());
 	}
 	
 	@Test
-	public void testSetCandidate2() {
+	public void testSetVoteCandidate2() {
 		b.setVoteCand2(false);
 		assertEquals(false, b.isVoteCand2());
 	}
 	@Test
-	public void testSetCandidate3() {
+	public void testSetVoteCandidate3() {
 		b.setVoteCand3(false);
 		assertEquals(false, b.isVoteCand3());
 	}
 	@Test
-	public void testSetCandidate4() {
+	public void testSetVoteCandidate4() {
 		b.setVoteCand4(false);
 		assertEquals(false, b.isVoteCand4());
 	}
 	
 	@Test
-	public void testGetCat1() {
+	public void testGetCat1Results() {
 		assertEquals("Harry Potter", b.getCat1Results());
 	}
 	
 	@Test
-	public void testGetCat2() {
+	public void testGetCat2Results() {
 		assertEquals("Nathan Drake", b.getCat2Results());
 	}
 	
 	@Test
-	public void testGetCat3() {
+	public void testGetCat3Results() {
 		assertEquals("Jeff Riley", b.getCat3Results());
 	}
 	
 	@Test
-	public void testGetCat4() {
+	public void testGetCat4Results() {
 		assertEquals("Ellen Page", b.getCat4Results());
 	}
 	

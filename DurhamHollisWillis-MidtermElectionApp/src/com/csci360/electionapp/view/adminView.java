@@ -23,6 +23,7 @@ public class adminView {
 
 	database db = new database();
 	
+	//All of the candidate names on scene
     @FXML
     private Label cand1;
     @FXML
@@ -49,6 +50,7 @@ public class adminView {
     private Label cand12;
     
    
+    //used to display the votes for each candidate
     @FXML
     private Label cand1votes;
     @FXML
@@ -74,11 +76,13 @@ public class adminView {
     @FXML
     private Label cand12votes;
     
+    //these are the two labels for number of ballots and registered users
     @FXML
     private Label V1;
     @FXML
     public Label V2;
     
+    //the buttons
    @FXML
    private Button closeButton;
    @FXML
@@ -90,6 +94,9 @@ public class adminView {
    
    Connection conn;
 
+   
+   //this initialize method is called when the scene is loaded
+   //this will set all the values of the labels 
 	public void initialize() throws SQLException {
 		
 		Ballot ballot = new Ballot();
@@ -126,6 +133,7 @@ public class adminView {
 		cand12votes.setText(String.valueOf(db.getCandVotes(conn, "12")));
 		
 	}
+	
 	public void btnClose_clicked(ActionEvent event) throws IOException {
         // Get the current window and close it
 		System.out.println("Admin logged out");
@@ -168,6 +176,7 @@ public class adminView {
 		}
 		
 	}
+	//method to add a test user
 	public void addTest(ActionEvent event) throws SQLException, NoSuchAlgorithmException, IOException {
 		db.addTester(conn);
 		Alert alert = new Alert(AlertType.INFORMATION);
@@ -177,6 +186,8 @@ public class adminView {
 		alert.setContentText("The tester's username is: testUser \npassword: Test123*");
 		alert.showAndWait();
 	}
+	
+	//method to delete test user
 	public void deleteTest(ActionEvent event) throws SQLException, IOException {
 		db.deleteTester(conn);
 		Alert alert = new Alert(AlertType.INFORMATION);
