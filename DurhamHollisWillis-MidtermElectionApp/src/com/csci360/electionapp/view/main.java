@@ -123,7 +123,6 @@ public class main extends Application {
 
 	registrationController rc = new registrationController();
 
-
 	// Set the stage to show whatever page is inputted
 	public void setStage(String title, String resourceName) throws Exception {
 		// FXMLLoader variable to grab the registration.fxml file.
@@ -143,6 +142,7 @@ public class main extends Application {
 		stage.showAndWait();
 	}
 
+	// Pop-up to fill all fields in the window
 	public void fillFields(Button page) {
 		Alert alert = new Alert(AlertType.WARNING);
 		alert.initOwner(page.getScene().getWindow());
@@ -152,6 +152,7 @@ public class main extends Application {
 		alert.showAndWait();
 	}
 
+	// Pop-up to input names correctly
 	public void fixNames(Button page) {
 		Alert alert = new Alert(AlertType.WARNING);
 		alert.initOwner(page.getScene().getWindow());
@@ -161,7 +162,7 @@ public class main extends Application {
 		alert.showAndWait();
 	}
 
-	// Check birthday fields
+	// Pop-up to fix birthday input fields
 	public void fixBirth(Button page) {
 		Alert alert = new Alert(AlertType.WARNING);
 		alert.initOwner(page.getScene().getWindow());
@@ -172,7 +173,7 @@ public class main extends Application {
 		alert.showAndWait();
 	}
 
-	// Check SSN
+	// Pop-up to fix SSN input field
 	public void fixSSN(Button page) {
 		Alert alert = new Alert(AlertType.WARNING);
 		alert.initOwner(page.getScene().getWindow());
@@ -189,7 +190,7 @@ public class main extends Application {
 	// Method used if the register button is clicked
 	@FXML
 	public void regButtonClicked() throws Exception {
-		
+
 		String title = "Registration Page";
 		String resourceName = "registration.fxml";
 
@@ -202,7 +203,7 @@ public class main extends Application {
 	 */
 	// Method used if the check registration button is clicked
 	public void checkButtonClicked() throws Exception {
-		
+
 		String title = "Check registration Status Page";
 		String resourceName = "checkStatus.fxml";
 
@@ -215,7 +216,7 @@ public class main extends Application {
 	 */
 	// Method used if the vote button is clicked
 	public void voteButtonClicked() throws Exception {
-		
+
 		String resourceName = "voterLogin.fxml";
 		String title = "Voter Login";
 
@@ -228,7 +229,7 @@ public class main extends Application {
 	 */
 	// Method used if the admin login button is clicked
 	public void adminButtonClicked() throws Exception {
-		
+
 		String resourceName = "admin.fxml";
 		String title = "Election Official Page";
 
@@ -252,20 +253,9 @@ public class main extends Application {
 	 * @param event
 	 * @throws IOException
 	 * @throws SQLException
-	 * @throws NoSuchAlgorithmException 
+	 * @throws NoSuchAlgorithmException
 	 */
 	public void regSubmit(ActionEvent event) throws IOException, SQLException, NoSuchAlgorithmException {
-		// Print statements for testing purposes (remove later)
-		/*
-		System.out.print(firstNameField.getText() + "\n");
-		System.out.print(lastNameField.getText() + "\n");
-		System.out.print(birthdayFieldMth.getText() + "\n");
-		System.out.print(birthdayFieldDay.getText() + "\n");
-		System.out.print(birthdayFieldYear.getText() + "\n");
-		*/
-		//System.out.print(ssn.getText() + "\n");
-		//System.out.print(pswd.getText() + "\n");
-
 		// Create variables for the creation of a voter object
 		// from the text fields.
 		String firstName = firstNameField.getText();
@@ -275,7 +265,6 @@ public class main extends Application {
 		String birthdayYear = birthdayFieldYear.getText();
 		String ssnString = ssn.getText();
 		String password = pswd.getText();
-
 
 		// Password check for validation
 		final String PASSWORD_REGEX = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!~<>,;:_=?*+#.\"&�%�()\\|\\[\\]\\-\\$\\^\\@\\/]).{8,40}$";
@@ -298,7 +287,7 @@ public class main extends Application {
 		// Incorrect SSN
 		else if (!ssnString.matches("[0-9]{9}")) {
 			fixSSN(regSubmit);
-		} 
+		}
 		// Incorrect password
 		else if (!(PASSWORD_PATTERN.matcher(password).matches())) {
 			Alert alert = new Alert(AlertType.WARNING);
@@ -311,13 +300,15 @@ public class main extends Application {
 							+ "- At least 1 number [0-9]\n" + "- At least 1 special character");
 			alert.showAndWait();
 		}
+		// Correct fields
 		else {
 			// Pass data to the controller by creating a registrationController object
 			VoterController votingPerson = registrationController.createVoter(firstName, lastName, birthdayMth,
 					birthdayDay, birthdayYear, ssnString, password);
 			String addResult = registrationController.add(votingPerson, this.db);
 			System.out.println("The result from adding person to the database is: " + addResult);
-			//System.out.println("The time the voter registered: " + votingPerson.getTime());
+			// System.out.println("The time the voter registered: " +
+			// votingPerson.getTime());
 			Alert result = new Alert(AlertType.INFORMATION);
 			result.initOwner(regSubmit.getScene().getWindow());
 			result.setTitle("Result");
@@ -347,12 +338,13 @@ public class main extends Application {
 	 * 
 	 * @param event
 	 * @throws IOException
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
 	public void checkSubmit(ActionEvent event) throws IOException, SQLException {
+		// File used to log data
 		String fileName = "log.txt";
 		BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true));
-	    
+
 		// Print statements for testing purposes (remove later)
 		System.out.print(firstNameField.getText() + "\n");
 		System.out.print(lastNameField.getText() + "\n");
@@ -361,6 +353,8 @@ public class main extends Application {
 		System.out.print(birthdayFieldYear.getText() + "\n");
 		System.out.print(ssn.getText() + "\n");
 
+		// Create variables for the creation of a voter object
+		// from the text fields.
 		String firstName = firstNameField.getText();
 		String lastName = lastNameField.getText();
 		String birthdayMth = birthdayFieldMth.getText();
@@ -386,6 +380,7 @@ public class main extends Application {
 		else if (!ssnString.matches("[0-9]{9}")) {
 			fixSSN(checkSubmit);
 		}
+		// Correct fields
 		else {
 			// Pass data to the controller by creating a registrationController object
 			String password = "";
@@ -393,9 +388,11 @@ public class main extends Application {
 					birthdayDay, birthdayYear, ssnString, password);
 			boolean addResult = votingPerson.getRegStatus(db);
 			if (addResult) {
-				// popup saying they are already added
+				// Pop-up saying they are already added
 				System.out.println("The voter is already registered to vote");
-				String str = LocalDateTime.now() + "\nCheck registration - already registered\n"+votingPerson.getVoterFirstName()+"\n"+votingPerson.getVoterLastName()+"\n"+votingPerson.getVoterBirthday()+"\n\n";
+				String str = LocalDateTime.now() + "\nCheck registration - already registered\n"
+						+ votingPerson.getVoterFirstName() + "\n" + votingPerson.getVoterLastName() + "\n"
+						+ votingPerson.getVoterBirthday() + "\n\n";
 				writer.write(str);
 				writer.close();
 				Alert resultTrue = new Alert(AlertType.INFORMATION);
@@ -406,9 +403,11 @@ public class main extends Application {
 
 				resultTrue.showAndWait();
 			} else {
-				// popup saying they are not registered
+				// Pop-up saying they are not registered
 				System.out.println("The voter is not registered to vote");
-				String str = LocalDateTime.now() + "\nCheck registration - not registered\n"+votingPerson.getVoterFirstName()+"\n"+votingPerson.getVoterLastName()+"\n"+votingPerson.getVoterBirthday()+"\n\n";
+				String str = LocalDateTime.now() + "\nCheck registration - not registered\n"
+						+ votingPerson.getVoterFirstName() + "\n" + votingPerson.getVoterLastName() + "\n"
+						+ votingPerson.getVoterBirthday() + "\n\n";
 				writer.write(str);
 				writer.close();
 				Alert resultFalse = new Alert(AlertType.INFORMATION);
@@ -419,9 +418,7 @@ public class main extends Application {
 
 				resultFalse.showAndWait();
 			}
-			
-			// Print data to console.
-			//votingPerson.updateView();
+
 			// Clear the text fields
 			firstNameField.clear();
 			lastNameField.clear();
@@ -448,104 +445,86 @@ public class main extends Application {
 		System.out.print(username.getText() + "\n");
 		String uname = username.getText();
 		String pssw = password.getText();
-		
+
+		// File used to log data
 		String fileName = "log.txt";
 		BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true));
-		
+
+		// Fields are empty
 		if (uname.isEmpty() || pssw.isEmpty()) {
-			Alert alert = new Alert(AlertType.WARNING);
-			alert.initOwner(voteLoginSubmit.getScene().getWindow());
-			alert.setTitle("Error");
-			alert.setHeaderText("Not all fields are filled.");
-			alert.setContentText("Please fill in all fields to register.");
-
-			alert.showAndWait();
-		} else {
+			fillFields(voteLoginSubmit);
+		}
+		// Correct fields
+		else {
 			boolean result = db.checkUserLogin(uname, pssw, db.getConnection());
-			// call check if user registered more than 24 hours ago
-			//boolean hasVoted = db.getStatusToVote(db.getConnection(), uname);
-			
-
+			// Correct login info
 			if (result) {
 				boolean hasVoted = db.getStatusToVote(db.getConnection(), uname);
-				if(!hasVoted) {
+				// Has not voted (begins voting process)
+				if (!hasVoted) {
 					java.util.Date created = db.getCreatedDate(db.getConnection(), uname);
 
 					java.util.Date today = new java.util.Date();
 
 					long period = Math.abs(today.getTime() - created.getTime());
 					long diff = TimeUnit.HOURS.convert(period, TimeUnit.MILLISECONDS);
-					if(diff >= 24) {
-				
-						
-						String str = LocalDateTime.now() +  "\nSuccessful Voter login\n" + uname +"\n\n";
+					// Checks if registered 24 hours ago
+					if (diff >= 24) {
+
+						String str = LocalDateTime.now() + "\nSuccessful Voter login\n" + uname + "\n\n";
 						writer.write(str);
 						writer.close();
-						
+
 						username.clear();
 						password.clear();
-						
+
 						String resourceName = "votingPage.fxml";
 						String title = "Voting Page";
-						
-						// FXMLLoader variable to grab the registration.fxml file.
-						FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(resourceName));
-		
-						// Store the registration.fxml file into root as a "Parent"
-						Parent root = fxmlLoader.load();
-		
-						votingCheckBoxes sceneController = fxmlLoader.getController();
-		                sceneController.initialize(uname);
-						// Create a new stage and initialize the modality
-						// set the opacity to 1 and set the title and show
-						// root as the scene.
-						Stage stage = new Stage();
-						stage.initModality(Modality.APPLICATION_MODAL);
-						stage.setOpacity(1);
-						stage.setTitle(title);
-						stage.setScene(new Scene(root));
-						stage.showAndWait();
-						
+
+						setStage(title, resourceName);
 					}
+					// Has not been 24 hours since registration
 					else {
 						Alert alert = new Alert(AlertType.ERROR);
 						alert.initOwner(voteLoginSubmit.getScene().getWindow());
 						alert.setTitle("Error");
 						alert.setHeaderText("Cannot Login");
 						alert.setContentText("Cannot vote without 24 hours of registration");
-						String str = LocalDateTime.now() + "\nUnsuccessful Voter login - Cannot vote without 24 hours of registration\n" + uname +"\n\n";
+						String str = LocalDateTime.now()
+								+ "\nUnsuccessful Voter login - Cannot vote within 24 hours of registration\n" + uname
+								+ "\n\n";
 						writer.write(str);
 						writer.close();
 						alert.showAndWait();
 					}
-				}else {
+				}
+				// Has already voted
+				else {
 					Alert alert = new Alert(AlertType.ERROR);
 					alert.initOwner(voteLoginSubmit.getScene().getWindow());
 					alert.setTitle("Error");
 					alert.setHeaderText("Cannot Login");
 					alert.setContentText("Voter has already voted");
-					String str = LocalDateTime.now() + "\nUnsuccessful Voter login - Voter has already voted\n" + uname +"\n\n";
+					String str = LocalDateTime.now() + "\nUnsuccessful Voter login - Voter has already voted\n" + uname
+							+ "\n\n";
 					writer.write(str);
 					writer.close();
 					alert.showAndWait();
 				}
-			 
-			}else {
-				// PoP uP
-				
+
+			}
+			// Incorrect login info
+			else {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.initOwner(voteLoginSubmit.getScene().getWindow());
 				alert.setTitle("Error");
 				alert.setHeaderText("Cannot Login");
-					alert.setContentText("Incorrect Username/Password");
-					String str = LocalDateTime.now() + "\nUnsuccessful Voter login - Incorrect Username/Password\n" + uname +"\n\n";
-					writer.write(str);
-					writer.close();
-					alert.showAndWait();
-				
-				
-				
-			
+				alert.setContentText("Incorrect Username/Password");
+				String str = LocalDateTime.now() + "\nUnsuccessful Voter login - Incorrect Username/Password\n" + uname
+						+ "\n\n";
+				writer.write(str);
+				writer.close();
+				alert.showAndWait();
 			}
 		}
 	}
@@ -560,33 +539,32 @@ public class main extends Application {
 		String uname = username.getText();
 		String pssw = password.getText();
 		String fileName = "log.txt";
-    	BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true));
-    	
-		if (uname.isEmpty() || pssw.isEmpty()) {
-			Alert alert = new Alert(AlertType.WARNING);
-			alert.initOwner(adminSubmit.getScene().getWindow());
-			alert.setTitle("Error");
-			alert.setHeaderText("Not all fields are filled.");
-			alert.setContentText("Please fill in all fields to register.");
+		BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true));
 
-			alert.showAndWait();
-		} else {
+		// Fields are empty
+		if (uname.isEmpty() || pssw.isEmpty()) {
+			fillFields(adminSubmit);
+		}
+		// Correct fields
+		else {
 			boolean result = db.checkAdminLogin(uname, pssw, db.getConnection());
+			// Correct login info
 			if (result == true) {
-				String str = LocalDateTime.now() + "\nAdmin Login successful\n" + uname+"\n\n";
+				String str = LocalDateTime.now() + "\nAdmin Login successful\n" + uname + "\n\n";
 				writer.write(str);
 				writer.close();
-		    	// Clear the text fields
+				// Clear the text fields
 				username.clear();
 				password.clear();
 
-				
 				String resourceName = "adminInfo.fxml";
 				String title = "Election Official Page";
 
 				setStage(title, resourceName);
-			} else {
-				String str = LocalDateTime.now() + "\nAdmin Login unsuccessful\n" + uname+"\n\n";
+			} 
+			// Incorrect login info
+			else {
+				String str = LocalDateTime.now() + "\nAdmin Login unsuccessful\n" + uname + "\n\n";
 				writer.write(str);
 				writer.close();
 				Alert alert = new Alert(AlertType.ERROR);
