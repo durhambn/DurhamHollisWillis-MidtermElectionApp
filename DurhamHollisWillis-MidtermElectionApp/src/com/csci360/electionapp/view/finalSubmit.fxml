@@ -26,12 +26,12 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Office" />
+            <Label text="Office" underline="true" />
             <Label text="President" GridPane.rowIndex="1" />
             <Label text="Vice President" GridPane.rowIndex="2" />
             <Label text="Secretary" GridPane.rowIndex="3" />
             <Label text="Treasurer" GridPane.rowIndex="4" />
-            <Label text="Your Choice" GridPane.columnIndex="1" />
+            <Label text="Your Choice" underline="true" GridPane.columnIndex="1" />
             <Label fx:id="S1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label fx:id="S2" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label fx:id="S3" GridPane.columnIndex="1" GridPane.rowIndex="3" />
