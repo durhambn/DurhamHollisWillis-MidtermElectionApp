@@ -463,69 +463,89 @@ public class main extends Application {
 		} else {
 			boolean result = db.checkUserLogin(uname, pssw, db.getConnection());
 			// call check if user registered more than 24 hours ago
-			boolean hasVoted = db.getStatusToVote(db.getConnection(), uname);
-			java.util.Date created = db.getCreatedDate(db.getConnection(), uname);
+			//boolean hasVoted = db.getStatusToVote(db.getConnection(), uname);
+			
 
-			java.util.Date today = new java.util.Date();
+			if (result) {
+				boolean hasVoted = db.getStatusToVote(db.getConnection(), uname);
+				if(!hasVoted) {
+					java.util.Date created = db.getCreatedDate(db.getConnection(), uname);
 
-			long period = Math.abs(today.getTime() - created.getTime());
-			long diff = TimeUnit.HOURS.convert(period, TimeUnit.MILLISECONDS);
+					java.util.Date today = new java.util.Date();
 
-			if (result && !hasVoted && (diff >= 24)) {
-				username.clear();
-				password.clear();
+					long period = Math.abs(today.getTime() - created.getTime());
+					long diff = TimeUnit.HOURS.convert(period, TimeUnit.MILLISECONDS);
+					if(diff >= 24) {
 				
-				String str = LocalDateTime.now() +  "\nSuccessful Voter login\n" + uname +"\n\n";
-				writer.write(str);
-				writer.close();
-				
-				String resourceName = "votingPage.fxml";
-				String title = "Voting Page";
-				
-				// FXMLLoader variable to grab the registration.fxml file.
-				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(resourceName));
-
-				// Store the registration.fxml file into root as a "Parent"
-				Parent root = fxmlLoader.load();
-
-				votingCheckBoxes sceneController = fxmlLoader.getController();
-                sceneController.initialize(uname);
-				// Create a new stage and initialize the modality
-				// set the opacity to 1 and set the title and show
-				// root as the scene.
-				Stage stage = new Stage();
-				stage.initModality(Modality.APPLICATION_MODAL);
-				stage.setOpacity(1);
-				stage.setTitle(title);
-				stage.setScene(new Scene(root));
-				stage.showAndWait();
-				
-			} else {
+						
+						String str = LocalDateTime.now() +  "\nSuccessful Voter login\n" + uname +"\n\n";
+						writer.write(str);
+						writer.close();
+						
+						username.clear();
+						password.clear();
+						
+						String resourceName = "votingPage.fxml";
+						String title = "Voting Page";
+						
+						// FXMLLoader variable to grab the registration.fxml file.
+						FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(resourceName));
+		
+						// Store the registration.fxml file into root as a "Parent"
+						Parent root = fxmlLoader.load();
+		
+						votingCheckBoxes sceneController = fxmlLoader.getController();
+		                sceneController.initialize(uname);
+						// Create a new stage and initialize the modality
+						// set the opacity to 1 and set the title and show
+						// root as the scene.
+						Stage stage = new Stage();
+						stage.initModality(Modality.APPLICATION_MODAL);
+						stage.setOpacity(1);
+						stage.setTitle(title);
+						stage.setScene(new Scene(root));
+						stage.showAndWait();
+						
+					}
+					else {
+						Alert alert = new Alert(AlertType.ERROR);
+						alert.initOwner(voteLoginSubmit.getScene().getWindow());
+						alert.setTitle("Error");
+						alert.setHeaderText("Cannot Login");
+						alert.setContentText("Cannot vote without 24 hours of registration");
+						String str = LocalDateTime.now() + "\nUnsuccessful Voter login - Cannot vote without 24 hours of registration\n" + uname +"\n\n";
+						writer.write(str);
+						writer.close();
+						alert.showAndWait();
+					}
+				}else {
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.initOwner(voteLoginSubmit.getScene().getWindow());
+					alert.setTitle("Error");
+					alert.setHeaderText("Cannot Login");
+					alert.setContentText("Voter has already voted");
+					String str = LocalDateTime.now() + "\nUnsuccessful Voter login - Voter has already voted\n" + uname +"\n\n";
+					writer.write(str);
+					writer.close();
+					alert.showAndWait();
+				}
+			 
+			}else {
 				// PoP uP
 				
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.initOwner(voteLoginSubmit.getScene().getWindow());
 				alert.setTitle("Error");
 				alert.setHeaderText("Cannot Login");
-				if (result == false) {
 					alert.setContentText("Incorrect Username/Password");
 					String str = LocalDateTime.now() + "\nUnsuccessful Voter login - Incorrect Username/Password\n" + uname +"\n\n";
 					writer.write(str);
 					writer.close();
-				} else if (hasVoted == true) {
-					alert.setContentText("Voter has already voted");
-					String str = LocalDateTime.now() + "\nUnsuccessful Voter login - Voter has already voted\n" + uname +"\n\n";
-					writer.write(str);
-					writer.close();
-				} else if (diff < 24) {
-					alert.setContentText("Cannot vote without 24 hours of registration");
-					String str = LocalDateTime.now() + "\nUnsuccessful Voter login - Cannot vote without 24 hours of registration\n" + uname +"\n\n";
-					writer.write(str);
-					writer.close();
-				}
-				alert.showAndWait();
-				username.clear();
-				password.clear();
+					alert.showAndWait();
+				
+				
+				
+			
 			}
 		}
 	}
