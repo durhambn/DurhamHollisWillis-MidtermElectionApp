@@ -19,7 +19,6 @@ import com.csci360.electionapp.security.*;
  */
 public class registrationController {
 	// Voter object that will be created
-	//private Voter v;
 	static BufferedWriter writer;
 	public registrationController() {
 	}
