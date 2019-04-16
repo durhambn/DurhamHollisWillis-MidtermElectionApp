@@ -48,3 +48,11 @@ CSCI_360_Project
          ```
          (The username is shown to you after registering a voter and is supplied in the console as well. This will enable the voter to vote and tell the database that more than 24 hours have elapsed. Note: Any time can be used in the created date as long as it is 24 hours before the current time.)
    * At current the default Admin login is set up by reading from a file labeled admin.txt
+   
+### Information on Logs:
+There are 2 log files being created as the application runs.
+1. log.txt  
+This is a log of every action that occurs as the application runs. For example, it logs when a user registers or when a user votes. There is no sensitive information stored in this log.
+2. backupBallot.txt  
+This a backup file for our ballot database table. It keeps a record of each ballot submitted. On each line there is a new ballot with the winner of the categories name listed. 
+
