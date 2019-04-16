@@ -33,7 +33,8 @@ public class finalVoteView {
     public Label S3;
     @FXML
     public Label S4;
-    //Button variable for submitting final choices (review page)
+    
+    // Button variable for submitting final choices (review page)
     @FXML
     public Button finalSubmit;
 
@@ -41,31 +42,36 @@ public class finalVoteView {
     @FXML
     public Button finalCancel;
     
-    //VoterController votingPerson;
-    
     public String uname;
 	
     Ballot ballot;
     
-    public void initialize() {
-    	
-    	
+    public void initialize() {   	
         
     }
-
 	
+    /**
+     * 
+     * @param event
+     * @throws IOException
+     */
 	public void finalCancel(ActionEvent event) throws IOException {
 		String logName = "log.txt";
     	BufferedWriter writer1 = new BufferedWriter(new FileWriter(logName, true));
     	String str = LocalDateTime.now() + "\nChange Button choosen, going back to voting page\n" + uname + "\n\n";
         writer1.write(str);
         writer1.close();
-    	System.out.println("Cancel chosen, going back to voting page");
-
         // Get the current window and close it
         Stage stage = (Stage) finalCancel.getScene().getWindow();
         stage.close();
     }
+	
+	/**
+	 * 
+	 * @param event
+	 * @throws IOException
+	 * @throws SQLException
+	 */
     public void finalSubmit(ActionEvent event) throws IOException,SQLException {
     	
     	String logName = "log.txt";
@@ -73,8 +79,8 @@ public class finalVoteView {
     	String log = LocalDateTime.now()+ "\nVote Cast\n" + uname + "\n\n";
     	writer1.write(log);
     	writer1.close();
+    	// Database calls
     	conn = db.getConnection();
-    	
     	db.addToBallots(ballot, conn);
     	db.addToCandidates(ballot, conn);
     	db.setStatus(uname, conn);
@@ -109,6 +115,11 @@ public class finalVoteView {
     }
     
     //this method is called instead of the initalize method from the previous scene
+    /**
+     * 
+     * @param ballot
+     * @param username
+     */
     public void transferMessage(Ballot ballot, String username) {
     	this.ballot = ballot;
     	S1.setText(ballot.getCat1Results());

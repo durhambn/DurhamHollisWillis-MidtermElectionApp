@@ -66,6 +66,7 @@ public class registrationController {
 			if(v.getVoterProfile().checkEligibility() == true) {
 				
 				//method hashed password and adds to database
+				@SuppressWarnings("unused")
 				String hashedPass = hashed.hashPassword(v);
 				
 				Result = "The voter has been added to the database\nYour username is: "+v.getVoterUsername();

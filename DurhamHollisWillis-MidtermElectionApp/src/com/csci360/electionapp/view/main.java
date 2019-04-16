@@ -306,9 +306,6 @@ public class main extends Application {
 			VoterController votingPerson = registrationController.createVoter(firstName, lastName, birthdayMth,
 					birthdayDay, birthdayYear, ssnString, password);
 			String addResult = registrationController.add(votingPerson, this.db);
-			System.out.println("The result from adding person to the database is: " + addResult);
-			// System.out.println("The time the voter registered: " +
-			// votingPerson.getTime());
 			Alert result = new Alert(AlertType.INFORMATION);
 			result.initOwner(regSubmit.getScene().getWindow());
 			result.setTitle("Result");
@@ -344,14 +341,6 @@ public class main extends Application {
 		// File used to log data
 		String fileName = "log.txt";
 		BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true));
-
-		// Print statements for testing purposes (remove later)
-		System.out.print(firstNameField.getText() + "\n");
-		System.out.print(lastNameField.getText() + "\n");
-		System.out.print(birthdayFieldMth.getText() + "\n");
-		System.out.print(birthdayFieldDay.getText() + "\n");
-		System.out.print(birthdayFieldYear.getText() + "\n");
-		System.out.print(ssn.getText() + "\n");
 
 		// Create variables for the creation of a voter object
 		// from the text fields.
@@ -389,7 +378,6 @@ public class main extends Application {
 			boolean addResult = votingPerson.getRegStatus(db);
 			if (addResult) {
 				// Pop-up saying they are already added
-				System.out.println("The voter is already registered to vote");
 				String str = LocalDateTime.now() + "\nCheck registration - already registered\n"
 						+ votingPerson.getVoterFirstName() + "\n" + votingPerson.getVoterLastName() + "\n"
 						+ votingPerson.getVoterBirthday() + "\n\n";
@@ -404,7 +392,6 @@ public class main extends Application {
 				resultTrue.showAndWait();
 			} else {
 				// Pop-up saying they are not registered
-				System.out.println("The voter is not registered to vote");
 				String str = LocalDateTime.now() + "\nCheck registration - not registered\n"
 						+ votingPerson.getVoterFirstName() + "\n" + votingPerson.getVoterLastName() + "\n"
 						+ votingPerson.getVoterBirthday() + "\n\n";
@@ -442,7 +429,6 @@ public class main extends Application {
 	 * @throws Exception
 	 */
 	public void voteLoginSubmit(ActionEvent event) throws Exception {
-		System.out.print(username.getText() + "\n");
 		String uname = username.getText();
 		String pssw = password.getText();
 
@@ -535,7 +521,6 @@ public class main extends Application {
 	 * @throws Exception
 	 */
 	public void adminSubmit(ActionEvent event) throws Exception {
-		// Print statements for testing purposes (remove later)
 		String uname = username.getText();
 		String pssw = password.getText();
 		String fileName = "log.txt";
