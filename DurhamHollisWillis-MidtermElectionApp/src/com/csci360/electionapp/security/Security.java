@@ -47,7 +47,7 @@ public class Security {
         return salt;
     }
     
-    public void hashPassword(VoterController v) throws IOException, NoSuchAlgorithmException, SQLException {
+    public String hashPassword(VoterController v) throws IOException, NoSuchAlgorithmException, SQLException {
     	database db = new database();
     	String username = v.getVoterUsername();
     	String passwordToHash = v.getVoterPassword();
@@ -64,7 +64,7 @@ public class Security {
     	
 		Connection conn = db.getConnection();
 		db.addToVoters(v, salt, conn);
-    	//return hashedPass;
+    	return hashedPass;
     }
  
     /**

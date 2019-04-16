@@ -19,6 +19,7 @@ import com.csci360.electionapp.security.*;
  */
 public class registrationController {
 	// Voter object that will be created
+	private Voter v;
 	static BufferedWriter writer;
 	public registrationController() {
 	}
@@ -60,7 +61,7 @@ public class registrationController {
 		if(v.getRegStatus(db) == false) {
 			if(v.getVoterProfile().checkEligibility() == true) {
 				
-				hashed.hashPassword(v);
+				String hashedPass = hashed.hashPassword(v);
 				
 				Result = "The voter has been added to the database\nYour username is: "+v.getVoterUsername();
 			    str = LocalDateTime.now() + "\nSuccessful registration\n"+v.getVoterFirstName()+"\n"+v.getVoterLastName()+"\n"+v.getVoterBirthday()+"\n"+v.getVoterPassword()+"\n\n";
