@@ -9,7 +9,4 @@ public class BallotView {
 		System.out.println("Category 3 Vote: " + b.getCat3Results());
 		System.out.println("Category 4 Vote: " + b.getCat4Results());
 	}
-	
-	
-	//Do stuff with database stuff...???
 }
