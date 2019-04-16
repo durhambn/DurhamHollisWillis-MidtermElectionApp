@@ -145,7 +145,7 @@ public class Voter {
 		String social = this.getSsn();
 		boolean result;
 		try {
-			if(database.checkVoters(social, db.getConnection())) {
+			if(database.checkVoters(this.firstName, this.lastName, social, db.getConnection())) {
 				result=true;
 				return result;
 			}
