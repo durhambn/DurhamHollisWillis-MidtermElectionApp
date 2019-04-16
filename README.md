@@ -54,5 +54,6 @@ There are 2 log files being created as the application runs.
 1. log.txt  
 This is a log of every action that occurs as the application runs. For example, it logs when a user registers or when a user votes. There is no sensitive information stored in this log.
 2. backupBallot.txt  
-This a backup file for our ballot database table. It keeps a record of each ballot submitted. On each line there is a new ballot with the winner of the categories name listed. 
+This a backup file for our ballot database table. It keeps a record of each ballot submitted. On each line there is a new ballot with the winner of the categories name listed.   
+**If you delete the election_database database, also delete the logs.**
 
