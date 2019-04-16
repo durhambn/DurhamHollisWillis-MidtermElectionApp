@@ -112,6 +112,7 @@ public class Voter {
 		return username;
 	}
 	
+	//checks if they've voted
 	public boolean getStatus() {
 		//calls database and returns if able to vote today
 		if (this.status == true) {
@@ -140,6 +141,7 @@ public class Voter {
 		return year;
 	}
 	
+	//check if registered
 	public boolean getRegistrationStatus(database db) throws IOException {
 		//calls database and returns if in the database
 		String social = this.getSsn();
@@ -162,6 +164,7 @@ public class Voter {
 		}
 	}
 	
+	//check over 18
 	public boolean checkEligibility() {
 		LocalDate today = LocalDate.now(); //todays date
 		LocalDate birthday = LocalDate.of(getBirthdayYearNum(), getBirthdayMonthNum(), getBirthdayDayNum());

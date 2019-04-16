@@ -24,6 +24,7 @@ public class finalVoteView {
 	database db = new database();
 	Connection conn;
 	
+	//labels for the candidate names chosen
 	@FXML
 	public Label S1;
     @FXML
@@ -47,16 +48,7 @@ public class finalVoteView {
     Ballot ballot;
     
     public void initialize() {
-    	//won't let me call votingCheckBoxes without method being static but that
-    	//causes more problems for other methods
     	
-    	/*
-    	String cat1 = votingCheckBoxes.getCat1();
-    	S1.setText(cat1);
-    	S2.setText(votingCheckBoxes.getCat2());
-    	S3.setText(votingCheckBoxes.getCat3());
-    	S4.setText(votingCheckBoxes.getCat4());
-    	*/
     	
         
     }
@@ -115,6 +107,8 @@ public class finalVoteView {
         stage.setScene(new Scene(root));
         stage.show();
     }
+    
+    //this method is called instead of the initalize method from the previous scene
     public void transferMessage(Ballot ballot, String username) {
     	this.ballot = ballot;
     	S1.setText(ballot.getCat1Results());
