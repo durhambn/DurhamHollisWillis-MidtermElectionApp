@@ -698,6 +698,5 @@ public class database {
 		stmt.setString(1, "testUser");
 		stmt.setString(2, encryptedSSN);
 		stmt.executeUpdate();
-		conn.close();
 	}
 }
