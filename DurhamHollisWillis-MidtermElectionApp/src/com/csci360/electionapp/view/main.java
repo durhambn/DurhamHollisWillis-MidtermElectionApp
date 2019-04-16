@@ -547,7 +547,8 @@ public class main extends Application {
 				
 			
 			}
-	}}
+		}
+	}
 
 	/**
 	 * 
