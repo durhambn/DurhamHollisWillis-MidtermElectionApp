@@ -29,6 +29,13 @@ CSCI_360_Project
      ```
 4. Run main.java
 
+### Adding Test Voters & Removing Them:
+* **You can only have 1 Test Voter at a time using the Admin Add Tester button**
+1. You can add and remove test voters from inside the Admin login section.
+2. The user name is **admin** and the password is **M.^9_6'Pdh'#&qXz** (The password is also inside the admin.txt file inside the model package)
+3. The Test Voters username will be set to **testUser** and the password will be set to **TestUser123***
+4. The application will automatically set the created date of the Test Voter to a date that allows them to vote for easy testing while also creating a way to prevent back door entries so long as you remember to delete the Test Voter.
+
 ### Instructions on running the application:
    #### Key points to take note of:
    * The database that is used for this application is created during the initialization phase.
