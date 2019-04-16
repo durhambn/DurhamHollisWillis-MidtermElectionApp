@@ -166,7 +166,7 @@ public class main extends Application {
 		Alert alert = new Alert(AlertType.WARNING);
 		alert.initOwner(page.getScene().getWindow());
 		alert.setTitle("Error");
-		alert.setHeaderText("Incorrect length of dates");
+		alert.setHeaderText("Invalid date.");
 		alert.setContentText("Text fields must match format of number length:\n" + "Month - MM\n" + "Day - DD\n"
 				+ "Year - YYYY\n" + "(Note: must input numbers in order to be accepted)");
 		alert.showAndWait();
@@ -291,8 +291,8 @@ public class main extends Application {
 			fixNames(regSubmit);
 		}
 		// Date fields do not match required format
-		else if (!birthdayMth.matches("[0-9]{2}") || !birthdayDay.matches("[0-9]{2}")
-				|| !birthdayYear.matches("[0-9]{4}")) {
+		else if (!birthdayMth.matches("0[0-9]|1[0-2]") || !birthdayDay.matches("0[1-9]|1[0-9]|2[0-9]|3[0-1]")
+				|| !birthdayYear.matches("19[0-9][0-9]|20[0-1][0-8]")) {
 			fixBirth(regSubmit);
 		}
 		// Incorrect SSN
@@ -378,8 +378,8 @@ public class main extends Application {
 			fixNames(checkSubmit);
 		}
 		// Date fields do not match required format
-		else if (!birthdayMth.matches("[0-9]{2}") || !birthdayDay.matches("[0-9]{2}")
-				|| !birthdayYear.matches("[0-9]{4}")) {
+		else if (!birthdayMth.matches("0[0-9]|1[0-2]") || !birthdayDay.matches("0[1-9]|1[0-9]|2[0-9]|3[0-1]")
+				|| !birthdayYear.matches("19[0-9][0-9]|20[0-1][0-8]")) {
 			fixBirth(checkSubmit);
 		}
 		// Incorrect SSN

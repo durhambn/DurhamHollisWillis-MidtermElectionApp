@@ -81,7 +81,10 @@
       </GridPane>
       <ButtonBar layoutX="280.0" layoutY="269.0" prefHeight="42.0" prefWidth="274.0">
         <buttons>
-          <Button fx:id="reTally" mnemonicParsing="false" onAction="#reTally" text="Re-Tally Votes" />
+          <Button fx:id="reTally" mnemonicParsing="false" onAction="#reTally" text="Re-Tally Votes">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
             <Button fx:id="closeButton" mnemonicParsing="false" onAction="#btnClose_clicked" text="Close">
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -91,8 +94,14 @@
       </ButtonBar>
       <ButtonBar layoutX="354.0" layoutY="200.0" prefHeight="40.0" prefWidth="200.0">
         <buttons>
-          <Button fx:id="add" mnemonicParsing="false" onAction="#addTest" text="Add" />
-            <Button fx:id="delete" layoutX="140.0" layoutY="17.0" mnemonicParsing="false" onAction="#deleteTest" text="Delete" />
+          <Button fx:id="add" mnemonicParsing="false" onAction="#addTest" text="Add">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+            <Button fx:id="delete" layoutX="140.0" layoutY="17.0" mnemonicParsing="false" onAction="#deleteTest" text="Delete">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
         </buttons>
       </ButtonBar>
       <Text layoutX="237.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Voter for testing purposes:" />
