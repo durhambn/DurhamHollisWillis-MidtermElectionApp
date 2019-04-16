@@ -373,7 +373,7 @@ public class database {
 	 * @throws SQLException
 	 * @throws IOException
 	 */
-	public static boolean checkUserLogin(String user, String pass, Connection conn) throws SQLException, IOException {
+	public boolean checkUserLogin(String user, String pass, Connection conn) throws SQLException, IOException {
 		//Create variables for the matching user login info and byte array for the salt check
 		boolean result;
 		byte[] salt;
@@ -403,7 +403,7 @@ public class database {
 	 * @return
 	 * @throws SQLException
 	 */
-	public static boolean checkAdminLogin(String user, String pass, Connection conn) throws SQLException {
+	public boolean checkAdminLogin(String user, String pass, Connection conn) throws SQLException {
 		boolean result;
 		//Grab all Admin users with the specified information
 		String query = "SELECT * FROM ADMIN WHERE username=? AND password=?;";
