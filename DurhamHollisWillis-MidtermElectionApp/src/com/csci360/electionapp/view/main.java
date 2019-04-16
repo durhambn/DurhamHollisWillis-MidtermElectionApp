@@ -34,7 +34,7 @@ import javafx.stage.Stage;
  * @author Brandi Durham, Austin Hollis, Justin Willis
  *
  */
-public class Main extends Application {
+public class main extends Application {
 
 	database db = new database();
 
@@ -462,6 +462,9 @@ public class Main extends Application {
 			alert.showAndWait();
 		} else {
 			boolean result = db.checkUserLogin(uname, pssw, db.getConnection());
+			// call check if user registered more than 24 hours ago
+			//boolean hasVoted = db.getStatusToVote(db.getConnection(), uname);
+			
 
 			if (result) {
 				boolean hasVoted = db.getStatusToVote(db.getConnection(), uname);
