@@ -177,7 +177,7 @@ public class adminView {
 		alert.setContentText("The tester's username is: testerUser \npassword: Test123*");
 		alert.showAndWait();
 	}
-	public void deleteTest(ActionEvent event) throws SQLException {
+	public void deleteTest(ActionEvent event) throws SQLException, IOException {
 		db.deleteTester(conn);
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.initOwner(reTally.getScene().getWindow());

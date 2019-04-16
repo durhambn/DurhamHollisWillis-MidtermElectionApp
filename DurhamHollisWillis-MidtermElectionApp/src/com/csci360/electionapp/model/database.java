@@ -295,16 +295,18 @@ public class database {
 	 * @throws SQLException
 	 * @throws IOException
 	 */
-	public static boolean checkVoters(String social, Connection conn) throws SQLException, IOException {
+	public static boolean checkVoters(String name, String last_name, String social, Connection conn) throws SQLException, IOException {
 		boolean result;
 		//Encrypt the social security number for security reasons
 		String encryptedSocial = Security.encrypt(social);
 		//Grab all ssn from the voters that match the given ssn
-		String query = "SELECT ssn FROM VOTERS WHERE ssn=?;";
+		String query = "SELECT ssn FROM VOTERS WHERE name=? AND last_name=? AND ssn=?;";
 		//Set up the statement to be ran
 		PreparedStatement stmt = conn.prepareStatement(query);
 		//Database stores encrypted ssn's so comparing encrypted values is the way to go
-		stmt.setString(1, encryptedSocial);
+		stmt.setString(1, name);
+		stmt.setString(2, last_name);
+		stmt.setString(3, encryptedSocial);
 		ResultSet rs = stmt.executeQuery();
 		//If a result set is not null that means the ssn is already in use
 		if(rs.next()) {
@@ -676,7 +678,8 @@ public class database {
 		//Call add function of registration controller
 		registrationController.add(v,db);
 		//Updating testUser for voting purposes
-		String query = "UPDATE VOTERS SET created='2019-04-05 17:21:49', username='testUser' WHERE username='testerT';";
+		String encryptedSSN = Security.encrypt("269715403");
+		String query = "UPDATE VOTERS SET created='2019-04-05 17:21:49', username='testUser' WHERE username='" + v.getVoterUsername() + "' AND ssn='" + encryptedSSN + "';";
 		PreparedStatement preparedStmt = conn.prepareStatement(query);
 		preparedStmt.execute();
 	}
@@ -685,12 +688,16 @@ public class database {
 	 * 
 	 * @param conn
 	 * @throws SQLException
+	 * @throws IOException 
 	 */
-	public void deleteTester(Connection conn) throws SQLException {
+	public void deleteTester(Connection conn) throws SQLException, IOException {
+		String encryptedSSN = Security.encrypt("269715403");
 		//Deletes testUser from database
-		String query = "DELETE FROM VOTERS WHERE username=?;";
+		String query = "DELETE FROM VOTERS WHERE username=? AND ssn=?;";
 		PreparedStatement stmt = conn.prepareStatement(query);
 		stmt.setString(1, "testUser");
+		stmt.setString(2, encryptedSSN);
 		stmt.executeUpdate();
+		conn.close();
 	}
 }

@@ -53,7 +53,6 @@ public class Security {
     	String passwordToHash = v.getVoterPassword();
     	String ssnToEncrypt = v.getVoterSSN();
     	String encryptedSSN = Security.encrypt(ssnToEncrypt);
-    	//System.out.println(encryptedSSN);
     	v.setVoterSSN(encryptedSSN);
     	byte[] salt = getSalt();
     	
