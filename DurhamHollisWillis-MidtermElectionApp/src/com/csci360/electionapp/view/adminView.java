@@ -174,7 +174,7 @@ public class adminView {
 		alert.initOwner(reTally.getScene().getWindow());
 		alert.setTitle("ADD TESTER");
 		alert.setHeaderText("Added Tester User");
-		alert.setContentText("The tester's username is: testUser \npassword: Test123*");
+		alert.setContentText("The tester's username is: testUser \npassword: TestUser123*");
 		alert.showAndWait();
 	}
 	public void deleteTest(ActionEvent event) throws SQLException, IOException {
