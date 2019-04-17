@@ -457,17 +457,33 @@ public class main extends Application {
 					// Checks if registered 24 hours ago
 					if (diff >= 24) {
 
-						String str = LocalDateTime.now() + "\nSuccessful Voter login\n" + uname + "\n\n";
+						String str = LocalDateTime.now() +  "\nSuccessful Voter login\n" + uname +"\n\n";
 						writer.write(str);
 						writer.close();
-
+						
 						username.clear();
 						password.clear();
-
+						
 						String resourceName = "votingPage.fxml";
 						String title = "Voting Page";
-
-						setStage(title, resourceName);
+						
+						// FXMLLoader variable to grab the registration.fxml file.
+						FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(resourceName));
+		
+						// Store the registration.fxml file into root as a "Parent"
+						Parent root = fxmlLoader.load();
+		
+						votingCheckBoxes sceneController = fxmlLoader.getController();
+		                sceneController.initialize(uname);
+						// Create a new stage and initialize the modality
+						// set the opacity to 1 and set the title and show
+						// root as the scene.
+						Stage stage = new Stage();
+						stage.initModality(Modality.APPLICATION_MODAL);
+						stage.setOpacity(1);
+						stage.setTitle(title);
+						stage.setScene(new Scene(root));
+						stage.showAndWait();
 					}
 					// Has not been 24 hours since registration
 					else {

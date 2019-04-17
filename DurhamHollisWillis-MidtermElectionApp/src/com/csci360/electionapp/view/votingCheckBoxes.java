@@ -133,7 +133,7 @@ public class votingCheckBoxes {
     	C11.setText(ballot.getCandidate11());
     	C12.setText(ballot.getCandidate12());
     	
-    	//these methods to configre the boxes
+    	//these methods to configure the boxes
         configureCheckBoxP(C1);
         configureCheckBoxP(C2);
         configureCheckBoxP(C3);
